@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
 
-        //Istanzio le variabili
+        //Istanzio le variabili mi dissocio
         logo = findViewById(R.id.logo);
         benv = findViewById(R.id.benv);
         store = findViewById(R.id.myStore);
