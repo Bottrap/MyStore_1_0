@@ -15,15 +15,6 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-
-        Window window = this.getWindow();
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        // aggiunge il flag FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS alla window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        // finalmente cambia il colore
-        window.setStatusBarColor(this.getResources().getColor(R.color.scanStatusBarColor));
-
     }
 
     public void clickAdminBtn(View v){
