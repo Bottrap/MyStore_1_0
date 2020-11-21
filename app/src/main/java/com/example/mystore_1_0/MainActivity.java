@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static int DELAY = 5000;
 
-    public void runActivityLogin(){
-        Intent intent = new Intent (this, MainActivityLogin.class);
+    public void runScanActivity(){
+        Intent intent = new Intent (this, ScanActivity.class);
         startActivity(intent);
     }
 
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                runActivityLogin();
+                runScanActivity();
                 finish();
             }
         },DELAY);
