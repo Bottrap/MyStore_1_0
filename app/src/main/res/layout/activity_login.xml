@@ -4,6 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/user"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="107dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text"
+        android:paddingLeft="30dp"
+        android:hint="Nome"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="255dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="316dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:srcCompat="@drawable/login"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="460dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
