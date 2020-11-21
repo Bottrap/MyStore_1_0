@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline9"
-        app:srcCompat="@drawable/login" />
+        app:srcCompat="@drawable/login"/>
 
     <TextView
         android:id="@+id/txtView"
