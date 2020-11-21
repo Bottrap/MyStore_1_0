@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     //Variabili
     Animation topAnim, bottomAnim;
     ImageView logo;
-    TextView benv, store;
+    TextView benv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         //Istanzio le variabili mi dissocio
         logo = findViewById(R.id.logo);
         benv = findViewById(R.id.benv);
-        store = findViewById(R.id.myStore);
+
 
         logo.setAnimation(topAnim);
         benv.setAnimation(bottomAnim);
-        store.setAnimation(bottomAnim);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

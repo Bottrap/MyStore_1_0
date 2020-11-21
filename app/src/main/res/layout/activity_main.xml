@@ -11,45 +11,31 @@
         android:id="@+id/logo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="108dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/benv"
         android:layout_width="216dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="176dp"
-        android:fontFamily="casual"
-        android:text="Benvenuto in"
+        android:layout_height="30dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/signika_negative_light"
+        android:text="Version 0.1"
         android:textAlignment="center"
-        android:textColor="#F8A617"
+        android:textColor="#000000"
         android:textColorHighlight="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/myStore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <TextView
-        android:id="@+id/myStore"
-        android:layout_width="182dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="176dp"
-        android:fontFamily="casual"
-        android:text="MyStore"
-        android:textAlignment="center"
-        android:textColor="#2535C7"
-        android:textColorHighlight="#FFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/benv"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_bias="0.761" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
