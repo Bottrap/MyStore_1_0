@@ -11,7 +11,7 @@
         android:id="@+id/scanBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="320dp"
         android:background="@color/transparent"
         android:onClick="clickScanBtn"
         android:scaleX="0.75"
@@ -19,14 +19,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qrCode"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bottone_scan" />
 
     <ImageView
         android:id="@+id/qrCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:scaleX="0.85"
         android:scaleY="0.85"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +40,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821"
+        app:layout_constraintVertical_bias="0.818"
         app:srcCompat="@drawable/img_scansiona" />
 
     <ImageButton
