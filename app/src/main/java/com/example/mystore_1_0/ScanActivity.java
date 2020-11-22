@@ -34,8 +34,6 @@ public class ScanActivity extends AppCompatActivity {
         intentIntegrator.setOrientationLocked(true);
         intentIntegrator.setCaptureActivity(Capture.class);
         intentIntegrator.initiateScan();
-
-
     }
 
     @Override
