@@ -62,30 +62,27 @@ public class LoginActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String passwFromDB = dataSnapshot.child(id).child("password").getValue().toString();
                     if (passwFromDB.equals(password)){
-                        //annullo gli errori su id e password (penso solo in material design)
-
                         String idFromDB = dataSnapshot.child(id).child("id").getValue().toString();
-                        String permessiFromDB = dataSnapshot.child(id).child("permessi").getValue().toString();
+                        /*String permessiFromDB = dataSnapshot.child(id).child("permessi").getValue().toString();
                         String nomeFromDB = dataSnapshot.child(id).child("nome").getValue().toString();
                         String cognomeFromDB = dataSnapshot.child(id).child("cognome").getValue().toString();
                         String dataNascitaFromDB = dataSnapshot.child(id).child("dataNascita").getValue().toString();
                         String telefonoFromDB = dataSnapshot.child(id).child("telefono").getValue().toString();
                         Utente utente = new Utente(idFromDB, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB);
-
-                        /*Intent intent = new Intent(this, nuovaActivity.class);
-
-                        intent.putExtra("utente", utente);
-
+                        */
+                        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                         intent.putExtra("id", idFromDB);
+                        /*intent.putExtra("utente", utente);
+
+
                         intent.putExtra("permessi", permessiFromDB);
                         intent.putExtra("nome", nomeFromDB);
                         intent.putExtra("cognome", cognomeFromDB);
                         intent.putExtra("telefono", telefonoFromDB);
                         intent.putExtra("dataNascita", dataNascitaFromDB);
                         intent.putExtra("permessi", permessiFromDB);
-
-                        startActivity(intent);
                         */
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(LoginActivity.this, "Password errata", Toast.LENGTH_SHORT).show();
