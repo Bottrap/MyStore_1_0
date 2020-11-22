@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int DELAY = 5000;
+    private static int DELAY = 4000;
 
     public void runScanActivity(){
         Intent intent = new Intent (this, ScanActivity.class);
