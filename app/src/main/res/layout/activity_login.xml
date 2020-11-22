@@ -18,12 +18,12 @@
         app:srcCompat="@drawable/user" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/editId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text"
         android:ems="10"
-        android:hint="Nome"
+        android:hint="Id"
         android:inputType="textPersonName"
         android:paddingLeft="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
