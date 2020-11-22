@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = editPassw.getText().toString();
 
         UserData data = new UserData(id, password);
-        reference.setValue(data);
+        reference.child(id).setValue(data);
 
         Toast.makeText(this, "registrazione effettuata", Toast.LENGTH_SHORT).show();
     }
