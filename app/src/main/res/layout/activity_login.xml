@@ -101,4 +101,15 @@
         app:layout_constraintGuide_percent="0.9"
         app:layout_constraintGuide_begin="20dp" />
 
+    <Button
+        android:id="@+id/btnProva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bottone Prova"
+        android:onClick="clickBtnProva"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
