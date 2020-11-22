@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         String telefonoFromDB = dataSnapshot.child(id).child("telefono").getValue().toString();
                         Utente utente = new Utente(idFromDB, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB);
                         */
-                        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                         intent.putExtra("id", idFromDB);
                         /*intent.putExtra("utente", utente);
 
