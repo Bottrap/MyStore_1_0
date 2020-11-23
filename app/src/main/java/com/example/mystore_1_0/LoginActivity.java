@@ -28,27 +28,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         editId = findViewById(R.id.editId);
         editPassw = findViewById(R.id.editPassw);
-
     }
 
     public void clickLogin(View view){
-
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Users");
-
-        String id = editId.getText().toString().trim();
-        String password = editPassw.getText().toString().trim();
-
-        Utente data = new Utente(id, password);
-        reference.child(id).setValue(data);
-
-        Toast.makeText(this, "Registrazione effettuata", Toast.LENGTH_SHORT).show();
-    }
-
-    public void clickBtnProva(View view) {
 
         String id = editId.getText().toString().trim();
         String password = editPassw.getText().toString().trim();
@@ -62,26 +46,26 @@ public class LoginActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String passwFromDB = dataSnapshot.child(id).child("password").getValue().toString();
                     if (passwFromDB.equals(password)){
-                        String idFromDB = dataSnapshot.child(id).child("id").getValue().toString();
-                        /*String permessiFromDB = dataSnapshot.child(id).child("permessi").getValue().toString();
+                        /*
                         String nomeFromDB = dataSnapshot.child(id).child("nome").getValue().toString();
+                        String permessiFromDB = dataSnapshot.child(id).child("permessi").getValue().toString();
                         String cognomeFromDB = dataSnapshot.child(id).child("cognome").getValue().toString();
                         String dataNascitaFromDB = dataSnapshot.child(id).child("dataNascita").getValue().toString();
                         String telefonoFromDB = dataSnapshot.child(id).child("telefono").getValue().toString();
-                        Utente utente = new Utente(idFromDB, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB);
+
                         */
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        intent.putExtra("id", idFromDB);
-                        /*intent.putExtra("utente", utente);
-
-
+                        /*intent.putExtra("utente", utente);  non posso usare questo metodo perchè un extra non è in grado di passare degli oggetti; per poterlo fare devo
+                                                              implementare l'interfaccia serializable (facile da implmentare però piu lenta e meno efficente) o l'interfaccia parcelable
+                                                              (piu efficace e rapida ma meno semplice da realizzare ). Per ora mi limito a passare id e password
                         intent.putExtra("permessi", permessiFromDB);
-                        intent.putExtra("nome", nomeFromDB);
                         intent.putExtra("cognome", cognomeFromDB);
                         intent.putExtra("telefono", telefonoFromDB);
                         intent.putExtra("dataNascita", dataNascitaFromDB);
                         intent.putExtra("permessi", permessiFromDB);
                         */
+                        //intent.putExtra("password", password);
+                        intent.putExtra("id", id);
                         startActivity(intent);
                     }
                     else{
@@ -99,4 +83,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
     }
+
+   /* public void clickBtnRegistrati(View view) {
+         rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Users");
+
+        String id = editId.getText().toString().trim();
+        String password = editPassw.getText().toString().trim();
+
+        Utente data = new Utente(id, password);
+        reference.child(id).setValue(data);
+
+        Toast.makeText(this, "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+    } */
 }

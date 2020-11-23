@@ -19,22 +19,21 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    TextView passwHeader, idHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-       /* TextView testo;
-        @Override
-        protected void onCreate (Bundle savedInstanceState){​​​​
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_user);
-            Intent intent = getIntent();
-            String nomeUtente = intent.getStringExtra("id");
-            testo = findViewById(R.id.testo);
-            testo.setText(nomeUtente);
-        */
+        Intent intent = getIntent();
+        String passUtente = intent.getStringExtra("password");
+        String idUtente = intent.getStringExtra("id");
+        passwHeader = findViewById(R.id.nomeHeader);
+        idHeader = findViewById(R.id.idHeader);
+        passwHeader.setText(passUtente);  //dà errore poichè sto cercando di settare un testo ad un oggetto che punta a null, non so dove/quando venga inizializzato l'header
+        idHeader.setText("boh");          // del quale sto cercando di cambiare i valori delle text view
+
 
         //aggancia le variabili
         drawerLayout = findViewById(R.id.drawer_layout);

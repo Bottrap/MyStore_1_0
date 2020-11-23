@@ -12,14 +12,14 @@
         android:layout_height="75dp"
         android:src="@drawable/home_img"/>
     <TextView
+        android:id="@+id/nomeHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bestiaaa"
         android:textSize="24sp"/>
     <TextView
+        android:id="@+id/idHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ue u bombon"
         android:textSize="15sp"/>
 
 
