@@ -10,4 +10,5 @@
     <color name="transparent">#00000000</color>
     <color name="statusBarColor">#CAE4F1</color>
     <color name="scanStatusBarColor">#55D7DB</color>
+    <color name="bluDiSotto">#395EEB</color>
 </resources>
