@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -19,7 +20,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    TextView passwHeader, idHeader;
+    //TextView passwHeader, idHeader;
+    Utente utente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         setContentView(R.layout.activity_profile);
 
         Intent intent = getIntent();
-        String passUtente = intent.getStringExtra("password");
-        String idUtente = intent.getStringExtra("id");
-        passwHeader = findViewById(R.id.nomeHeader);
-        idHeader = findViewById(R.id.idHeader);
-        passwHeader.setText(passUtente);  //dà errore poichè sto cercando di settare un testo ad un oggetto che punta a null, non so dove/quando venga inizializzato l'header
-        idHeader.setText("boh");          // del quale sto cercando di cambiare i valori delle text view
+        utente = intent.getParcelableExtra("utente");
+        //passwHeader = findViewById(R.id.nomeHeader);
+        //idHeader = findViewById(R.id.idHeader);
+        //passwHeader.setText(utente.getPassword());  //dà errore poichè sto cercando di settare un testo ad un oggetto che punta a null, non so dove/quando venga inizializzato l'header
+        //idHeader.setText("boh");          // del quale sto cercando di cambiare i valori delle text view
 
 
         //aggancia le variabili

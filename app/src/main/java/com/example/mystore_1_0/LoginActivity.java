@@ -55,17 +55,17 @@ public class LoginActivity extends AppCompatActivity {
 
                         */
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        /*intent.putExtra("utente", utente);  non posso usare questo metodo perchè un extra non è in grado di passare degli oggetti; per poterlo fare devo
-                                                              implementare l'interfaccia serializable (facile da implmentare però piu lenta e meno efficente) o l'interfaccia parcelable
-                                                              (piu efficace e rapida ma meno semplice da realizzare ). Per ora mi limito a passare id e password
+                        /*
                         intent.putExtra("permessi", permessiFromDB);
                         intent.putExtra("cognome", cognomeFromDB);
                         intent.putExtra("telefono", telefonoFromDB);
                         intent.putExtra("dataNascita", dataNascitaFromDB);
                         intent.putExtra("permessi", permessiFromDB);
                         */
-                        //intent.putExtra("password", password);
+                        Utente utente = new Utente(id, password, null, null, null, null, null);
+                        intent.putExtra("utente", utente);
                         intent.putExtra("id", id);
+                        intent.putExtra("password", password);
                         startActivity(intent);
                     }
                     else{
