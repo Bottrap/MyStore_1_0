@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("dataNascita", dataNascitaFromDB);
                         intent.putExtra("permessi", permessiFromDB);
                         */
-                        //intent.putExtra("password", password);
+                        intent.putExtra("password", password);
                         intent.putExtra("id", id);
                         startActivity(intent);
                     }

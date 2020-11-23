@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -26,19 +27,25 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Intent intent = getIntent();
-        String passUtente = intent.getStringExtra("password");
-        String idUtente = intent.getStringExtra("id");
-        passwHeader = findViewById(R.id.nomeHeader);
-        idHeader = findViewById(R.id.idHeader);
-        passwHeader.setText(passUtente);  //dà errore poichè sto cercando di settare un testo ad un oggetto che punta a null, non so dove/quando venga inizializzato l'header
-        idHeader.setText("boh");          // del quale sto cercando di cambiare i valori delle text view
-
-
         //aggancia le variabili
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+
+        Intent intent = getIntent();
+        String passUtente = intent.getStringExtra("password");
+        String idUtente = intent.getStringExtra("id");
+        //passwHeader = findViewById(R.id.nomeHeader);
+        //idHeader = findViewById(R.id.idHeader);
+        View header = navigationView.getHeaderView(0);
+        idHeader = header.findViewById(R.id.idHeader);
+        passwHeader = header.findViewById(R.id.nomeHeader);
+
+        passwHeader.setText(passUtente);  //dà errore poichè sto cercando di settare un testo ad un oggetto che punta a null, non so dove/quando venga inizializzato l'header
+        idHeader.setText(idUtente);          // del quale sto cercando di cambiare i valori delle text view
+
+
+
 
         //toolbar
         setSupportActionBar(toolbar);
