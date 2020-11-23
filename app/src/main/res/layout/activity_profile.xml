@@ -17,34 +17,25 @@
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!--
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/menuBtn"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp"
-            app:srcCompat="@drawable/ic_baseline_menu"/>
-        -->
-
-
-        <com.google.android.material.appbar.MaterialToolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bluDiSotto"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:navigationIcon="@drawable/menu_img" />
+            android:theme="?attr/actionBarTheme" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container"/>
 
-
-
-    </ScrollView>
+    </LinearLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

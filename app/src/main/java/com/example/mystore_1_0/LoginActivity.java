@@ -83,7 +83,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-   /* public void clickBtnRegistrati(View view) {
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        editId.getText().clear();
+        editPassw.getText().clear();
+    }
+
+/* public void clickBtnRegistrati(View view) {
          rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("Users");
 
