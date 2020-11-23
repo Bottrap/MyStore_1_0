@@ -10,20 +10,24 @@
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu"
         android:layout_gravity="start"
-        />
+        android:visibility="gone"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        //BODY DI ACTIVITY_PROFILE
-
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/menuBtn"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            app:srcCompat="@drawable/ic_baseline_menu"/>
     </ScrollView>
 
 
