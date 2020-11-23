@@ -103,4 +103,5 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/text_scansiona" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

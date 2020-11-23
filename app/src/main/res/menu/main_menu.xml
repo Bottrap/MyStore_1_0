@@ -1,40 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
-        <item
-        android:id="@+id/nav_home"
-        android:title = "Home"
-        android:icon = "@drawable/home_img"/>
-        <item
-            android:id="@+id/nav_logou"
-            android:title = "Home"
-            android:icon = "@drawable/logout_img"/>
-        <item
-            android:id="@+id/nav_back"
-            android:title = "Home"
-            android:icon = "@drawable/logout_img"/>
-    </group>
 
-    <item android:title="Profile">
+
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_home"
+                android:title = "Home"
+                android:icon = "@drawable/home_img"
+                />
+        </group>
+
+    <item android:title="Dipendenti">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_login"
-                    android:title = "Home"
-                    android:icon = "@drawable/home_img"/>
+                    android:id="@+id/nav_list_dip"
+                    android:title = "Lista dipendenti"
+                    android:icon = "@drawable/list_dip_img"
+                    />
                 <item
-                    android:id="@+id/nav_logout"
-                    android:title = "Home"
-                    android:icon = "@drawable/logout_img"/>
-                <item
-                    android:id="@+id/nav_profile"
-                    android:title = "Home"
-                    android:icon = "@drawable/logout_img"/>
+                    android:id="@+id/nav_add_dip"
+                    android:title = "Aggiungi_dipendente"
+                    android:icon = "@drawable/add_dip_img"
+                    />
             </group>
         </menu>
     </item>
 
-    <item android:title="Communicate">
+    <item android:title="Prodotti">
         <menu>
             <item
                 android:id="@+id/nav_shared"
@@ -47,5 +40,21 @@
         </menu>
     </item>
 
+    <item android:title="Profilo">
+        <menu>
+            <group android:checkableBehavior="single">
+                <!--
+                <item
+                    android:id="@+id/nav_profile"
+                    android:title = "Profilo"
+                    android:icon = "@drawable/profile_img"/>
+                 -->
+                <item
+                    android:id="@+id/nav_logout"
+                    android:title = "Logout"
+                    android:icon = "@drawable/logout_img"/>
+            </group>
+        </menu>
+    </item>
 
 </menu>
