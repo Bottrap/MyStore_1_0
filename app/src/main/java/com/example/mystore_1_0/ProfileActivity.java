@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
