@@ -85,15 +85,13 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else{
-                        Toast.makeText(LoginActivity.this, "Password errata", Toast.LENGTH_SHORT).show();
-                        //password.setError("È stata inserita una password errata");
-                        //password.requestFocus();
+                        editPassw.setError("È stata inserita una password errata");
+                        editPassw.requestFocus();
                     }
                 }
                 else{
-                    Toast.makeText(LoginActivity.this, "Id non trovato", Toast.LENGTH_SHORT).show();
-                    //id.setError("È stato inserito un Id non esistente");
-                    //id.requestFocus();
+                    editId.setError("È stato inserito un Id non esistente");
+                    editId.requestFocus();
                 }
             }
 
