@@ -13,4 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="NavTextStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/signika_negative_light</item>
+    </style>
 </resources>

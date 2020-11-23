@@ -11,4 +11,5 @@
     <color name="statusBarColor">#CAE4F1</color>
     <color name="scanStatusBarColor">#55D7DB</color>
     <color name="bluDiSotto">#395EEB</color>
+    <color name="arancione">#FFA500</color>
 </resources>
