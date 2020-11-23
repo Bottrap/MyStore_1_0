@@ -13,14 +13,12 @@
         android:src="@drawable/home_img"/>
 
     <TextView
-        android:id="@+id/nomeHeader"
-        android:text="."
+        android:id="@+id/passwHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp" />
     <TextView
         android:id="@+id/idHeader"
-        android:text="."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"/>
