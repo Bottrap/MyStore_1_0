@@ -14,9 +14,10 @@
             android:title = "Home"
             android:icon = "@drawable/logout_img"/>
     </group>
-    <group android:checkableBehavior="single">
-        <item android:title="Profile">
-            <menu>
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_login"
                     android:title = "Home"
@@ -29,9 +30,10 @@
                     android:id="@+id/nav_profile"
                     android:title = "Home"
                     android:icon = "@drawable/logout_img"/>
-            </menu>
-        </item>
-    </group>
+            </group>
+        </menu>
+    </item>
+
     <item android:title="Communicate">
         <menu>
             <item
