@@ -43,17 +43,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
+        android:backgroundTint="@color/scanStatusBarColor"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline9"
-        app:srcCompat="@drawable/login"
-        android:onClick="clickLogin"/>
+        app:cornerRadius="30dp"
+        android:text="LOGIN"
+        android:scaleY="1.5"
+        android:scaleX="1.5"
+        android:onClick="clickLogin"
+        app:strokeColor="@color/arancione"
+        app:strokeWidth="1.5dp"/>
 
     <TextView
         android:id="@+id/txtView"
