@@ -96,6 +96,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_list_dip:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
                 break;
+            case R.id.nav_logout:
+                finish();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

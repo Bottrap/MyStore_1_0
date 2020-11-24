@@ -7,6 +7,7 @@
     android:background="@drawable/bgprova"
     tools:context=".ScanActivity">
 
+    <!--
     <ImageButton
         android:id="@+id/scanBtn"
         android:layout_width="wrap_content"
@@ -20,7 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline1"
         app:srcCompat="@drawable/bottone_scan" />
-
+    -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/scanBtn"
+        android:onClick="clickScanBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline1"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/arancione"
+        app:strokeWidth="1.5dp"
+        app:cornerRadius="30dp"
+        app:icon="@drawable/qr_scan_img"
+        app:iconTint="@color/black"
+        android:text="SCAN"
+        android:textColor="@color/black"/>
+    <!--
     <ImageButton
         android:id="@+id/adminBtn"
         android:layout_width="wrap_content"
@@ -32,6 +53,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/bottone_amm" />
+    -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/adminBtn"
+        android:onClick="clickAdminBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:cornerRadius="20dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/arancione"
+        android:backgroundTint="@color/transparent"
+        android:text="Sei un amministratore ?"
+
+
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -64,20 +103,33 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent="0.50"/>
-
+    <!--
     <TextView
         android:id="@+id/benvText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/allerta"
         android:text="Benvenuto in My Store"
-        android:textColor="@color/black"
+        android:textColor="@color/arancione"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    -->
+
+    <ImageView
+        android:id="@+id/benvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/benv_img_text"
+        android:scaleX="1.5"
+        android:scaleY="1.5"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
