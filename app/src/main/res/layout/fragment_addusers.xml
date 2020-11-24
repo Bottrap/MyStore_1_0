@@ -118,7 +118,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_permessi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -130,6 +129,7 @@
             >
 
             <AutoCompleteTextView
+                android:id="@+id/text_permessi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"

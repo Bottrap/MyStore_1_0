@@ -29,8 +29,7 @@ public class AddUsersFragment extends Fragment {
 
         String [] tipopermessi = new String[] {"1","2","3"};
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, tipopermessi);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tipopermessi);
 
         AutoCompleteTextView editTextFilledExposedDropdown = view.findViewById(R.id.text_permessi);
         editTextFilledExposedDropdown.setAdapter(adapter);
