@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         Window window = ProfileActivity.this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(ProfileActivity.this, R.color.bluDiSotto));
+        window.setStatusBarColor(ContextCompat.getColor(ProfileActivity.this, R.color.scanStatusBarColor));
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
