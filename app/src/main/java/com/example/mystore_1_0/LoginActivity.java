@@ -54,13 +54,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         */
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        /*
-                        intent.putExtra("permessi", permessiFromDB);
-                        intent.putExtra("cognome", cognomeFromDB);
-                        intent.putExtra("telefono", telefonoFromDB);
-                        intent.putExtra("dataNascita", dataNascitaFromDB);
-                        intent.putExtra("permessi", permessiFromDB);
-                        */
                         Utente utente = new Utente(id, password, null, null, null, null, null);
                         intent.putExtra("utente", utente);
                         intent.putExtra("id", id);
