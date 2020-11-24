@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         String id = editId.getText().toString().trim();
         String password = editPassw.getText().toString().trim();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
 
         Query checkId = reference.orderByChild("id").equalTo(id);
         checkId.addListenerForSingleValueEvent(new ValueEventListener() {
