@@ -1,6 +1,7 @@
 package com.example.mystore_1_0.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,26 +38,21 @@ public class ShowUsersFragment extends Fragment {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
         Query retrieveAll = reference.orderByKey();
-        retrieveAll.addListenerForSingleValueEvent(new ValueEventListener() {
+        retrieveAll.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
+                    Toast.makeText(getActivity(), String.valueOf(dataSnapshot.getChildrenCount()), Toast.LENGTH_LONG).show();
                     ArrayList<Utente> utenti = new ArrayList<>();
-                    Iterable<DataSnapshot> userschild = dataSnapshot.getChildren();
-                    for(DataSnapshot ds : userschild){
+                    ArrayList<String> boh = new ArrayList<>();
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
 
-                        String id = (ds.child("id").getValue().toString());
-                        String password = (ds.child("password").getValue().toString());
-                        String permessi = (ds.child("permessi").getValue().toString());
-                        String nome = (ds.child("nome").getValue().toString());
-                        String cognome = (ds.child("cognome").getValue().toString());
-                        String dataNascita = (ds.child("dataNascita").getValue().toString());
-                        String telefono = (ds.child("telefono").getValue().toString());
-
-                        Utente utente = new Utente(id, password, permessi, nome, cognome, dataNascita, telefono);
+                        Utente utente = ds.getValue(Utente.class);
                         utenti.add(utente);
+
                     }
-                    ArrayAdapter<Utente> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, utenti);
+                    ArrayAdapter<Utente> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_expandable_list_item_1, utenti);
+                    //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, boh);
                     listaDipendenti.setAdapter(arrayAdapter);
                 }
                 else{
