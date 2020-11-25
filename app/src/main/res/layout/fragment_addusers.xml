@@ -26,8 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp">
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+       >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_nome"
@@ -43,6 +44,7 @@
             app:boxStrokeColor="@color/arancione"
             android:textColorHint="@color/white"
             app:placeholderTextColor="@color/white"
+            app:hintTextColor="@color/white"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -62,8 +64,9 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
-            android:textColorHint="@color/arancione"
-            android:outlineSpotShadowColor="@color/arancione">
+            app:boxStrokeColor="@color/arancione"
+            android:textColorHint="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -83,7 +86,9 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/id_img"
-                app:boxBackgroundColor="@color/arancione">
+                app:boxStrokeColor="@color/arancione"
+                android:textColorHint="@color/white"
+                app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -104,9 +109,9 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/password_img"
-            app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/arancione"
-            android:outlineSpotShadowColor="@color/arancione">
+            android:textColorHint="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -124,11 +129,9 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/permessi_img"
+            app:boxStrokeColor="@color/arancione"
             android:textColorHint="@color/white"
-            app:hintTextColor="@color/white"
-            app:helperTextTextColor="@color/white"
             app:placeholderTextColor="@color/white"
-            app:errorTextColor="@color/white"
             >
 
             <AutoCompleteTextView
@@ -140,7 +143,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone"
+            android:id="@+id/text_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -149,7 +152,11 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/phone_img">
+            app:startIconDrawable="@drawable/phone_img"
+            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/arancione"
+            android:textColorHint="@color/white"
+            app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -167,16 +174,29 @@
             style="@style/TextAppearance.AppCompat.Body1"/>
 
 
-
         <DatePicker
+            android:id="@+id/text_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"
-            android:spinnersShown="true"
             android:calendarTextColor="@color/arancione"
-            android:outlineSpotShadowColor="@color/arancione"
-            android:outlineAmbientShadowColor="@color/arancione"/>
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:spinnersShown="true"
+            android:yearListSelectorColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add"
+            android:text="CONFERMA"
+            android:backgroundTint="@color/scanStatusBarColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button"
+            app:cornerRadius="60dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
+            android:onClick="clickAdd"/>
 
     </LinearLayout>
 
