@@ -24,9 +24,6 @@ public class AddUsersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_addusers, container, false);
         Toast.makeText(getActivity(), "Aggiungi Dipendenti", Toast.LENGTH_SHORT).show();
 
-       // val items = listOf("Material", "Design", "Components", "Android")
-       // val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-
         String [] tipopermessi = new String[] {"1","2","3"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tipopermessi);
