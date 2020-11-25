@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mystore_1_0.R;
+import com.example.mystore_1_0.UserAdapter;
 import com.example.mystore_1_0.Utente;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,10 +22,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShowUsersFragment extends Fragment {
 
-    RecyclerView listaDipendenti;
+    RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -33,7 +34,7 @@ public class ShowUsersFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
 
-        listaDipendenti = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
         Query retrieveAll = reference.orderByKey();
@@ -42,11 +43,13 @@ public class ShowUsersFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     Toast.makeText(getActivity(), String.valueOf(dataSnapshot.getChildrenCount()), Toast.LENGTH_LONG).show();
-                    ArrayList<Utente> utenti = new ArrayList<>();
+                    List<Utente> listaUtenti = new ArrayList<>();
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
                         Utente utente = ds.getValue(Utente.class);
-                        utenti.add(utente);
+                        listaUtenti.add(utente);
                     }
+                    UserAdapter userAdapter = new UserAdapter(listaUtenti);
+                    recyclerView.setAdapter(userAdapter);
                 }
                 else{
                     Toast.makeText(getActivity(), "Dati non trovati", Toast.LENGTH_SHORT).show();

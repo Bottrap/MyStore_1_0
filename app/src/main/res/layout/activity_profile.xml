@@ -8,7 +8,7 @@
     tools:context = ".ProfileActivity"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    android:background="@drawable/bgprova">
+    android:background="@drawable/background">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

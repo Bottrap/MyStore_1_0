@@ -4,7 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Utente implements Parcelable {
-    String id, password, permessi, nome, cognome, dataNascita, telefono;
+    private String id, password, permessi, nome, cognome, dataNascita, telefono;
+    private boolean expanded;
 
     public Utente(){ }
 
@@ -21,6 +22,7 @@ public class Utente implements Parcelable {
         this.cognome = cognome;
         this.dataNascita = dataNascita;
         this.telefono = telefono;
+        this.expanded = false;
     }
 
     protected Utente(Parcel in) {
@@ -117,5 +119,11 @@ public class Utente implements Parcelable {
         this.password = password;
     }
 
+    public boolean isExpanded() {
+        return expanded;
+    }
 
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
 }
