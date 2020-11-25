@@ -1,17 +1,16 @@
 package com.example.mystore_1_0.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 
 public class ShowUsersFragment extends Fragment {
 
-    ListView listaDipendenti;
+    RecyclerView listaDipendenti;
 
     @Nullable
     @Override
@@ -34,7 +33,7 @@ public class ShowUsersFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
 
-        listaDipendenti = view.findViewById(R.id.listView);
+        listaDipendenti = view.findViewById(R.id.recycler_view);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
         Query retrieveAll = reference.orderByKey();
@@ -44,16 +43,10 @@ public class ShowUsersFragment extends Fragment {
                 if (dataSnapshot.exists()){
                     Toast.makeText(getActivity(), String.valueOf(dataSnapshot.getChildrenCount()), Toast.LENGTH_LONG).show();
                     ArrayList<Utente> utenti = new ArrayList<>();
-                    ArrayList<String> boh = new ArrayList<>();
                     for(DataSnapshot ds : dataSnapshot.getChildren()){
-
                         Utente utente = ds.getValue(Utente.class);
                         utenti.add(utente);
-
                     }
-                    ArrayAdapter<Utente> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_expandable_list_item_1, utenti);
-                    //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, boh);
-                    listaDipendenti.setAdapter(arrayAdapter);
                 }
                 else{
                     Toast.makeText(getActivity(), "Dati non trovati", Toast.LENGTH_SHORT).show();
