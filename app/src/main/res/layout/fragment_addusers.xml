@@ -7,8 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titolo_add_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextAppearance.AppCompat.Title"
         />
 
     <LinearLayout
@@ -39,7 +39,11 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img">
+            app:startIconDrawable="@drawable/name_img"
+            app:boxStrokeColor="@color/arancione"
+            android:textColorHint="@color/white"
+            app:placeholderTextColor="@color/white"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -57,7 +61,9 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img">
+            app:startIconDrawable="@drawable/name_img"
+            android:textColorHint="@color/arancione"
+            android:outlineSpotShadowColor="@color/arancione">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -65,7 +71,8 @@
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+
+            <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,13 +82,15 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/id_img">
+            app:startIconDrawable="@drawable/id_img"
+                app:boxBackgroundColor="@color/arancione">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_password"
@@ -94,7 +103,10 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:passwordToggleEnabled="true"
-            app:startIconDrawable="@drawable/password_img">
+            app:startIconDrawable="@drawable/password_img"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/arancione"
+            android:outlineSpotShadowColor="@color/arancione">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -103,7 +115,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -112,7 +123,13 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/permessi_img">
+            app:startIconDrawable="@drawable/permessi_img"
+            android:textColorHint="@color/white"
+            app:hintTextColor="@color/white"
+            app:helperTextTextColor="@color/white"
+            app:placeholderTextColor="@color/white"
+            app:errorTextColor="@color/white"
+            >
 
             <AutoCompleteTextView
                 android:id="@+id/text_permessi"
@@ -156,7 +173,10 @@
             android:layout_height="wrap_content"
             android:datePickerMode="spinner"
             android:calendarViewShown="false"
-            android:spinnersShown="true"/>
+            android:spinnersShown="true"
+            android:calendarTextColor="@color/arancione"
+            android:outlineSpotShadowColor="@color/arancione"
+            android:outlineAmbientShadowColor="@color/arancione"/>
 
     </LinearLayout>
 
