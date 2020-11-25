@@ -103,13 +103,18 @@
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:startIconDrawable="@drawable/id_img">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,14 +131,19 @@
         app:boxCornerRadiusTopStart="10dp"
         app:passwordToggleEnabled="true"
         app:layout_constraintBottom_toBottomOf="@id/guideline9"
-        app:layout_constraintTop_toTopOf="@id/guideline8">
+        app:layout_constraintTop_toTopOf="@id/guideline8"
+        app:boxStrokeColor="@color/white"
+        app:hintTextColor="@color/white"
+        app:startIconDrawable="@drawable/password_img">
 
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editPassw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

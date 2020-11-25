@@ -91,15 +91,6 @@ public class AddUsersFragment extends Fragment {
                         Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-
-
-
-
-
-                Toast.makeText(getActivity(), permessi +" uela "+ dataNascita, Toast.LENGTH_SHORT).show();
-
             }
         });
 
