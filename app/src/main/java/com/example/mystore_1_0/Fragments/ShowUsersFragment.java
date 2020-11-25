@@ -36,7 +36,7 @@ public class ShowUsersFragment extends Fragment {
         listaDipendenti = view.findViewById(R.id.listView);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
-        Query retrieveAll = reference.orderByChild("id");
+        Query retrieveAll = reference.orderByKey();
         retrieveAll.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,6 +63,7 @@ public class ShowUsersFragment extends Fragment {
                     Toast.makeText(getActivity(), "Dati non trovati", Toast.LENGTH_SHORT).show();
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
