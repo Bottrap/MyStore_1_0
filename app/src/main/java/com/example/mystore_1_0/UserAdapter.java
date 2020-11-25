@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
 //import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
     public void onBindViewHolder(@NonNull UserVH holder, int position) {
         Utente utente = users.get(position);
 
-        holder.titleTextView.setText(users.get(position).getId());
+        holder.titleTextView.setText(utente.getId());
+        holder.nome.setText(utente.getNome());
 
         boolean isExpanded = users.get(position).isExpanded();
         if (isExpanded) holder.layoutEspandibile.setVisibility(View.VISIBLE);
@@ -47,7 +49,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
     class UserVH extends RecyclerView.ViewHolder{
         private static final String TAG = "UserVH";
 
-        MaterialTextView titleTextView;
+        MaterialTextView titleTextView, nome;
 
         ConstraintLayout layoutEspandibile;
 
@@ -56,6 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
 
             layoutEspandibile = itemView.findViewById(R.id.layoutEspandibile);
             titleTextView = itemView.findViewById(R.id.titleTextView);
+            nome = itemView.findViewById(R.id.show_nome);
 
             titleTextView.setOnClickListener(new View.OnClickListener() {
                 @Override

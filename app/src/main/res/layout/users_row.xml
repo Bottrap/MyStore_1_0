@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
         
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:id="@+id/constraint_layout">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/titleTextView"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:backgroundTint="@color/transparent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -30,196 +37,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView"
                 >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:orientation="vertical"
-                    android:layout_marginStart="55dp"
-                    android:layout_marginEnd="55dp"
-                    >
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/show_nome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Nome"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:startIconDrawable="@drawable/name_img"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white"
-                    app:hintTextColor="@color/white">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/show_nome"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:padding="10dp"
+                        android:backgroundTint="@color/transparent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toStartOf="@id/show_cognome"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/show_cognome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Cognome"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:startIconDrawable="@drawable/name_img"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white"
-                    app:hintTextColor="@color/white">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/show_cognome"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:text="Cognome"
+                        android:backgroundTint="@color/transparent"
+                        android:padding="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/show_nome"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/show_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Id"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:startIconDrawable="@drawable/id_img"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white"
-                    app:hintTextColor="@color/white">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/show_phone"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/white"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:padding="16dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/show_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Password"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:passwordToggleEnabled="true"
-                    app:startIconDrawable="@drawable/password_img"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white"
-                    app:hintTextColor="@color/white">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@null"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:hint="Permessi"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:startIconDrawable="@drawable/permessi_img"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white"
-                    app:hintTextColor="@color/white"
-                    >
-
-                    <AutoCompleteTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/show_permessi"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        android:textColor="@color/white"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/show_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="Cellulare"
-                    app:boxCornerRadiusTopStart="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:startIconDrawable="@drawable/phone_img"
-                    app:hintTextColor="@color/white"
-                    app:boxStrokeColor="@color/arancione"
-
-                    app:placeholderTextColor="@color/white">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:textCursorDrawable="@null"
-                        android:textColor="@color/white"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/show_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:hint="Cellulare"
-                        app:boxCornerRadiusTopStart="10dp"
-                        app:boxCornerRadiusBottomStart="10dp"
-                        app:boxCornerRadiusBottomEnd="10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:startIconDrawable="@drawable/phone_img"
-                        app:hintTextColor="@color/white"
-                        app:boxStrokeColor="@color/arancione"
-
-                        app:placeholderTextColor="@color/white">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="date"
-                            android:textCursorDrawable="@null"
-                            android:textColor="@color/white"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-                </LinearLayout>
-
-
-
-
+                        android:padding="16dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
