@@ -8,10 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
-//import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
@@ -33,8 +31,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
     public void onBindViewHolder(@NonNull UserVH holder, int position) {
         Utente utente = users.get(position);
 
-        holder.titleTextView.setText(utente.getId());
-        holder.nome.setText(utente.getNome());
+        holder.titleTextView.setText("Id: " + utente.getId());
+        holder.nome.setText("Nome: " + utente.getNome());
+        holder.cognome.setText("Cognome: " + utente.getCognome());
+        holder.dataNascita.setText(utente.getDataNascita());
+        holder.permessi.setText("Permessi: " + utente.getPermessi());
+        holder.password.setText("Passw: " + utente.getPassword());
+        holder.telefono.setText("Cell: " + utente.getTelefono());
 
         boolean isExpanded = users.get(position).isExpanded();
         if (isExpanded) holder.layoutEspandibile.setVisibility(View.VISIBLE);
@@ -49,7 +52,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
     class UserVH extends RecyclerView.ViewHolder{
         private static final String TAG = "UserVH";
 
-        MaterialTextView titleTextView, nome;
+        MaterialTextView titleTextView, nome, cognome, telefono, permessi, password, dataNascita;
 
         ConstraintLayout layoutEspandibile;
 
@@ -59,6 +62,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
             layoutEspandibile = itemView.findViewById(R.id.layoutEspandibile);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             nome = itemView.findViewById(R.id.show_nome);
+            cognome = itemView.findViewById(R.id.show_cognome);
+            password = itemView.findViewById(R.id.show_password);
+            telefono = itemView.findViewById(R.id.show_telefono);
+            dataNascita = itemView.findViewById(R.id.show_dataNascita);
+            permessi = itemView.findViewById(R.id.show_permessi);
 
             titleTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
