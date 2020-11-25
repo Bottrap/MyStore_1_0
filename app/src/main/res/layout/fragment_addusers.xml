@@ -42,15 +42,17 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
             app:boxStrokeColor="@color/arancione"
-            android:textColorHint="@color/white"
+
             app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white"
-            >
+            app:hintTextColor="@color/white">
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,13 +67,16 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
             app:boxStrokeColor="@color/arancione"
-            android:textColorHint="@color/white"
-            app:placeholderTextColor="@color/white">
+
+            app:placeholderTextColor="@color/white"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -87,13 +92,16 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/id_img"
                 app:boxStrokeColor="@color/arancione"
-                android:textColorHint="@color/white"
-                app:placeholderTextColor="@color/white">
+
+                app:placeholderTextColor="@color/white"
+                app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -110,13 +118,16 @@
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/password_img"
             app:boxStrokeColor="@color/arancione"
-            android:textColorHint="@color/white"
-            app:placeholderTextColor="@color/white">
+
+            app:placeholderTextColor="@color/white"
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -130,8 +141,9 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/permessi_img"
             app:boxStrokeColor="@color/arancione"
-            android:textColorHint="@color/white"
+
             app:placeholderTextColor="@color/white"
+            app:hintTextColor="@color/white"
             >
 
             <AutoCompleteTextView
@@ -139,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
+                android:textColor="@color/white"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,13 +168,15 @@
             app:startIconDrawable="@drawable/phone_img"
             app:hintTextColor="@color/white"
             app:boxStrokeColor="@color/arancione"
-            android:textColorHint="@color/white"
+
             app:placeholderTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -196,7 +211,10 @@
             android:scaleY="1.5"
             android:layout_gravity="center"
             android:layout_marginBottom="60dp"
-            android:onClick="clickAdd"/>
+            android:onClick="clickAdd"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/white"/>
+
 
     </LinearLayout>
 
