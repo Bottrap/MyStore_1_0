@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mystore_1_0.ProfileActivity;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +33,6 @@ public class AddUsersFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addusers, container, false);
-        Toast.makeText(getActivity(), "Aggiungi Dipendenti", Toast.LENGTH_SHORT).show();
 
         //dropdown menu permessi
         String [] tipopermessi = new String[] {"1","2","3"};
@@ -52,45 +52,91 @@ public class AddUsersFragment extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get data
-                String id = (text_id.getEditText().getText().toString().trim());
-                String password = (text_password.getEditText().getText().toString().trim());
-                String permessi = (text_permessi.getText().toString().trim());
-                String nome = (text_nome.getEditText().getText().toString().trim());
-                String cognome = (text_cognome.getEditText().getText().toString().trim());
-                String dataNascita = (String.valueOf(text_date.getDayOfMonth()) + "/" + String.valueOf(text_date.getMonth()+1) + "/" + String.valueOf(text_date.getYear()));
-                String telefono = (text_phone.getEditText().getText().toString().trim());
-                //crea utente
-                Utente utente = new Utente(id, password, permessi, nome, cognome, dataNascita, telefono);
 
-                //database
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1");
-                Query checkId = reference.child("Users").orderByChild("id").equalTo(id);
+                String id = "", password = "", permessi = "", nome = "", cognome = "", telefono = "";
+                Utente utente = new Utente();
 
-                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            text_id.setError("È stato inserito un id già esistente");
-                            text_id.requestFocus();
+                if(text_id.getEditText().getText().toString().trim().isEmpty()) {
+                    text_id.setError("Questo campo non può essere vuoto");
+                    text_id.requestFocus();
+                } else {
+                    id = text_id.getEditText().getText().toString().trim();
+                    utente.setId(id);
+                }
+
+                if(text_nome.getEditText().getText().toString().trim().isEmpty()) {
+                    text_nome.setError("Questo campo non può essere vuoto");
+                    text_nome.requestFocus();
+                } else {
+                    nome = text_nome.getEditText().getText().toString().trim();
+                    utente.setNome(nome);
+                }
+
+                if(text_cognome.getEditText().getText().toString().trim().isEmpty()) {
+                    text_cognome.setError("Questo campo non può essere vuoto");
+                    text_cognome.requestFocus();
+                } else {
+                    cognome = text_cognome.getEditText().getText().toString().trim();
+                    utente.setCognome(cognome);
+                }
+
+                if(text_password.getEditText().getText().toString().trim().isEmpty()) {
+                    text_password.setError("Questo campo non può essere vuoto");
+                    text_password.requestFocus();
+                } else {
+                    password = text_password.getEditText().getText().toString().trim();
+                    utente.setPassword(password);
+                }
+
+                if(text_permessi.getText().toString().trim().isEmpty()) {
+                    text_id.setError("Questo campo non può essere vuoto");
+                    text_id.requestFocus();
+                } else {
+                    permessi = text_permessi.getText().toString().trim();
+                    utente.setPermessi(permessi);
+                }
+
+                if(text_phone.getEditText().getText().toString().trim().isEmpty()) {
+                    text_phone.setError("Questo campo non può essere vuoto");
+                    text_phone.requestFocus();
+                } else {
+                    telefono = text_phone.getEditText().getText().toString().trim();
+                    utente.setTelefono(telefono);
+                }
+
+                if (!(id.isEmpty()) && !(nome.isEmpty()) && !(cognome.isEmpty()) && !(telefono.isEmpty()) && !(permessi.isEmpty()) && !(password.isEmpty())){
+
+                    utente.setDataNascita(String.valueOf(text_date.getDayOfMonth()) + "/" + String.valueOf(text_date.getMonth()+1) + "/" + String.valueOf(text_date.getYear()));
+
+                    //database
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1");
+                    Query checkId = reference.child("Users").orderByChild("id").equalTo(text_id.getEditText().getText().toString().trim());
+
+                    checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                text_id.setError("È stato inserito un id già esistente");
+                                text_id.requestFocus();
+                            }
+                            else{
+                                reference.child("Users").child(utente.getId()).setValue(utente);
+                                Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                                text_nome.getEditText().getText().clear();
+                                text_cognome.getEditText().getText().clear();
+                                text_id.getEditText().getText().clear();
+                                text_password.getEditText().getText().clear();
+                                text_permessi.clearListSelection();
+                                text_phone.getEditText().getText().clear();
+                            }
                         }
-                        else{
-                            reference.child("Users").child(utente.getId()).setValue(utente);
-                            Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
-                            text_nome.getEditText().getText().clear();
-                            text_cognome.getEditText().getText().clear();
-                            text_id.getEditText().getText().clear();
-                            text_password.getEditText().getText().clear();
-                            text_permessi.clearListSelection();
-                            text_phone.getEditText().getText().clear();
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

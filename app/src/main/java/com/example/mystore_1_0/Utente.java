@@ -7,11 +7,14 @@ public class Utente implements Parcelable {
     private String id, password, permessi, nome, cognome, dataNascita, telefono;
     private boolean expanded;
 
-    public Utente(){ }
+    public Utente(){
+        this.expanded = false;
+    }
 
     public Utente(String id, String password){
         this.id = id;
         this.password = password;
+        this.expanded = false;
     }
 
     public Utente(String id, String password, String permessi, String nome, String cognome, String dataNascita, String telefono) {
