@@ -1,12 +1,15 @@
 package com.example.mystore_1_0;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -81,7 +84,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this).setTitle("Sei sicuro di voler uscire?").setMessage("Se esci dovrai autenticarti nuovamente.")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            ProfileActivity.super.onBackPressed();
+                        }
+                    }).setNeutralButton("No", null).create().show();
         }
     }
     @Override
