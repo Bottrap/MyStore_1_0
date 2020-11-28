@@ -45,19 +45,17 @@ public class LoginActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String passwFromDB = dataSnapshot.child(id).child("password").getValue().toString();
                     if (passwFromDB.equals(password)){
-                        /*
+
                         String nomeFromDB = dataSnapshot.child(id).child("nome").getValue().toString();
                         String permessiFromDB = dataSnapshot.child(id).child("permessi").getValue().toString();
                         String cognomeFromDB = dataSnapshot.child(id).child("cognome").getValue().toString();
                         String dataNascitaFromDB = dataSnapshot.child(id).child("dataNascita").getValue().toString();
                         String telefonoFromDB = dataSnapshot.child(id).child("telefono").getValue().toString();
 
-                        */
+
                         Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        Utente utente = new Utente(id, password, null, null, null, null, null);
+                        Utente utente = new Utente(id, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB);
                         intent.putExtra("utente", utente);
-                        intent.putExtra("id", id);
-                        intent.putExtra("password", password);
                         startActivity(intent);
                     }
                     else{

@@ -1,5 +1,6 @@
 package com.example.mystore_1_0;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +32,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
     public void onBindViewHolder(@NonNull UserVH holder, int position) {
         Utente utente = users.get(position);
 
-        holder.titleTextView.setText("Id: " + utente.getId());
-        holder.nome.setText("Nome: " + utente.getNome());
-        holder.cognome.setText("Cognome: " + utente.getCognome());
-        holder.dataNascita.setText(utente.getDataNascita());
-        holder.permessi.setText("Permessi: " + utente.getPermessi());
-        holder.password.setText("Passw: " + utente.getPassword());
-        holder.telefono.setText("Cell: " + utente.getTelefono());
+        holder.titleTextView.setText(Html.fromHtml("<b>Id: " + utente.getId() + "</b>"));
+        holder.nome.setText(Html.fromHtml("<b><u>Nome:</u></b><i> " + utente.getNome() + "</i>"));
+        holder.cognome.setText(Html.fromHtml("<b><u>Cognome:</u></b><i> " + utente.getCognome() + "</i>"));
+        holder.dataNascita.setText(Html.fromHtml("<i>" + utente.getDataNascita() + "</i>"));
+        holder.permessi.setText(Html.fromHtml("<b><u>Permessi:</u></b><i> " + utente.getPermessi() + "</i>"));
+        holder.password.setText(Html.fromHtml("<b><u>Passw:</u></b><i> " + utente.getPassword() + "</i>"));
+        holder.telefono.setText(Html.fromHtml("<b><u>Cell:</u></b><i> " + utente.getTelefono() + "</i>"));
 
         boolean isExpanded = users.get(position).isExpanded();
         if (isExpanded) holder.layoutEspandibile.setVisibility(View.VISIBLE);

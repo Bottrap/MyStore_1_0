@@ -45,8 +45,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         View header = navigationView.getHeaderView(0);
         idHeader = header.findViewById(R.id.idHeader);
         passwHeader = header.findViewById(R.id.passwHeader);
-        passwHeader.setText(utente.getPassword());
-        idHeader.setText(utente.getId());
+        passwHeader.setText("Benvenuto " + utente.getNome());
+        idHeader.setText("Il tuo ID è: " + utente.getId());
 
 
         //toolbar
