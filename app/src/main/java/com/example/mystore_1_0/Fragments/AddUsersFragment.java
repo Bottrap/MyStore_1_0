@@ -59,8 +59,8 @@ public class AddUsersFragment extends Fragment {
                 Utente utente = new Utente();
 
                 if(text_id.getEditText().getText().toString().trim().isEmpty()) {
-                    text_id.setError("Questo campo non può essere vuoto");
-                    text_id.requestFocus();
+                    text_id.getEditText().setError("Questo campo non può essere vuoto");
+                    text_id.getEditText().requestFocus();
                     isEmpty = true;
                 } else {
                     id = text_id.getEditText().getText().toString().trim();
@@ -68,8 +68,8 @@ public class AddUsersFragment extends Fragment {
                 }
 
                 if(text_nome.getEditText().getText().toString().trim().isEmpty()) {
-                    text_nome.setError("Questo campo non può essere vuoto");
-                    text_nome.requestFocus();
+                    text_nome.getEditText().setError("Questo campo non può essere vuoto");
+                    text_nome.getEditText().requestFocus();
                     isEmpty = true;
                 } else {
                     nome = text_nome.getEditText().getText().toString().trim();
@@ -77,8 +77,8 @@ public class AddUsersFragment extends Fragment {
                 }
 
                 if(text_cognome.getEditText().getText().toString().trim().isEmpty()) {
-                    text_cognome.setError("Questo campo non può essere vuoto");
-                    text_cognome.requestFocus();
+                    text_cognome.getEditText().setError("Questo campo non può essere vuoto");
+                    text_cognome.getEditText().requestFocus();
                     isEmpty = true;
                 } else {
                     cognome = text_cognome.getEditText().getText().toString().trim();
@@ -86,9 +86,10 @@ public class AddUsersFragment extends Fragment {
                 }
 
                 if(text_password.getEditText().getText().toString().trim().isEmpty()) {
-                    text_password.setError("Questo campo non può essere vuoto");
-                    text_password.requestFocus();
+                    text_password.getEditText().setError("Questo campo non può essere vuoto");
+                    text_password.getEditText().requestFocus();
                     isEmpty = true;
+
                 } else {
                     password = text_password.getEditText().getText().toString().trim();
                     utente.setPassword(password);
@@ -104,8 +105,8 @@ public class AddUsersFragment extends Fragment {
                 }
 
                 if(text_phone.getEditText().getText().toString().trim().isEmpty()) {
-                    text_phone.setError("Questo campo non può essere vuoto");
-                    text_phone.requestFocus();
+                    text_phone.getEditText().setError("Questo campo non può essere vuoto");
+                    text_phone.getEditText().requestFocus();
                     isEmpty = true;
                 } else {
                     telefono = text_phone.getEditText().getText().toString().trim();
