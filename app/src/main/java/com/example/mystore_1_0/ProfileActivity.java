@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.HomeFragment;
+import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
 import com.example.mystore_1_0.Fragments.ShowUsersFragment;
 import com.google.android.material.navigation.NavigationView;
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -103,6 +104,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_list_dip:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
+                break;
+            case R.id.nav_qr_gen:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QrGeneratorFragment()).commit();
                 break;
             case R.id.nav_logout:
                 finish();

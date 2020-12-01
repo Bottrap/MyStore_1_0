@@ -39,6 +39,19 @@
         </menu>
     </item>
 
+    <item android:title="QR-code">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_qr_gen"
+                    android:title = "Genera QR-code"
+                    android:icon = "@drawable/logout_img"/>
+            </group>
+        </menu>
+    </item>
+
+
+
     <item android:title="Profilo">
         <menu>
             <group android:checkableBehavior="single">
