@@ -30,11 +30,10 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class QrGeneratorFragment extends Fragment {
 
-    Bitmap bitmap;
-    Bitmap bitmapsave;
+    Bitmap bitmap, bitmapsave;
     Button btn_qr_gen;
     Button btn_save;
-    ImageView qr_img;
+    ImageView qr_img, qr_img2;
     OutputStream outputStream;
 
     @Nullable
@@ -45,17 +44,17 @@ public class QrGeneratorFragment extends Fragment {
         btn_qr_gen = view.findViewById(R.id.btn_qr_gen);
         btn_save = view.findViewById(R.id.btn_save);
         qr_img = view.findViewById(R.id.qr_img);
+        qr_img2 = view.findViewById(R.id.qr_img2);
 
         btn_qr_gen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String store = "store1"; //store in cui far accedere i clienti
-                QRGEncoder qrgEncoder = new QRGEncoder(store, null, QRGContents.Type.TEXT, 700);
-                qrgEncoder.setColorBlack(Color.BLACK);
-                qrgEncoder.setColorWhite(Color.TRANSPARENT);
+                QRGEncoder qrgEncoderShow = new QRGEncoder(store, QRGContents.Type.TEXT, 700);
+                qrgEncoderShow.setColorWhite(Color.TRANSPARENT);
                 try {
                     // Getting QR-Code as Bitmap
-                    bitmap = qrgEncoder.getBitmap();
+                    bitmap = qrgEncoderShow.getBitmap();
                     // Setting Bitmap to ImageView
                     qr_img.setImageBitmap(bitmap);
                     btn_save.setVisibility(View.VISIBLE);
@@ -72,9 +71,19 @@ public class QrGeneratorFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
-                bitmapsave = ((BitmapDrawable) qr_img.getDrawable()).getBitmap();
+                String store = "store1";
+                QRGEncoder qrgEncoderSave = new QRGEncoder(store, QRGContents.Type.TEXT, 1000);
+                try {
+                    // Getting QR-Code as Bitmap
+                    bitmap = qrgEncoderSave.getBitmap();
+                    qr_img2.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                bitmapsave = ((BitmapDrawable) qr_img2.getDrawable()).getBitmap();
                  File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/qrcode");
-                 dir.mkdir();
+                 dir.mkdirs();
                  String filename = String.format("%d.png", System.currentTimeMillis());
                  File file = new File(dir, filename);
                  try {
