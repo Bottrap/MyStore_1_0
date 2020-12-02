@@ -22,8 +22,8 @@ import com.example.mystore_1_0.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
+
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -31,7 +31,7 @@ import androidmads.library.qrgenearator.QRGEncoder;
 public class QrGeneratorFragment extends Fragment {
 
     Bitmap bitmap;
-    public Bitmap bitmapsave;
+    Bitmap bitmapsave;
     Button btn_qr_gen;
     Button btn_save;
     ImageView qr_img;
@@ -40,7 +40,7 @@ public class QrGeneratorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_qrgeneretor, container, false);
+        View view = inflater.inflate(R.layout.fragment_qrgenerator, container, false);
 
         btn_qr_gen = view.findViewById(R.id.btn_qr_gen);
         btn_save = view.findViewById(R.id.btn_save);
@@ -68,35 +68,25 @@ public class QrGeneratorFragment extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
-                 bitmapsave = ((BitmapDrawable) qr_img.getDrawable()).getBitmap();
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
-                    File filepath = Environment.getExternalStorageDirectory();
-                    File dir = new File (filepath.getAbsolutePath()+"/qrcode");
-                    dir.mkdirs();
-                    String filename = String.format("%d.png", System.currentTimeMillis());
-                    File file = new File (dir, filename);
-
-                    try {
+                bitmapsave = ((BitmapDrawable) qr_img.getDrawable()).getBitmap();
+                 File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/qrcode");
+                 dir.mkdir();
+                 String filename = String.format("%d.png", System.currentTimeMillis());
+                 File file = new File(dir, filename);
+                 try {
                         outputStream = new FileOutputStream(file);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    bitmapsave.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                    Toast.makeText(getActivity(), "Immagine salvata", Toast.LENGTH_LONG).show();
-                    try{
-                        outputStream.flush();
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    try {
+                        bitmapsave.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                        Toast.makeText(getActivity(), "Immagine salvata", Toast.LENGTH_LONG).show();
                         outputStream.close();
-                    }catch (IOException e){
+                    } catch (Exception e) {
+                        //Toast.makeText(getActivity(), "Percorso non trovato", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
+
             }
         });
 

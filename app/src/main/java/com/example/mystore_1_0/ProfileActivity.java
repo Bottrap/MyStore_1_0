@@ -44,8 +44,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+
         Intent intent = getIntent();
         Utente utente = intent.getParcelableExtra("utente");
+
         View header = navigationView.getHeaderView(0);
         idHeader = header.findViewById(R.id.idHeader);
         passwHeader = header.findViewById(R.id.passwHeader);
