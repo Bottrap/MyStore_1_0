@@ -1,4 +1,4 @@
-package com.example.mystore_1_0;
+package com.example.mystore_1_0.Activity;
 
 import androidx.annotation.Nullable;
 
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mystore_1_0.Activity.LoginActivity;
+import com.example.mystore_1_0.Capture;
+import com.example.mystore_1_0.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
