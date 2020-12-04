@@ -13,8 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mystore_1_0.Fragments.ShowUsersFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.List;
 
@@ -81,7 +85,6 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
                     Utente utente = users.get(getAdapterPosition());
                     utente.setExpanded(!utente.isExpanded());
                     notifyItemChanged(getAdapterPosition());
-                    Toast.makeText(itemView.getContext(), utente.getNome(), Toast.LENGTH_LONG).show();
                 }
             });
             btn_elimina = itemView.findViewById(R.id.btn_elimina);
@@ -90,6 +93,7 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
             btn_elimina.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Utente utente = users.get(getAdapterPosition());
                     AlertDialog.Builder dialog = new AlertDialog.Builder(itemView.getContext());
                     dialog.setTitle("Sei sicuro di voler eliminare questo utente?");
@@ -97,7 +101,9 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
                     dialog.setPositiveButton("ELIMINA", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(), "ciao", Toast.LENGTH_LONG).show();
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users").child(utente.getId());
+                            reference.removeValue();
+                            //Toast.makeText(dialog, "eliminato", Toast.LENGTH_SHORT).show();
                         }
                     }).setNegativeButton("INDIETRO", null);
                     dialog.create().show();
