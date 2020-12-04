@@ -1,5 +1,7 @@
 package com.example.mystore_1_0.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.ShowUsersAdapter;
 import com.example.mystore_1_0.Utente;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +29,6 @@ import java.util.List;
 public class ShowUsersFragment extends Fragment {
 
     RecyclerView recyclerView;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
@@ -60,7 +62,6 @@ public class ShowUsersFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
 
         return view;
     }

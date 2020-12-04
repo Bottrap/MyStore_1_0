@@ -1,14 +1,19 @@
 package com.example.mystore_1_0;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
@@ -16,6 +21,7 @@ import java.util.List;
 public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.UserVH> {
     private static final String TAG = "UserAdapter";
     List<Utente> users;
+    MaterialButton btn_modifica, btn_elimina;
 
     public ShowUsersAdapter(List<Utente> users) {
         this.users = users;
@@ -75,8 +81,32 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
                     Utente utente = users.get(getAdapterPosition());
                     utente.setExpanded(!utente.isExpanded());
                     notifyItemChanged(getAdapterPosition());
+                    Toast.makeText(itemView.getContext(), utente.getNome(), Toast.LENGTH_LONG).show();
+                }
+            });
+            btn_elimina = itemView.findViewById(R.id.btn_elimina);
+
+
+            btn_elimina.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Utente utente = users.get(getAdapterPosition());
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(itemView.getContext());
+                    dialog.setTitle("Sei sicuro di voler eliminare questo utente?");
+                    dialog.setMessage("Cliccando su ELIMINA, cancellerai definitivamente tutti i dati dell'utente selezionato");
+                    dialog.setPositiveButton("ELIMINA", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(itemView.getContext(), "ciao", Toast.LENGTH_LONG).show();
+                        }
+                    }).setNegativeButton("INDIETRO", null);
+                    dialog.create().show();
                 }
             });
         }
+
+
     }
+
+
 }
