@@ -1,4 +1,4 @@
-package com.example.mystore_1_0.Fragments;
+package com.example.mystore_1_0.Fragments.ShowUsers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mystore_1_0.R;
-import com.example.mystore_1_0.ShowUsersAdapter;
 import com.example.mystore_1_0.Utente;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

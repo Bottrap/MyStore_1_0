@@ -1,4 +1,5 @@
-package com.example.mystore_1_0;
+package com.example.mystore_1_0.Activity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -18,13 +19,24 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
-import com.example.mystore_1_0.Fragments.HomeFragment;
+import com.example.mystore_1_0.Fragments.Home.ChangePasswordDialog;
+import com.example.mystore_1_0.Fragments.Home.HomeFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
-import com.example.mystore_1_0.Fragments.ShowUsersFragment;
+import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
+import com.example.mystore_1_0.R;
+import com.example.mystore_1_0.Utente;
 import com.google.android.material.navigation.NavigationView;
-public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ChangePasswordDialog.ChangePasswordDialogListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -81,12 +93,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
+
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             new AlertDialog.Builder(this).setTitle("Sei sicuro di voler uscire?").setMessage("Se esci dovrai autenticarti nuovamente.")
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -95,9 +107,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     }).setNeutralButton("No", null).create().show();
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 break;
@@ -115,5 +128,24 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void changePassword(String password) {
+        Utente utente = getIntent().getParcelableExtra("utente");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
+        Query checkId = reference.orderByChild("id").equalTo(utente.getId());
+        checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                reference.child(utente.getId()).child("password").setValue(password);
+                Toast.makeText(ProfileActivity.this, "Password modificata correttamente", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
