@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mystore_1_0.R;
-import com.example.mystore_1_0.UserAdapter;
+import com.example.mystore_1_0.ShowUsersAdapter;
 import com.example.mystore_1_0.Utente;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +45,7 @@ public class ShowUsersFragment extends Fragment {
                         listaUtenti.add(utente);
                     }
 
-                    UserAdapter userAdapter = new UserAdapter(listaUtenti);
+                    ShowUsersAdapter userAdapter = new ShowUsersAdapter(listaUtenti);
                     recyclerView.setAdapter(userAdapter);
 
 

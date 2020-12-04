@@ -13,18 +13,18 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserVH> {
+public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.UserVH> {
     private static final String TAG = "UserAdapter";
     List<Utente> users;
 
-    public UserAdapter(List<Utente> users) {
+    public ShowUsersAdapter(List<Utente> users) {
         this.users = users;
     }
 
     @NonNull
     @Override
     public UserVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.showusers_row, parent, false);
         return new UserVH(view);
     }
 

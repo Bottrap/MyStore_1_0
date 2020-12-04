@@ -55,7 +55,6 @@ public class AddUsersFragment extends Fragment {
 
                 boolean isEmpty = false;
                 String id, password, permessi, nome, cognome, telefono;
-                //String id = "", password = "", permessi = "", nome = "", cognome = "", telefono = "";
                 Utente utente = new Utente();
 
                 if(text_id.getEditText().getText().toString().trim().isEmpty()) {
@@ -113,9 +112,8 @@ public class AddUsersFragment extends Fragment {
                     utente.setTelefono(telefono);
                 }
 
-                //if (!(id.isEmpty()) && !(nome.isEmpty()) && !(cognome.isEmpty()) && !(telefono.isEmpty()) && !(permessi.isEmpty()) && !(password.isEmpty())){
-                if (!isEmpty){
 
+                if (!isEmpty){
                     utente.setDataNascita(String.valueOf(text_date.getDayOfMonth()) + "/" + String.valueOf(text_date.getMonth()+1) + "/" + String.valueOf(text_date.getYear()));
 
                     //database
