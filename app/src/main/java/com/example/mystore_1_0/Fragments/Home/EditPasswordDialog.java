@@ -5,11 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +18,7 @@ import com.example.mystore_1_0.Utente;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class ChangePasswordDialog extends AppCompatDialogFragment {
+public class EditPasswordDialog extends AppCompatDialogFragment {
 
     TextInputEditText insertOldPw, insertNewPw, confirmNewPw;
     ChangePasswordDialogListener listener;
@@ -32,7 +30,7 @@ public class ChangePasswordDialog extends AppCompatDialogFragment {
         Utente utente = getActivity().getIntent().getParcelableExtra("utente");
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.change_password_dialog_layout, null);
+        View view = inflater.inflate(R.layout.edit_password_dialog_layout, null);
 
         builder.setView(view).setNeutralButton("Annulla", null).setPositiveButton("Ok", null);
 
@@ -42,7 +40,7 @@ public class ChangePasswordDialog extends AppCompatDialogFragment {
 
         AlertDialog dialog = builder.create();
         dialog.setOnShowListener(dialog1 -> {
-            Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+            Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setTextColor(getResources().getColor(R.color.arancione));
             dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.arancione));
             positiveButton.setOnClickListener(v -> {
@@ -50,10 +48,6 @@ public class ChangePasswordDialog extends AppCompatDialogFragment {
                 String oldPw = insertOldPw.getText().toString().trim();
                 String newPw = insertNewPw.getText().toString().trim();
                 String confirmedNewPw = confirmNewPw.getText().toString().trim();
-
-                Log.d("boh", oldPw);
-                Log.d("boh2", newPw);
-                Log.d("boh3", confirmedNewPw);
 
                 if (oldPw.equals(utente.getPassword())) {
                     if (oldPw.equals(newPw)) {

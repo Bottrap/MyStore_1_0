@@ -1,11 +1,11 @@
 package com.example.mystore_1_0.Fragments.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,17 +16,11 @@ import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EditPhoneDialog.EditPhoneDialogListener {
 
     MaterialTextView showId, showNome, showCognome, showPermessi, showDataNascita, showTelefono;
-    MaterialButton pwEdit;
+    MaterialButton pwEdit, phoneEdit;
 
     @Nullable
     @Override
@@ -45,6 +39,7 @@ public class HomeFragment extends Fragment {
         showDataNascita = view.findViewById(R.id.showDataNascita);
         showTelefono = view.findViewById(R.id.showTelefono);
         pwEdit = view.findViewById(R.id.pwEdit);
+        phoneEdit = view.findViewById(R.id.phoneEdit);
 
         showNome.setText(utente.getNome());
         showCognome.setText(utente.getCognome());
@@ -54,11 +49,23 @@ public class HomeFragment extends Fragment {
         showDataNascita.setText(utente.getDataNascita());
 
         pwEdit.setOnClickListener(v -> {
-            ChangePasswordDialog changePasswordDialog = new ChangePasswordDialog();
-            changePasswordDialog.show(getActivity().getSupportFragmentManager(), "Change Password Dialog");
+            EditPasswordDialog editPasswordDialog = new EditPasswordDialog();
+            editPasswordDialog.show(getActivity().getSupportFragmentManager(), "Change Password Dialog");
+        });
+
+        phoneEdit.setOnClickListener(v -> {
+            EditPhoneDialog editPhoneDialog = new EditPhoneDialog();
+            editPhoneDialog.setTargetFragment(this, 0);
+            editPhoneDialog.show(getActivity().getSupportFragmentManager(), "Change Phone Dialog");
         });
 
         return view;
     }
+
+    @Override
+    public void changePhoneNumber(String phone) {
+        showTelefono.setText(phone);
+        Toast.makeText(getContext(), "Numero di telefono modificato correttamente", Toast.LENGTH_SHORT).show();
     }
+}
 

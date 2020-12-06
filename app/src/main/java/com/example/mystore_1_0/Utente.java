@@ -7,6 +7,14 @@ public class Utente implements Parcelable {
     private String id, password, permessi, nome, cognome, dataNascita, telefono;
     private boolean expanded;
 
+    /** Legenda permessi
+     *
+     * Permesso = 1 --> Capo supremo
+     * Permesso = 2 --> Responsabile magazzino
+     * Permesso = 3 --> Dipendente (zona esposizione)
+     *
+     */
+
     public Utente(){
         this.expanded = false;
     }

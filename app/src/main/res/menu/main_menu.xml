@@ -52,15 +52,9 @@
 
 
 
-    <item android:title="Profilo">
+    <item android:title="Logout">
         <menu>
             <group android:checkableBehavior="single">
-                <!--
-                <item
-                    android:id="@+id/nav_profile"
-                    android:title = "Profilo"
-                    android:icon = "@drawable/profile_img"/>
-                 -->
                 <item
                     android:id="@+id/nav_logout"
                     android:title = "Logout"

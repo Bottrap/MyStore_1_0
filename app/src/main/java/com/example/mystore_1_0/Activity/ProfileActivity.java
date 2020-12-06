@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -22,7 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
-import com.example.mystore_1_0.Fragments.Home.ChangePasswordDialog;
+import com.example.mystore_1_0.Fragments.Home.EditPasswordDialog;
+import com.example.mystore_1_0.Fragments.Home.EditPhoneDialog;
 import com.example.mystore_1_0.Fragments.Home.HomeFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
@@ -36,7 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ChangePasswordDialog.ChangePasswordDialogListener {
+public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, EditPasswordDialog.ChangePasswordDialogListener{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -91,6 +93,14 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
+        //Controllo sui permessi dell'utente
+        if((Integer.parseInt(utente.getPermessi()) == 2) || (Integer.parseInt(utente.getPermessi()) == 3)){
+            navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
+        }
+
 
     }
 
