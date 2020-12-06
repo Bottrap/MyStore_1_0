@@ -2,6 +2,13 @@ package com.example.mystore_1_0;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Utente implements Parcelable {
     private String id, password, permessi, nome, cognome, dataNascita, telefono;
@@ -137,4 +144,18 @@ public class Utente implements Parcelable {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
+
+    public Calendar getDataDate(){
+        String dataNascita = this.dataNascita;
+        Calendar cal = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            cal = Calendar.getInstance();
+            cal.setTime(sdf.parse(dataNascita));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cal;
+    }
+
 }
