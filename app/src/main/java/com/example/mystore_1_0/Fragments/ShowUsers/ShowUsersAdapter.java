@@ -1,24 +1,26 @@
-package com.example.mystore_1_0;
+package com.example.mystore_1_0.Fragments.ShowUsers;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mystore_1_0.Fragments.ShowUsersFragment;
+import com.example.mystore_1_0.Fragments.EditUserFragment;
+import com.example.mystore_1_0.R;
+import com.example.mystore_1_0.Utente;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.List;
 
@@ -107,6 +109,20 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
                         }
                     }).setNegativeButton("INDIETRO", null);
                     dialog.create().show();
+                }
+            });
+
+            btn_modifica = itemView.findViewById(R.id.btn_modifica);
+            btn_modifica.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Utente utente = users.get(getAdapterPosition());
+                    AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditUserFragment(utente)).commit();
+
+
+                    //Fragment nextFragment = new Fragment();
+                    //v.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFragment, new ModifUserFragment()).commit();
                 }
             });
         }
