@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.mystore_1_0.Mappa;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.material.textfield.TextInputEditText;
@@ -78,6 +79,11 @@ public class LoginActivity extends AppCompatActivity {
 
         editId.getText().clear();
         editPassw.getText().clear();
+    }
+
+    public void apriGridLayout(View view) {
+        Intent intent = new Intent(getApplicationContext(), Mappa.class);
+        startActivity(intent);
     }
 
 /* public void clickBtnRegistrati(View view) {

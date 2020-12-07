@@ -7,6 +7,17 @@
     android:background="@drawable/background"
     tools:context=".Activity.LoginActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        android:text="Grid Layout"
+        android:onClick="apriGridLayout"
+        android:backgroundTint="@color/statusBarColor"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"

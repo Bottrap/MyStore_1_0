@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Utente implements Parcelable {
-    private String id, password, permessi, nome, cognome, dataNascita, telefono;
+    private String id, password, permessi, nome, cognome, dataNascita, telefono, negozio;
     private boolean expanded;
 
     /** Legenda permessi
@@ -145,17 +145,21 @@ public class Utente implements Parcelable {
         this.expanded = expanded;
     }
 
-    public Calendar getDataDate(){
-        String dataNascita = this.dataNascita;
-        Calendar cal = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            cal = Calendar.getInstance();
-            cal.setTime(sdf.parse(dataNascita));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return cal;
+    public int getDay(String birthDate){
+        String[] parse = birthDate.split("/");
+        int day = Integer.parseInt(parse[0]);
+        return day;
     }
+    public int getYear(String birthDate){
+        String[] parse = birthDate.split("/");
+        int year = Integer.parseInt(parse[2]);
+        return year;
+    }
+    public int getMonth(String birthDate){
+        String[] parse = birthDate.split("/");
+        int month = Integer.parseInt(parse[1]);
+        return month;
+    }
+
 
 }

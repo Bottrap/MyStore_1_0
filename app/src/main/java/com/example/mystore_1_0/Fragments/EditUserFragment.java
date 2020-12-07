@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class EditUserFragment extends Fragment {
+public class EditUserFragment extends Fragment implements IOnBackPressed {
 
     Utente utente;
 
@@ -59,15 +60,12 @@ public class EditUserFragment extends Fragment {
         text_mod_permessi.setText(utente.getPermessi());
         text_mod_permessi.setAdapter(adapter);
 
-        Log.d("data",utente.getDataNascita());
-        Log.d("anno", String.valueOf(utente.getDataDate().get(Calendar.YEAR)));
-
         text_mod_nome.getEditText().setText(utente.getNome());
         text_mod_cognome.getEditText().setText(utente.getCognome());
         text_mod_id.getEditText().setText(utente.getId());
         text_mod_password.getEditText().setText(utente.getPassword());
         text_mod_phone.getEditText().setText(utente.getTelefono());
-        text_mod_date.init(utente.getDataDate().get(Calendar.YEAR), utente.getDataDate().get(Calendar.MONTH), utente.getDataDate().get(Calendar.DAY_OF_MONTH), null);
+        text_mod_date.init(utente.getYear(utente.getDataNascita()), utente.getMonth(utente.getDataNascita()), utente.getDay(utente.getDataNascita()), null);
 
         btn_mod.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,11 +152,17 @@ public class EditUserFragment extends Fragment {
                         }
                     });
                 }
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
+
             }
         });
 
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
+        return true;
     }
 }

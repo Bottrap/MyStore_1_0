@@ -9,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,11 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
+import com.example.mystore_1_0.Fragments.EditUserFragment;
 import com.example.mystore_1_0.Fragments.Home.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Home.EditPhoneDialog;
 import com.example.mystore_1_0.Fragments.Home.HomeFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.material.navigation.NavigationView;
@@ -106,16 +109,23 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            new AlertDialog.Builder(this).setTitle("Sei sicuro di voler uscire?").setMessage("Se esci dovrai autenticarti nuovamente.")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            ProfileActivity.super.onBackPressed();
-                        }
-                    }).setNeutralButton("No", null).create().show();
+
+        Fragment editFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (!(editFragment instanceof IOnBackPressed) || !((IOnBackPressed) editFragment).onBackPressed())
+        {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                new AlertDialog.Builder(this).setTitle("Sei sicuro di voler uscire?").setMessage("Se esci dovrai autenticarti nuovamente.")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                ProfileActivity.super.onBackPressed();
+                            }
+                        }).setNeutralButton("No", null).create().show();
+            }
         }
+
+
     }
 
     @Override
