@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/backprova1"
     tools:context=".Activity.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -79,8 +79,8 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
             app:startIconDrawable="@drawable/ic_baseline_storefront_24">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -90,7 +90,7 @@
             android:id="@+id/autoCompleteStores"
             android:completionThreshold="1"
             android:layout_marginBottom="15dp"
-            app:hintTextColor="@color/white"/>
+            app:hintTextColor="@color/black"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,8 +105,8 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
             app:startIconDrawable="@drawable/id_img">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textCursorDrawable="@null" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -128,8 +128,8 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/white"
-            app:hintTextColor="@color/white"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/password_img">
 
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textCursorDrawable="@null"/>
 
         </com.google.android.material.textfield.TextInputLayout>
