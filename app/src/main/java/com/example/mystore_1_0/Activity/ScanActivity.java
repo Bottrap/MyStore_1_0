@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.mystore_1_0.Activity.LoginActivity;
 import com.example.mystore_1_0.Capture;
 import com.example.mystore_1_0.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -28,12 +27,16 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     public void clickScanBtn(View v){
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);    //temporaneamente il bottone apre solo l'activity mappa
+        startActivity(intent);
+        /*
         IntentIntegrator intentIntegrator = new IntentIntegrator(this);
         intentIntegrator.setPrompt("Scansiona il QR code");
         intentIntegrator.setBeepEnabled(true);
         intentIntegrator.setOrientationLocked(true);
         intentIntegrator.setCaptureActivity(Capture.class);
         intentIntegrator.initiateScan();
+         */
     }
 
     @Override
@@ -46,5 +49,10 @@ public class ScanActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "La scansione non è andata a buon fine!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void apriGridLayout(View view) {
+        Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        startActivity(intent);
     }
 }

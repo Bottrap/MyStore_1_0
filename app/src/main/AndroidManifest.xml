@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyStore_1_0">
-        <activity android:name=".Mappa"></activity>
+        <activity android:name=".Activity.MapActivity"></activity>
         <activity android:name=".Activity.ProfileActivity" />
         <activity
             android:name=".Activity.LoginActivity"

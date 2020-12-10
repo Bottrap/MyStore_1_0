@@ -161,5 +161,11 @@ public class Utente implements Parcelable {
         return month;
     }
 
+    public String getNegozio() {
+        return negozio;
+    }
 
+    public void setNegozio(String negozio) {
+        this.negozio = negozio;
+    }
 }

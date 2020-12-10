@@ -1,11 +1,13 @@
-package com.example.mystore_1_0;
+package com.example.mystore_1_0.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-public class Mappa extends AppCompatActivity {
+import com.example.mystore_1_0.R;
+
+public class MapActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
