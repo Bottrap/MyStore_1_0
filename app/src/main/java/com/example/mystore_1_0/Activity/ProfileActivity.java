@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
+import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.Fragments.EditUserFragment;
 import com.example.mystore_1_0.Fragments.Home.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Home.EditPhoneDialog;
@@ -95,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
         //Controllo sui permessi dell'utente
         if((Integer.parseInt(utente.getPermessi()) == 2) || (Integer.parseInt(utente.getPermessi()) == 3)){
@@ -132,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
                 break;
             case R.id.nav_add_dip:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddUsersFragment()).commit();
@@ -142,6 +143,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_qr_gen:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QrGeneratorFragment()).commit();
+                break;
+            case R.id.nav_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 break;
             case R.id.nav_logout:
                 finish();

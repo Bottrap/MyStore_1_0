@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -125,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         editId.getText().clear();
         editPassw.getText().clear();
     }
-
 
 
 /* public void clickBtnRegistrati(View view) {
