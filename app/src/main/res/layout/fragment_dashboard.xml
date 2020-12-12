@@ -36,6 +36,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:id="@+id/showusers_cardview"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="20dp"
@@ -113,12 +114,6 @@
                 app:cardElevation="5dp" />
 
         </LinearLayout>
-
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

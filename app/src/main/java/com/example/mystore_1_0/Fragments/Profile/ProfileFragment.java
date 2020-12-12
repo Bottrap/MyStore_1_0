@@ -1,8 +1,6 @@
-package com.example.mystore_1_0.Fragments.Home;
+package com.example.mystore_1_0.Fragments.Profile;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,7 @@ import com.example.mystore_1_0.Utente;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
-public class HomeFragment extends Fragment implements EditPhoneDialog.EditPhoneDialogListener {
+public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPhoneDialogListener {
 
     MaterialTextView showId, showNome, showCognome, showPermessi, showDataNascita, showTelefono;
     MaterialButton pwEdit, phoneEdit;
@@ -25,7 +23,7 @@ public class HomeFragment extends Fragment implements EditPhoneDialog.EditPhoneD
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         MaterialTextView welcomeTxtView = view.findViewById(R.id.welcomeTxtView);
         Utente utente = getActivity().getIntent().getParcelableExtra("utente");

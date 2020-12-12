@@ -32,7 +32,7 @@ public class Utente implements Parcelable {
         this.expanded = false;
     }
 
-    public Utente(String id, String password, String permessi, String nome, String cognome, String dataNascita, String telefono) {
+    public Utente(String id, String password, String permessi, String nome, String cognome, String dataNascita, String telefono, String negozio) {
         this.id = id;
         this.password = password;
         this.permessi = permessi;
@@ -40,6 +40,7 @@ public class Utente implements Parcelable {
         this.cognome = cognome;
         this.dataNascita = dataNascita;
         this.telefono = telefono;
+        this.negozio = negozio;
         this.expanded = false;
     }
 
@@ -51,6 +52,7 @@ public class Utente implements Parcelable {
         cognome = in.readString();
         dataNascita = in.readString();
         telefono = in.readString();
+        negozio = in.readString();
     }
 
     public static final Creator<Utente> CREATOR = new Creator<Utente>() {
@@ -79,6 +81,7 @@ public class Utente implements Parcelable {
         dest.writeString(cognome);
         dest.writeString(dataNascita);
         dest.writeString(telefono);
+        dest.writeString(negozio);
     }
 
     public String getPermessi() {
