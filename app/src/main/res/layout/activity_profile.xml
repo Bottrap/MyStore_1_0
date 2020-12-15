@@ -5,10 +5,10 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context = ".Activity.ProfileActivity"
+    android:background="@drawable/background"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    android:background="@drawable/background">
+    tools:context=".Activity.ProfileActivity"
+    tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -32,16 +32,17 @@
             android:background="@color/transparent"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragment_container"/>
-    </ScrollView>
+            android:layout_height="wrap_content">
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ScrollView>
     </LinearLayout>
 
 

@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String telefonoFromDB = dataSnapshot.child(id).child("telefono").getValue().toString();
 
                                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                                Utente utente = new Utente(id, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB);
+                                Utente utente = new Utente(id, password, permessiFromDB, nomeFromDB, cognomeFromDB, dataNascitaFromDB, telefonoFromDB, negozio);
                                 intent.putExtra("utente", utente);
                                 startActivity(intent);
                             } else {
@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editId.getText().clear();
         editPassw.getText().clear();
+        editStore.getText().clear();
     }
 
 

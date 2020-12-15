@@ -15,7 +15,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -25,10 +24,8 @@ import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
-import com.example.mystore_1_0.Fragments.EditUserFragment;
-import com.example.mystore_1_0.Fragments.Home.EditPasswordDialog;
-import com.example.mystore_1_0.Fragments.Home.EditPhoneDialog;
-import com.example.mystore_1_0.Fragments.Home.HomeFragment;
+import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
+import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.IOnBackPressed;
@@ -132,7 +129,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_home:
+            case R.id.nav_dashboard:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
                 break;
             case R.id.nav_add_dip:
@@ -145,7 +142,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QrGeneratorFragment()).commit();
                 break;
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
             case R.id.nav_logout:
                 finish();

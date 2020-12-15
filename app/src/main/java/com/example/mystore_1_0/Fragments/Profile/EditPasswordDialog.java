@@ -1,4 +1,4 @@
-package com.example.mystore_1_0.Fragments.Home;
+package com.example.mystore_1_0.Fragments.Profile;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

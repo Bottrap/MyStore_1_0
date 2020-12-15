@@ -1,10 +1,9 @@
-package com.example.mystore_1_0.Fragments.Home;
+package com.example.mystore_1_0.Fragments.Profile;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
