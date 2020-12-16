@@ -53,7 +53,7 @@
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/add_dip_img" />
+                        android:src="@drawable/add_dip_img"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -5,2285 +5,1242 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline1"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65"/>
+        app:layout_constraintGuide_percent="0.6" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1">
+        >
 
         <GridLayout
+            android:id="@+id/gridlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnCount="30"
-            android:rowCount="15"
+            android:columnCount="20"
+            android:rowCount="11"
             android:background="@drawable/map">
 
-            <!-- Il rapporto lunghezza/altezza della foto è di circa 1.4178
-                 verificato su 2 risoluzioni (hdpi e xhdpi) -->
-
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-                        <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
             <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-            <Button
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/transparent" />
-
-
-
-
-
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
+            <Button
+                android:layout_width="50dp"
+                android:backgroundTint="@color/transparent"
+                android:visibility="visible"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="50dp"
+                android:visibility="visible"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:backgroundTint="@color/transparent"
+                app:strokeWidth="5dp"
+                app:strokeColor="@color/black"/>
 
         </GridLayout>
+
 
     </HorizontalScrollView>
 
