@@ -20,23 +20,12 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.mappa);
 
 
-        Button btn0_1 = findViewById(R.id.btn0_1);
+        Button btn = findViewById(R.id.btn_0_0);
         GridLayout gridLayout = findViewById(R.id.gridlayout);
 
-        btn0_1.requestFocus();
+        gridLayout.getChildAt(3).setVisibility(View.VISIBLE);
 
-        gridLayout.getChildAt(1).setVisibility(View.VISIBLE);
-        gridLayout.getChildAt(1).setBackgroundColor(getResources().getColor(R.color.transparent));
-        gridLayout.getChildAt(23).setVisibility(View.VISIBLE);
-        gridLayout.getChildAt(23).setBackgroundColor(getResources().getColor(R.color.transparent));
-
-
-        //gridLayout.getChildAt(11).setVisibility(View.INVISIBLE);
-        //gridLayout.getChildAt(12).setVisibility(View.INVISIBLE);
-        //gridLayout.getChildAt(10).getLayoutParams();
-        Log.d("X",String.valueOf(gridLayout.getChildAt(10).getLayoutParams()));
-        Log.d("material",String.valueOf(gridLayout.getChildAt(23)));
-        Log.d("count", String.valueOf(gridLayout.getChildCount()));
+        btn.setVisibility(View.VISIBLE);
 
 
 

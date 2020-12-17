@@ -11,6 +11,11 @@ public class Posizione {
         this.orientamento = orientamento;
     }
 
+    public Posizione(int indiceRiga, int indiceColonna) {
+        this.indiceRiga = indiceRiga;
+        this.indiceColonna = indiceColonna;
+    }
+
     public int getIndiceRiga() {
         return indiceRiga;
     }
@@ -42,6 +47,8 @@ public class Posizione {
     public void setOrientamento(Orientamento orientamento) {
         this.orientamento = orientamento;
     }
+
+
 }
 
 enum Orientamento { verticale, orizzontale }

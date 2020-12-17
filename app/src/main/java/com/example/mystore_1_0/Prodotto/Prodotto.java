@@ -1,6 +1,7 @@
 package com.example.mystore_1_0.Prodotto;
 
 public class Prodotto {
+    final int NumeroColonne = 33;
     String nome;
     int codice;
     float prezzo;
@@ -44,4 +45,21 @@ public class Prodotto {
     public void setPosizione(Posizione posizione) {
         this.posizione = posizione;
     }
+
+    private int getIndex(int x, int y){
+        int indice = ((NumeroColonne)*x)+y;
+        return indice;
+    }
+
+    private Posizione getPosition(int index){
+        int x = 0;
+        while(index >= NumeroColonne){
+            index = index - NumeroColonne;
+            x = x + 1;
+        }
+        Posizione posizione = new Posizione(x, index);
+        return posizione;
+    }
+
+
 }
