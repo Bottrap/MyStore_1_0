@@ -20,8 +20,10 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.mappa);
 
 
-        //Button button00 = findViewById(R.id.button_prova);
+        Button btn0_1 = findViewById(R.id.btn0_1);
         GridLayout gridLayout = findViewById(R.id.gridlayout);
+
+        btn0_1.requestFocus();
 
         gridLayout.getChildAt(1).setVisibility(View.VISIBLE);
         gridLayout.getChildAt(1).setBackgroundColor(getResources().getColor(R.color.transparent));
