@@ -18,14 +18,12 @@
             android:rowCount="11"
             android:background="@drawable/map">
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            <Button
                 android:id="@+id/button00"
                 android:layout_width="33dp"
-                android:backgroundTint="@color/transparent"
-                android:visibility="visible"
-                app:strokeColor="@color/black"
-                app:strokeWidth="5dp" />
+                android:background="@drawable/shape_button"
+                android:visibility="visible"/>
+
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:id="@+id/button01"
