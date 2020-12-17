@@ -191,7 +191,6 @@
                         android:text="PROFILO"
                         android:textColor="@color/scanStatusBarColor"/>
 
-
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
