@@ -130,12 +130,12 @@ public class AddProductFragment extends Fragment {
         btn_add_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Prodotto prodotto = new Prodotto;
+                Prodotto prodotto = new Prodotto();
                 if (isClicked){
                     if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()){
                         Posizione posizione = getPosition(indicePrecedente);
-                        posizione.setOrientamento();
-                        prodotto.
+                        posizione.setOrientamento(Orientamento.orizzontale);
+                        prodotto. //boh non so che dovevi fare qua
                     }
                 }
             }
