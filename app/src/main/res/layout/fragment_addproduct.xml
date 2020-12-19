@@ -2327,7 +2327,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add_prod"
-            android:text="CONFERMA"
+            android:text="AGGIUNGI PRODOTTO"
             android:backgroundTint="@color/scanStatusBarColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

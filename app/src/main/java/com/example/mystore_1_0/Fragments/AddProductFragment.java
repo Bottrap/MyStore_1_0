@@ -87,14 +87,14 @@ public class AddProductFragment extends Fragment {
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
                                         lunghezza++;
                                     }
-                                    //posizione.setLunghezza(lunghezza);
+                                    posizione = getPosition(finalI);
                                 } else {
                                     for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
                                         lunghezza++;
                                     }
-                                    //posizione.setLunghezza(lunghezza);
+                                    posizione = getPosition(finalI);
                                 }
                                 posizione.setLunghezza(lunghezza);
                             }
@@ -143,8 +143,8 @@ public class AddProductFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Prodotto prodotto = new Prodotto();
-                if (isClicked){
-                    if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()){
+                if (isClicked) {
+                    if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()) {
                         Posizione posizione = getPosition(indicePrecedente);
                         posizione.setOrientamento(Orientamento.orizzontale);
                         prodotto.setPosizione(posizione);
