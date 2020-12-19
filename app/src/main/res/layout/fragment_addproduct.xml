@@ -2236,7 +2236,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            app:endIconMode="clear_text"
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor">
 
@@ -2337,6 +2337,7 @@
             android:scaleY="1.5"
             android:layout_gravity="center"
             android:layout_marginBottom="60dp"
+            android:layout_marginTop="20dp"
             android:onClick="clickAdd"
             app:strokeWidth="1dp"
             app:strokeColor="@color/white"/>

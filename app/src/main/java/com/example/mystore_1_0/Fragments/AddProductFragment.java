@@ -1,5 +1,7 @@
 package com.example.mystore_1_0.Fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +14,10 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,6 +42,11 @@ public class AddProductFragment extends Fragment {
         return posizione;
     }
 
+    public Boolean isClicked = false;
+    public int indicePrecedente;
+    public int indiceSuccessivo = 500;
+    public Boolean is2Clicked = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,11 +66,39 @@ public class AddProductFragment extends Fragment {
                 public void onClick(View view){
                     // your click code here
 
-                    text_posizione.getEditText().setText(getPosition(finalI).getIndiceRiga()+", "+getPosition(finalI).getIndiceColonna());
+                    if (!isClicked) {
+                        isClicked = true;
+                        text_posizione.getEditText().setText(getPosition(finalI).getIndiceRiga()+", "+getPosition(finalI).getIndiceColonna());
+                        indicePrecedente = finalI;
+                        grid.getChildAt(finalI).setBackgroundResource(R.drawable.button_shape);
+
+
+                    } else {
+                        indiceSuccessivo = finalI;
+                        if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(finalI).getIndiceRiga()) {
+                            for (int j = indicePrecedente; j <= finalI; j++ ){
+                                grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga()+", "+getPosition(indicePrecedente).getIndiceColonna()+" -> "+ getPosition(finalI).getIndiceRiga()+", "+getPosition(finalI).getIndiceColonna());
+                            }
+                        }
+
+                    }
+
+
 
                 }
             });
         }
+
+
+        text_posizione.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
+
+            }
+        });
 
 
 
