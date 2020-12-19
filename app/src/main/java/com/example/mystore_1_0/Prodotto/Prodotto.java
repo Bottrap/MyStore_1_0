@@ -30,20 +30,15 @@ public class Prodotto {
         this.URLImmagine = URLImmagine;
     }
 
-    public Prodotto(String nome, String codice, String prezzo, String URLImmagine) {
+    public Prodotto(String nome, String codice, String prezzo, String URLImmagine, Posizione posizione) {
         this.nome = nome;
         this.codice = codice;
         this.prezzo = prezzo;
         this.URLImmagine = URLImmagine;
+        this.posizione = posizione;
     }
 
     public Prodotto() {
-    }
-
-    public Prodotto(String nome, String codice, String prezzo) {  //costruttore utile solo per le prove col database
-        this.nome = nome;
-        this.codice = codice;
-        this.prezzo = prezzo;
     }
 
     public String getNome() {

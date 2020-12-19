@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.GridLayout;
 
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersAdapter;
@@ -56,9 +58,9 @@ public class MapActivity extends AppCompatActivity {
         });
 
         //Button btn = findViewById(R.id.btn_0_0);
-        //GridLayout gridLayout = findViewById(R.id.gridlayout);
+        GridLayout gridLayout = findViewById(R.id.gridlayout);
 
-        //gridLayout.getChildAt(85).setVisibility(View.VISIBLE);
+        gridLayout.getChildAt(85).setVisibility(View.VISIBLE);
 
         //btn.setVisibility(View.VISIBLE);
 

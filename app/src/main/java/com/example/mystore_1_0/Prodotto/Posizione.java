@@ -4,16 +4,18 @@ public class Posizione {
     int indiceRiga, indiceColonna, lunghezza;
     Orientamento orientamento;
 
-    public Posizione(int indiceRiga, int indiceColonna, int lunghezza, Orientamento orientamento) {
+    public Posizione(int indiceRiga, int indiceColonna, int lunghezza, String orientamento) {
         this.indiceRiga = indiceRiga;
         this.indiceColonna = indiceColonna;
         this.lunghezza = lunghezza;
-        this.orientamento = orientamento;
+        this.orientamento = stringToOrientamento(orientamento);
     }
 
     public Posizione(int indiceRiga, int indiceColonna) {
         this.indiceRiga = indiceRiga;
         this.indiceColonna = indiceColonna;
+        this.lunghezza = 1;
+        this.orientamento = Orientamento.orizzontale;
     }
 
     public int getIndiceRiga() {
@@ -46,6 +48,23 @@ public class Posizione {
 
     public void setOrientamento(Orientamento orientamento) {
         this.orientamento = orientamento;
+    }
+
+    public Orientamento stringToOrientamento(String stringa){
+        Orientamento orientamento = null;
+        if(stringa.equals("orizzontale")){
+            orientamento = Orientamento.orizzontale;
+        }else if(stringa.equals("verticale")){
+            orientamento = Orientamento.verticale;
+        }
+        return orientamento;
+    }
+
+    public String orientamentoToString(Orientamento orientamento){
+        String stringa = null;
+        if(orientamento == Orientamento.orizzontale) stringa = "orizzontale";
+        else if (orientamento == Orientamento.verticale) stringa = "verticale";
+        return stringa;
     }
 
 
