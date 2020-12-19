@@ -69,5 +69,8 @@ public class Posizione {
         return stringa;
     }
 
+    public Posizione(){
+
+    }
 }
 

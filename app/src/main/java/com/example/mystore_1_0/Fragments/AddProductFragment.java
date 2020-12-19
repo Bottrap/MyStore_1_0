@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.Orientamento;
-import com.example.mystore_1_0.Prodotto.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
@@ -50,6 +49,7 @@ public class AddProductFragment extends Fragment {
     public int indiceSuccessivo = 500;
     public Boolean is2Clicked = false;
     public Posizione posizione;
+    public int lunghezza = 1;
 
     @Nullable
     @Override
@@ -77,6 +77,7 @@ public class AddProductFragment extends Fragment {
                             grid.getChildAt(finalI).setBackgroundResource(R.drawable.button_shape);
 
                         } else {
+                            lunghezza = 0;
                             is2Clicked = true;
                             indiceSuccessivo = finalI;
                             if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(finalI).getIndiceRiga()) {
@@ -84,27 +85,38 @@ public class AddProductFragment extends Fragment {
                                     for (int j = indicePrecedente; j <= finalI; j++) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
                                     }
+                                    //posizione.setLunghezza(lunghezza);
                                 } else {
                                     for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
                                     }
+                                    //posizione.setLunghezza(lunghezza);
                                 }
+                                posizione.setLunghezza(lunghezza);
                             }
                             if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
                                 posizione = getPosition(indicePrecedente);
-                                Orientamento orientamento = Orientamento.verticale;
+                                posizione.setOrientamento(Orientamento.verticale);
+
                                 if (indicePrecedente < indiceSuccessivo) {
+
                                     for (int j = indicePrecedente; j <= indiceSuccessivo; j = j + 33) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
                                     }
+                                    posizione.setLunghezza(lunghezza);
                                 } else {
                                     for (int j = indicePrecedente; j >= indiceSuccessivo; j = j - 33) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
                                     }
+                                    posizione.setLunghezza(lunghezza);
                                 }
                             }
 
@@ -135,7 +147,10 @@ public class AddProductFragment extends Fragment {
                     if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()){
                         Posizione posizione = getPosition(indicePrecedente);
                         posizione.setOrientamento(Orientamento.orizzontale);
-                        prodotto. //boh non so che dovevi fare qua
+                        prodotto.setPosizione(posizione);
+                        Log.d("orientamento", String.valueOf(posizione.getOrientamento()));
+                        Log.d("lunghezza", String.valueOf(posizione.getLunghezza()));
+                        Log.d("indice", String.valueOf(posizione.getIndiceRiga() + String.valueOf(posizione.getIndiceColonna())));
                     }
                 }
             }
