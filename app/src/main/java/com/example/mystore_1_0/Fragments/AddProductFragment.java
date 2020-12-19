@@ -94,8 +94,7 @@ public class AddProductFragment extends Fragment {
                             }
                             if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
                                 posizione = getPosition(indicePrecedente);
-                                Orientamento orientamento =
-                                posizione.setOrientamento(stringToOrientamento);
+                                Orientamento orientamento = Orientamento.verticale;
                                 if (indicePrecedente < indiceSuccessivo) {
                                     for (int j = indicePrecedente; j <= indiceSuccessivo; j = j + 33) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
