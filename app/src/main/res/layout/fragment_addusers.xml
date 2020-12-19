@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backprova1">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titolo_add_user"
@@ -15,6 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/TextAppearance.AppCompat.Title"
+        android:paddingBottom="10dp"
+        android:paddingTop="15dp"
         />
 
     <LinearLayout
@@ -39,17 +42,17 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
-            app:boxStrokeColor="@color/arancione"
+            app:boxStrokeColor="@color/scanStatusBarColor"
 
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
+            app:placeholderTextColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/white"
+                android:textColor="@color/scanStatusBarColor"
                 android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,16 +67,16 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
-            app:boxStrokeColor="@color/arancione"
+            app:boxStrokeColor="@color/scanStatusBarColor"
 
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
+            app:placeholderTextColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/white"
+                android:textColor="@color/scanStatusBarColor"
                 android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,17 +92,17 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/id_img"
-                app:boxStrokeColor="@color/arancione"
+                app:boxStrokeColor="@color/scanStatusBarColor"
 
-                app:placeholderTextColor="@color/white"
-                app:hintTextColor="@color/white">
+                app:placeholderTextColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textCursorDrawable="@null"
-                android:textColor="@color/white"/>
+                android:textColor="@color/scanStatusBarColor"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -115,16 +118,16 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/password_img"
-            app:boxStrokeColor="@color/arancione"
+            app:boxStrokeColor="@color/scanStatusBarColor"
 
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
+            app:placeholderTextColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
+                android:textColor="@color/scanStatusBarColor"
                 android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,10 +141,10 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/permessi_img"
-            app:boxStrokeColor="@color/arancione"
+            app:boxStrokeColor="@color/scanStatusBarColor"
 
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white"
+            app:placeholderTextColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor"
             >
 
             <AutoCompleteTextView
@@ -149,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:textColor="@color/white"
+                android:textColor="@color/scanStatusBarColor"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,17 +167,17 @@
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/phone_img"
-            app:hintTextColor="@color/white"
-            app:boxStrokeColor="@color/arancione"
+            app:hintTextColor="@color/scanStatusBarColor"
+            app:boxStrokeColor="@color/scanStatusBarColor"
 
-            app:placeholderTextColor="@color/white">
+            app:placeholderTextColor="@color/scanStatusBarColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:textCursorDrawable="@null"
-                android:textColor="@color/white"/>
+                android:textColor="@color/scanStatusBarColor"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -191,11 +194,11 @@
             android:id="@+id/text_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarTextColor="@color/arancione"
+            android:calendarTextColor="@color/scanStatusBarColor"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
             android:spinnersShown="true"
-            android:yearListSelectorColor="@color/white" />
+            android:yearListSelectorColor="@color/scanStatusBarColor" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add"

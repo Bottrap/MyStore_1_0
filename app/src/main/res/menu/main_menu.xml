@@ -29,8 +29,8 @@
     <item android:title="Prodotti">
         <menu>
             <item
-                android:id="@+id/nav_shared"
-                android:title = "shared"
+                android:id="@+id/nav_add_prod"
+                android:title = "Aggiungi prodotti"
                 android:icon = "@drawable/logout_img"/>
             <item
                 android:id="@+id/nav_rate_us"
