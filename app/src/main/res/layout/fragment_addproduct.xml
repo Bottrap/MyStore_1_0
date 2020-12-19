@@ -20,17 +20,13 @@
             android:background="@drawable/map"
             android:columnCount="33"
             android:rowCount="11">
-        <RelativeLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
 
             <Button
                 android:id="@+id/btn_0_0"
                 android:layout_width="33dp"
                 android:backgroundTint="@color/transparent"
-                android:visibility="visible"
-                android:layout_height="33dp"/>
-        </RelativeLayout>
+                android:visibility="visible" />
+
             <Button
                 android:id="@+id/btn_0_1"
                 android:layout_width="33dp"
