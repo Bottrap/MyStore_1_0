@@ -1,5 +1,7 @@
 package com.example.mystore_1_0.Prodotto;
 
+import com.example.mystore_1_0.Orientamento;
+
 public class Posizione {
     int indiceRiga, indiceColonna, lunghezza;
     Orientamento orientamento;
@@ -70,4 +72,3 @@ public class Posizione {
 
 }
 
-enum Orientamento { verticale, orizzontale }
