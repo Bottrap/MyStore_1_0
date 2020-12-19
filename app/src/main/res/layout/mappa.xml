@@ -22,7 +22,8 @@
                 android:id="@+id/btn_0_0"
                 android:layout_width="33dp"
                 android:background="@drawable/button_shape"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                />
             <Button
                 android:id="@+id/btn_0_1"
                 android:layout_width="33dp"

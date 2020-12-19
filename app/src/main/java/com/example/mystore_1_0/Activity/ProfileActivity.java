@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mystore_1_0.Fragments.AddProductFragment;
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
@@ -140,6 +141,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_qr_gen:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QrGeneratorFragment()).commit();
+                break;
+            case R.id.nav_add_prod:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
                 break;
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();

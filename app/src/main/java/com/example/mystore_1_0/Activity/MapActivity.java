@@ -22,7 +22,7 @@ public class MapActivity extends AppCompatActivity {
 
         Button btn = findViewById(R.id.btn_0_0);
         GridLayout gridLayout = findViewById(R.id.gridlayout);
-
+        Log.d("childat", String.valueOf(gridLayout.getChildAt(1)));
         gridLayout.getChildAt(3).setVisibility(View.VISIBLE);
 
         btn.setVisibility(View.VISIBLE);
