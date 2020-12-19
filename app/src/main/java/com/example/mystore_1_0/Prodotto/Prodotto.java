@@ -1,17 +1,49 @@
 package com.example.mystore_1_0.Prodotto;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+
+
 public class Prodotto {
     final int NumeroColonne = 33;
-    String nome;
-    int codice;
-    float prezzo;
+    String nome, codice, prezzo, URLImmagine;
     Posizione posizione;
 
-    public Prodotto(String nome, int codice, float prezzo, Posizione posizione) {
+    public String getURLImmagine() {
+        return URLImmagine;
+    }
+
+    public void setURLImmagine(String URLImmagine) {
+        this.URLImmagine = URLImmagine;
+    }
+
+    public Prodotto(String nome, String codice, String prezzo, String URLImmagine) {
         this.nome = nome;
         this.codice = codice;
         this.prezzo = prezzo;
-        this.posizione = posizione;
+        this.URLImmagine = URLImmagine;
+    }
+
+    public Prodotto() {
+    }
+
+    public Prodotto(String nome, String codice, String prezzo) {  //costruttore utile solo per le prove col database
+        this.nome = nome;
+        this.codice = codice;
+        this.prezzo = prezzo;
     }
 
     public String getNome() {
@@ -22,19 +54,19 @@ public class Prodotto {
         this.nome = nome;
     }
 
-    public int getCodice() {
+    public String getCodice() {
         return codice;
     }
 
-    public void setCodice(int codice) {
+    public void setCodice(String codice) {
         this.codice = codice;
     }
 
-    public float getPrezzo() {
+    public String getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(float prezzo) {
+    public void setPrezzo(String prezzo) {
         this.prezzo = prezzo;
     }
 
@@ -46,14 +78,14 @@ public class Prodotto {
         this.posizione = posizione;
     }
 
-    private int getIndex(int x, int y){
-        int indice = ((NumeroColonne)*x)+y;
+    private int getIndex(int x, int y) {
+        int indice = ((NumeroColonne) * x) + y;
         return indice;
     }
 
-    private Posizione getPosition(int index){
+    private Posizione getPosition(int index) {
         int x = 0;
-        while(index >= NumeroColonne){
+        while (index >= NumeroColonne) {
             index = index - NumeroColonne;
             x = x + 1;
         }
