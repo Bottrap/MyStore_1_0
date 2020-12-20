@@ -2223,6 +2223,14 @@
         android:layout_marginEnd="55dp"
         android:layout_marginTop="20dp"
         >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleziona la posizione del prodotto cliccando sulla mappa"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textColor="@color/scanStatusBarColor"
+            android:textAlignment="center"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_position"
@@ -2234,7 +2242,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img"
+            app:startIconDrawable="@drawable/position_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
             app:endIconMode="clear_text"
             app:placeholderTextColor="@color/scanStatusBarColor"
@@ -2244,6 +2252,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:clickable="false"
+                android:longClickable="false"
                 android:textColor="@color/scanStatusBarColor"
                 android:textCursorDrawable="@null"/>
 
@@ -2259,7 +2269,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img"
+            app:startIconDrawable="@drawable/ic_baseline_storefront_24"
             app:boxStrokeColor="@color/scanStatusBarColor"
 
             app:placeholderTextColor="@color/scanStatusBarColor"
@@ -2310,7 +2320,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/phone_img"
+            app:startIconDrawable="@drawable/price_img"
             app:hintTextColor="@color/scanStatusBarColor"
             app:boxStrokeColor="@color/scanStatusBarColor"
 

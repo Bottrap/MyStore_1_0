@@ -51,12 +51,16 @@ public class AddProductFragment extends Fragment {
     public Posizione posizione;
     public int lunghezza = 1;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addproduct, container, false);
 
         TextInputLayout text_posizione = view.findViewById(R.id.text_position);
+        TextInputLayout text_nome = view.findViewById(R.id.text_NomeProdotto);
+        TextInputLayout text_codice = view.findViewById(R.id.text_codice_prodotto);
+        TextInputLayout text_prezzo = view.findViewById(R.id.text_price);
 
         GridLayout grid = (GridLayout) view.findViewById(R.id.gridProduct);
         int childCount = grid.getChildCount();
@@ -69,40 +73,41 @@ public class AddProductFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     // your click code here
-                    if (!is2Clicked) {
-                        if (!isClicked) {
+                    if (!is2Clicked) {  // SE NON E' STATO CLICCATO UN SECONDO BOTTONE
+                        if (!isClicked) {  // SE NON E' STATO CLICCATO NULLA, QUINDI PRIMO CLICK
                             isClicked = true;
                             text_posizione.getEditText().setText(getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
                             indicePrecedente = finalI;
                             grid.getChildAt(finalI).setBackgroundResource(R.drawable.button_shape);
+                            posizione = getPosition(indicePrecedente);
 
-                        } else {
+                        } else { // E' STATO CLICCATO GIA' UN BOTTONE, QUINDI CODICE PER IL SECONDO BOTTONE
                             lunghezza = 0;
                             is2Clicked = true;
                             indiceSuccessivo = finalI;
                             if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(finalI).getIndiceRiga()) {
-                                if (indicePrecedente < indiceSuccessivo) {
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA RIGA DEL PRIMO
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' A DESTRA DEL 1 BOTTONE
                                     for (int j = indicePrecedente; j <= finalI; j++) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
                                         lunghezza++;
                                     }
-                                    posizione = getPosition(finalI);
-                                } else {
-                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {
+                                    //posizione = getPosition(finalI);
+                                } else if (indicePrecedente > indiceSuccessivo) {
+                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j--) { // SE IL 2 BOTTONE E' A SINISTRA DEL 1 BOTTONE
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
-                                        lunghezza++;
+                                        lunghezza--;
                                     }
-                                    posizione = getPosition(finalI);
                                 }
-                                posizione.setLunghezza(lunghezza);
+                                //posizione.setLunghezza(lunghezza);
                             }
                             if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
-                                posizione = getPosition(indicePrecedente);
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA COLONA DEL PRIMO
                                 posizione.setOrientamento(Orientamento.verticale);
 
-                                if (indicePrecedente < indiceSuccessivo) {
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' A DESTRA DEL PRIMO
 
                                     for (int j = indicePrecedente; j <= indiceSuccessivo; j = j + 33) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
@@ -110,13 +115,15 @@ public class AddProductFragment extends Fragment {
                                         lunghezza++;
                                     }
                                     posizione.setLunghezza(lunghezza);
-                                } else {
+                                } else  if (indicePrecedente > indiceSuccessivo) { // SE IL SECONDO BOTTONE E' A SINISRA DEL PRIMO
                                     for (int j = indicePrecedente; j >= indiceSuccessivo; j = j - 33) {
                                         grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
                                         text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
-                                        lunghezza++;
+                                        lunghezza--;
                                     }
-                                    posizione.setLunghezza(lunghezza);
+
+                                } else {
+                                    lunghezza = 1;
                                 }
                             }
 
@@ -142,17 +149,51 @@ public class AddProductFragment extends Fragment {
         btn_add_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Boolean isEmpty = false;
                 Prodotto prodotto = new Prodotto();
-                if (isClicked) {
-                    if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()) {
-                        Posizione posizione = getPosition(indicePrecedente);
-                        posizione.setOrientamento(Orientamento.orizzontale);
+                if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
+                        posizione.setLunghezza(lunghezza);
                         prodotto.setPosizione(posizione);
                         Log.d("orientamento", String.valueOf(posizione.getOrientamento()));
                         Log.d("lunghezza", String.valueOf(posizione.getLunghezza()));
-                        Log.d("indice", String.valueOf(posizione.getIndiceRiga() + String.valueOf(posizione.getIndiceColonna())));
-                    }
+                        Log.d("indice Riga", String.valueOf(posizione.getIndiceRiga() +", indice Colonna: "+ String.valueOf(posizione.getIndiceColonna())));
+                        prodotto.setNome(text_posizione.getEditText().getText().toString().trim());
+                } else{
+                    text_posizione.getEditText().setError("Questo campo non può essere vuoto");
+                    text_posizione.getEditText().requestFocus();
+                    isEmpty = true;
                 }
+
+                if(text_nome.getEditText().getText().toString().trim().isEmpty()) {
+                    text_nome.getEditText().setError("Questo campo non può essere vuoto");
+                    text_nome.getEditText().requestFocus();
+                    isEmpty = true;
+                } else {
+                    String nome = text_nome.getEditText().getText().toString().trim();
+                    prodotto.setNome(nome);
+                }
+                if(text_codice.getEditText().getText().toString().trim().isEmpty()) {
+                    text_codice.getEditText().setError("Questo campo non può essere vuoto");
+                    text_codice.getEditText().requestFocus();
+                    isEmpty = true;
+                } else {
+                    String codice = text_codice.getEditText().getText().toString().trim();
+                    prodotto.setCodice(codice);
+                }
+                if(text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
+                    text_prezzo.getEditText().setError("Questo campo non può essere vuoto");
+                    text_prezzo.getEditText().requestFocus();
+                    isEmpty = true;
+                } else {
+                    String prezzo = text_prezzo.getEditText().getText().toString().trim();
+                    prodotto.setPrezzo(prezzo);
+                }
+
+
+                if (!isEmpty){
+                    // codice database :)
+                }
+
             }
         });
 

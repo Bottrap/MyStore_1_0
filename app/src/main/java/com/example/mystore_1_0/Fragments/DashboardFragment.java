@@ -17,7 +17,7 @@ import com.example.mystore_1_0.R;
 
 public class DashboardFragment extends Fragment {
 
-    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV;
+    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV;
 
     @Nullable
     @Override
@@ -29,6 +29,7 @@ public class DashboardFragment extends Fragment {
         qrScanCV = view.findViewById(R.id.qrGen_cardView);
         profileCV = view.findViewById(R.id.profile_cardView);
         logoutCV = view.findViewById(R.id.logout_cardView);
+        addProdCV = view.findViewById(R.id.add_prod_cardView);
 
         addUserCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -38,6 +39,11 @@ public class DashboardFragment extends Fragment {
         showUsersCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
+        });
+
+        addProdCV.setOnClickListener(v -> {
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
         });
 
         qrScanCV.setOnClickListener(v -> {
@@ -54,9 +60,6 @@ public class DashboardFragment extends Fragment {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.finish();
         });
-
-
-
         return view;
     }
 }
