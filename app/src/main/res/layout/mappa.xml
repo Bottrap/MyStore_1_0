@@ -1845,7 +1845,7 @@
     </HorizontalScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cerca il prodotto che ti interessa"
@@ -1855,15 +1855,16 @@
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeColor="@color/black"
             app:hintTextColor="@color/black"
-            app:startIconDrawable="@drawable/ic_baseline_storefront_24">
+            app:startIconDrawable="@drawable/ic_baseline_search_24"
+            android:paddingTop="5dp">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:completionThreshold="1"
                 android:id="@+id/boh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
 
 </ScrollView>

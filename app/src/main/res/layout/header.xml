@@ -6,7 +6,7 @@
     android:background="@drawable/background"
     android:gravity="bottom"
     android:paddingLeft="20dp"
-    android:paddingTop="0dp"
+    android:paddingTop="15dp"
     android:paddingBottom="20dp">
 
     <ImageView

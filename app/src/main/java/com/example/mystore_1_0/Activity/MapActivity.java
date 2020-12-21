@@ -4,11 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridLayout;
 
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersAdapter;
+import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
@@ -31,7 +35,8 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mappa);
 
-        MaterialAutoCompleteTextView boh = findViewById(R.id.boh);
+        MaterialAutoCompleteTextView autoComplete = findViewById(R.id.boh);
+        autoComplete.setThreshold(1);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Products");
         Query retrieveAll = reference.orderByKey();
@@ -46,7 +51,7 @@ public class MapActivity extends AppCompatActivity {
                     }
 
                     AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(getApplicationContext(), listaProdotti);
-                    boh.setAdapter(adapter);
+                    autoComplete.setAdapter(adapter);
                 }
             }
 
@@ -57,12 +62,50 @@ public class MapActivity extends AppCompatActivity {
 
         });
 
-        //Button btn = findViewById(R.id.btn_0_0);
-        GridLayout gridLayout = findViewById(R.id.gridlayout);
+        GridLayout grid = findViewById(R.id.gridlayout);
+        autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                if (item instanceof Prodotto){
+                    Prodotto prodotto = (Prodotto) item;
+                    Log.d("prodott",prodotto.getNome());
+                    int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
+                    if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)){
+                        //ORENTAMENTO ORIZZONTALE
+                        if (prodotto.getPosizione().getLunghezza() > 0){ // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
+                            for (int i = indice; i < indice + prodotto.getPosizione().getLunghezza(); i++) {
+                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                grid.getChildAt(i).setVisibility(View.VISIBLE);
+                            }
+                        }else{ // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
+                            for (int i = indice; i > indice + prodotto.getPosizione().getLunghezza(); i--) {
+                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                grid.getChildAt(i).setVisibility(View.VISIBLE);
 
-        gridLayout.getChildAt(85).setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }else{ // ORIENTAMENTO VERTICALE
+                        if (prodotto.getPosizione().getLunghezza() > 0){ // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
+                            for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza()*33); i=i+33) {
+                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                grid.getChildAt(i).setVisibility(View.VISIBLE);
 
-        //btn.setVisibility(View.VISIBLE);
+                            }
+                        }else{ // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
+                            for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza()*33); i=i-33) {
+                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                grid.getChildAt(i).setVisibility(View.VISIBLE);
+
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        });
+
 
 
     }

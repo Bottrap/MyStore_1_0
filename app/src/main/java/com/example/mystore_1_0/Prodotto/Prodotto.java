@@ -73,7 +73,7 @@ public class Prodotto {
         this.posizione = posizione;
     }
 
-    private int getIndex(int x, int y) {
+    public int getIndex(int x, int y) {
         int indice = ((NumeroColonne) * x) + y;
         return indice;
     }

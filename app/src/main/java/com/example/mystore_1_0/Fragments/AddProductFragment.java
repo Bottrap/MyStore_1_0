@@ -24,8 +24,12 @@ import com.example.mystore_1_0.Utente;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
@@ -144,6 +148,7 @@ public class AddProductFragment extends Fragment {
 
                             } else {
                                 lunghezza = 1;
+                                is2Clicked = false;
                             }
                         }
 
@@ -221,28 +226,50 @@ public class AddProductFragment extends Fragment {
                 String prezzo = text_prezzo.getEditText().getText().toString().trim();
                 prodotto.setPrezzo(prezzo);
             }
-
-
-            if (!isEmpty) {
-                //salvo il prodotto nel realtime database (con URLImmagine vuoto)
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-                reference.child(utenteLoggato.getNegozio()).child("Products").child(prodotto.getCodice()).setValue(prodotto);
-
-                //salvo l'immagine nello storageDatabase e salvo l'url dell'immagine nel realtime database
-                if (imageUri != null) {
-                    final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
-                    UploadTask uploadTask = imageRef.putFile(imageUri);
-                    uploadTask.addOnSuccessListener(taskSnapshot -> {
-                        //StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();  potenzialmente inutile
-                        Task<Uri> downloadUrl = imageRef.getDownloadUrl();
-                        downloadUrl.addOnSuccessListener(uri -> {
-                            String imageReference = uri.toString();
-                            reference.child(utenteLoggato.getNegozio()).child("Products").child(prodotto.getCodice()).child("URLImmagine").setValue(imageReference);
-                        });
+            if (imageUri == null) {
+                isEmpty = true;
+                Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
+            } else {
+                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                UploadTask uploadTask = imageRef.putFile(imageUri);
+                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                    //StorageMetadata snapshotMetadata = taskSnapshot.getMetadata();  potenzialmente inutile
+                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(uri -> {
+                        String imageReference = uri.toString();
+                        prodotto.setURLImmagine(imageReference);
                     });
-                }else {
-                    Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
-                }
+                });
+            }
+
+            if (!isEmpty){
+                // codice database :)
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1");
+                Query checkId = reference.child("Products").orderByChild("codice").equalTo(prodotto.getCodice());
+
+                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            text_codice.getEditText().setError("È stato inserito un id già esistente");
+                            text_codice.getEditText().requestFocus();
+                        }
+                        else{
+                            reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
+                            Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                            text_nome.getEditText().getText().clear();
+                            text_codice.getEditText().getText().clear();
+                            text_posizione.getEditText().getText().clear();
+                            text_prezzo.getEditText().getText().clear();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
 
         });
