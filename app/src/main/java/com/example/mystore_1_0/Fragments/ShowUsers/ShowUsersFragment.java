@@ -33,9 +33,11 @@ public class ShowUsersFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
 
+        Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
+
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio()).child("Users");
         Query retrieveAll = reference.orderByKey();
         retrieveAll.addValueEventListener(new ValueEventListener() {
             @Override

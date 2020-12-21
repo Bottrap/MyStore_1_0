@@ -32,6 +32,8 @@ public class AddUsersFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addusers, container, false);
 
+        Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
+
         //dropdown menu permessi
         String [] tipopermessi = new String[] {"1","2","3"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tipopermessi);
@@ -115,7 +117,7 @@ public class AddUsersFragment extends Fragment {
                     utente.setDataNascita(String.valueOf(text_date.getDayOfMonth()) + "/" + String.valueOf(text_date.getMonth()+1) + "/" + String.valueOf(text_date.getYear()));
 
                     //database
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1");
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                     Query checkId = reference.child("Users").orderByChild("id").equalTo(text_id.getEditText().getText().toString().trim());
 
                     checkId.addListenerForSingleValueEvent(new ValueEventListener() {
