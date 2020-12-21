@@ -1,21 +1,32 @@
 package com.example.mystore_1_0.Activity;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridLayout;
 
+import android.widget.GridLayout;
+import android.widget.HorizontalScrollView;
+
+import com.bumptech.glide.Glide;
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersAdapter;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +34,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +51,25 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mappa);
 
-        MaterialAutoCompleteTextView autoComplete = findViewById(R.id.boh);
-        autoComplete.setThreshold(1);
+        MaterialAutoCompleteTextView autoComplete = findViewById(R.id.autoCompleteTextView);
+        GridLayout gridLayout = findViewById(R.id.gridlayout);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Products");
+        Intent intent = getIntent();
+        String negozio = intent.getStringExtra("negozio");
+
+       StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
+        try {
+            File localFile = File.createTempFile(negozio, "png");
+            mapReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+                gridLayout.setBackground(bitmapDrawable);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
         Query retrieveAll = reference.orderByKey();
         retrieveAll.addValueEventListener(new ValueEventListener() {
             @Override
@@ -57,7 +88,6 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
 
         });

@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnCount="33"
-            android:rowCount="11"
-            android:background="@drawable/map">
+            android:rowCount="11">
+            <!-- android:background="@drawable/map" -->
 
             <Button
                 android:id="@+id/btn_0_0"
@@ -1860,7 +1861,7 @@
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:completionThreshold="1"
-                android:id="@+id/boh"
+                android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
