@@ -62,7 +62,7 @@ public class ShowUsersAdapter extends RecyclerView.Adapter<ShowUsersAdapter.User
         return users.size();
     }
 
-    class UserVH extends RecyclerView.ViewHolder{
+    class UserVH extends RecyclerView.ViewHolder {
         private static final String TAG = "UserVH";
 
         MaterialTextView titleTextView, nome, cognome, telefono, permessi, password, dataNascita;

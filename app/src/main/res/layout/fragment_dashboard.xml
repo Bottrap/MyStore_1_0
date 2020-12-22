@@ -53,7 +53,8 @@
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/add_dip_img"/>
+                        android:src="@drawable/add_dip_img" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,7 +63,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="AGGIUNGI DIPENDENTE"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -99,7 +100,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="LISTA DIPENDENTI"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
 
                 </RelativeLayout>
@@ -151,7 +152,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="AGGIUNGI PRODOTTO"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
 
                 </RelativeLayout>
@@ -178,8 +179,7 @@
                         app:tint="@color/arancione"
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                         />
+                        android:layout_marginTop="15dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,8 +188,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
-                        android:text="FAKE"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:text="GESTISCI PRODOTTI"
+                        android:textColor="@color/scanStatusBarColor" />
 
                 </RelativeLayout>
 
@@ -242,7 +242,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="GENERA CODICE QR"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
 
                 </RelativeLayout>
@@ -280,7 +280,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="PROFILO"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
                 </RelativeLayout>
 
@@ -339,7 +339,7 @@
                         android:layout_marginTop="2dp"
                         android:textSize="12dp"
                         android:text="LOGOUT"
-                        android:textColor="@color/scanStatusBarColor"/>
+                        android:textColor="@color/scanStatusBarColor" />
 
 
                 </RelativeLayout>

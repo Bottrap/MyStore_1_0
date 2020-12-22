@@ -192,9 +192,6 @@ public class AddProductFragment extends Fragment {
             if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
                 posizione.setLunghezza(lunghezza);
                 prodotto.setPosizione(posizione);
-                Log.d("orientamento", String.valueOf(posizione.getOrientamento()));
-                Log.d("lunghezza", String.valueOf(posizione.getLunghezza()));
-                Log.d("indice Riga", String.valueOf(posizione.getIndiceRiga() + ", indice Colonna: " + String.valueOf(posizione.getIndiceColonna())));
                 prodotto.setNome(text_posizione.getEditText().getText().toString().trim());
             } else {
                 text_posizione.getEditText().setError("Questo campo non può essere vuoto");

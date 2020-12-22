@@ -28,6 +28,7 @@ import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
+import com.example.mystore_1_0.Fragments.ShowProductFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
@@ -144,6 +145,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_add_prod:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
+                break;
+            case R.id.nav_show_prod:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
                 break;
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();

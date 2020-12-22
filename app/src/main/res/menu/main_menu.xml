@@ -33,8 +33,8 @@
                 android:title = "Aggiungi prodotti"
                 android:icon = "@drawable/img_add_prod"/>
             <item
-                android:id="@+id/nav_rate_us"
-                android:title = "rate"
+                android:id="@+id/nav_show_prod"
+                android:title = "Mostra Prodotti"
                 android:icon = "@drawable/logout_img"/>
         </menu>
     </item>
