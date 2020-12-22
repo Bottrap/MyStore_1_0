@@ -82,6 +82,9 @@ public class ShowProductFragment extends Fragment {
             }
 
         });
+        TextInputLayout name_editText = view.findViewById(R.id.name_editText);
+        TextInputLayout code_editText = view.findViewById(R.id.code_editText);
+        TextInputLayout price_editText = view.findViewById(R.id.price_editText);
 
         GridLayout grid = view.findViewById(R.id.gridlayout);
         autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,9 +94,7 @@ public class ShowProductFragment extends Fragment {
                 if (item instanceof Prodotto){
                     Prodotto prodotto = (Prodotto) item;
 
-                    TextInputLayout name_editText = view.findViewById(R.id.name_editText);
-                    TextInputLayout code_editText = view.findViewById(R.id.code_editText);
-                    TextInputLayout price_editText = view.findViewById(R.id.price_editText);
+
 
                     name_editText.getEditText().setText(prodotto.getNome());     //?????????
                     code_editText.getEditText().setText(prodotto.getCodice());   //?????????

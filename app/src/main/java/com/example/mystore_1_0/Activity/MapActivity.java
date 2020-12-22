@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import android.widget.GridLayout;
@@ -131,12 +133,21 @@ public class MapActivity extends AppCompatActivity {
                         }
                     }
 
+                closeKeyboard();
 
                 }
             }
         });
 
 
+
+    }
+     private void closeKeyboard(){
+        View vista = this.getCurrentFocus();
+        if (vista != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(vista.getWindowToken(), 0);
+        }
 
     }
 }

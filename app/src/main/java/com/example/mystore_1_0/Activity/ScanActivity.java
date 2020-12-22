@@ -28,6 +28,14 @@ public class ScanActivity extends AppCompatActivity {
     public void clickAdminBtn(View v){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+
+        // PER FAR PARTIRE MAP ACTIVITY SENZA QR CODE
+        /*
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("negozio", "store1");
+        startActivity(intent);
+
+         */
     }
 
     public void clickScanBtn(View v){

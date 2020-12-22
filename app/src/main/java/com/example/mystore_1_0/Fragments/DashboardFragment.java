@@ -17,7 +17,7 @@ import com.example.mystore_1_0.R;
 
 public class DashboardFragment extends Fragment {
 
-    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV, showProdCV;
+    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV;
 
     @Nullable
     @Override
@@ -28,9 +28,8 @@ public class DashboardFragment extends Fragment {
         showUsersCV = view.findViewById(R.id.showusers_cardview);
         qrScanCV = view.findViewById(R.id.qrGen_cardView);
         profileCV = view.findViewById(R.id.profile_cardView);
-        logoutCV = view.findViewById(R.id.logout_cardView);
+        //logoutCV = view.findViewById(R.id.logout_cardView);
         addProdCV = view.findViewById(R.id.add_prod_cardView);
-        showProdCV = view.findViewById(R.id.list_prod_cardView);
 
         addUserCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -56,17 +55,13 @@ public class DashboardFragment extends Fragment {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
         });
-
+/*
         logoutCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.finish();
         });
 
-        showProdCV.setOnClickListener(v -> {
-            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
-        });
-
+ */
         return view;
     }
 }

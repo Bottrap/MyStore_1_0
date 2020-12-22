@@ -39,8 +39,10 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddProductFragment extends Fragment {
 
-    private final int NumeroColonne = 33;
+    private boolean isRestarted = false;
+    private Prodotto prodInSospeso;
 
+    private final int NumeroColonne = 33;
     private Uri imageUri;
     private static final int PICK_IMAGE = 1;
 
@@ -48,7 +50,13 @@ public class AddProductFragment extends Fragment {
         int indice = ((NumeroColonne) * x) + y;
         return indice;
     }
-
+    public AddProductFragment(){
+        this.isRestarted = false;
+    }
+    public AddProductFragment(Prodotto prodInSospeso){
+        this.isRestarted = true;
+        this.prodInSospeso = prodInSospeso;
+    }
     private Posizione getPosition(int index) {
         int x = 0;
         while (index >= NumeroColonne) {
@@ -91,6 +99,17 @@ public class AddProductFragment extends Fragment {
         GridLayout grid = (GridLayout) view.findViewById(R.id.gridProduct);
         int childCount = grid.getChildCount();
 
+        if(isRestarted){
+            if (!prodInSospeso.getNome().equals("null")){
+                text_nome.getEditText().setText(prodInSospeso.getNome());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                text_codice.getEditText().setText(prodInSospeso.getCodice());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                text_prezzo.getEditText().setText(prodInSospeso.getPrezzo());
+            }
+        }
 
         for (int i = 0; i < childCount; i++) {
 
@@ -158,13 +177,28 @@ public class AddProductFragment extends Fragment {
             });
         }
 
-
+        // CLICK SU CANCELLA POSIZIONE
         text_posizione.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Prodotto prodInSospeso = new Prodotto();
+                if (!text_nome.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setNome(text_nome.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setNome("null");
+                }
+                if (!text_codice.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setCodice(text_codice.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setCodice("null");
+                }
+                if (!text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setPrezzo(text_prezzo.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setPrezzo("null");
+                }
                 AppCompatActivity activity = (AppCompatActivity) getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment(prodInSospeso)).commit();
 
             }
         });

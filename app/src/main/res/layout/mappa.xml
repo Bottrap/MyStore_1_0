@@ -1857,7 +1857,10 @@
             app:boxStrokeColor="@color/black"
             app:hintTextColor="@color/black"
             app:startIconDrawable="@drawable/ic_baseline_search_24"
-            android:paddingTop="5dp">
+            android:paddingTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingBottom="20dp">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:completionThreshold="1"
