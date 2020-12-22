@@ -1,5 +1,6 @@
 package com.example.mystore_1_0.Fragments;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.GridLayout;
 
@@ -86,19 +88,27 @@ public class ShowProductFragment extends Fragment {
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
         TextInputLayout price_editText = view.findViewById(R.id.price_editText);
 
+
         GridLayout grid = view.findViewById(R.id.gridlayout);
         autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //CLOSE KEYBOARD
+                View vista = getActivity().getCurrentFocus();
+                if (vista != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(vista.getWindowToken(), 0);
+                }
+
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Prodotto){
                     Prodotto prodotto = (Prodotto) item;
 
 
 
-                    name_editText.getEditText().setText(prodotto.getNome());     //?????????
-                    code_editText.getEditText().setText(prodotto.getCodice());   //?????????
-                    price_editText.getEditText().setText(prodotto.getPrezzo());  //?????????
+                    name_editText.getEditText().setText(prodotto.getNome());
+                    code_editText.getEditText().setText(prodotto.getCodice());
+                    price_editText.getEditText().setText(prodotto.getPrezzo());
 
                     int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
                     if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)){
