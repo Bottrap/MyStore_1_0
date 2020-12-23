@@ -2269,9 +2269,8 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/ic_baseline_storefront_24"
+            app:startIconDrawable="@drawable/ic_baseline_assignment_24"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor">
 
@@ -2336,9 +2335,16 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pickImageBtn"
+            android:text="Seleziona l'immagine del prodotto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seleziona l'immagine del prodotto"
+            android:backgroundTint="@color/scanStatusBarColor"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_gravity="center"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/white"
             />
 
 

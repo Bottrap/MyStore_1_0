@@ -275,7 +275,7 @@ public class AddProductFragment extends Fragment {
 
             if (!isEmpty){
                 // codice database :)
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                 Query checkId = reference.child("Products").orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {

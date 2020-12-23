@@ -101,7 +101,12 @@ public class MapActivity extends AppCompatActivity {
                 Object item = parent.getItemAtPosition(position);
                 if (item instanceof Prodotto){
                     Prodotto prodotto = (Prodotto) item;
-                    Log.d("prodott",prodotto.getNome());
+
+                    //prima di visualizzare il nuovo prodotto, rendo invisibili tutti i bottoni del grid layout
+                    for(int i = 0; i < gridLayout.getChildCount(); i++){
+                        gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+                    }
+
                     int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
                     if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)){
                         //ORENTAMENTO ORIZZONTALE
