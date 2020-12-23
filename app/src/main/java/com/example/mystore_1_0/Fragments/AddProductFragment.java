@@ -117,7 +117,6 @@ public class AddProductFragment extends Fragment {
 
             final int finalI = i;
             grid.getChildAt(i).setOnClickListener(view1 -> {
-                // your click code here
                 if (!is2Clicked) {  // SE NON E' STATO CLICCATO UN SECONDO BOTTONE
                     if (!isClicked) {  // SE NON E' STATO CLICCATO NULLA, QUINDI PRIMO CLICK
                         isClicked = true;
@@ -227,7 +226,6 @@ public class AddProductFragment extends Fragment {
 
             Prodotto prodotto = new Prodotto();
 
-
             if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
                 posizione.setLunghezza(lunghezza);
                 prodotto.setPosizione(posizione);
@@ -262,10 +260,15 @@ public class AddProductFragment extends Fragment {
                 String prezzo = text_prezzo.getEditText().getText().toString().trim();
                 prodotto.setPrezzo(prezzo);
             }
+            //salvo il prodotto nel realtime database (con URLImmagine vuoto)
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            ref.child(utenteLoggato.getNegozio()).child("Products").child(prodotto.getCodice()).setValue(prodotto);
+
+            //salvo l'immagine nello storageDatabase e salvo l'url dell'immagine nel realtime database
             if (imageUri == null) {
-                isEmpty = true;
                 Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
-            } else {
+                isEmpty = true;
+            }else {
                 final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
                 UploadTask uploadTask = imageRef.putFile(imageUri);
                 uploadTask.addOnSuccessListener(taskSnapshot -> {
@@ -273,9 +276,10 @@ public class AddProductFragment extends Fragment {
                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                     downloadUrl.addOnSuccessListener(uri -> {
                         String imageReference = uri.toString();
-                        prodotto.setURLImmagine(imageReference);
+                        ref.child(utenteLoggato.getNegozio()).child("Products").child(prodotto.getCodice()).child("URLImmagine").setValue(imageReference);
                     });
                 });
+
             }
 
             if (!isEmpty){

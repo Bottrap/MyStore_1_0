@@ -19,8 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.R;
-
-
+import com.example.mystore_1_0.Utente;
 
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -38,6 +37,8 @@ public class QrGeneratorFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_qrgenerator, container, false);
 
+        Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
+
         btn_qr_gen = view.findViewById(R.id.btn_qr_gen);
         btn_save = view.findViewById(R.id.btn_save);
         qr_img = view.findViewById(R.id.qr_img);
@@ -46,7 +47,7 @@ public class QrGeneratorFragment extends Fragment {
         btn_qr_gen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String store = "store1"; //store in cui far accedere i clienti
+                String store = utenteLoggato.getNegozio(); //store in cui far accedere i clienti
                 QRGEncoder qrgEncoderShow = new QRGEncoder(store, QRGContents.Type.TEXT, 700);
                 qrgEncoderShow.setColorWhite(Color.TRANSPARENT);
                 try {
