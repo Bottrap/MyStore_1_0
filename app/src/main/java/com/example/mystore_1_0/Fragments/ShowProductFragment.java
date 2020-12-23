@@ -69,12 +69,15 @@ public class ShowProductFragment extends Fragment {
 
                 name_editText.getEditText().setClickable(true);
                 name_editText.getEditText().setLongClickable(true);
+                name_editText.getEditText().setFocusable(true);
 
                 code_editText.getEditText().setClickable(true);
                 code_editText.getEditText().setLongClickable(true);
+                code_editText.getEditText().setFocusable(true);
 
                 price_editText.getEditText().setClickable(true);
                 price_editText.getEditText().setLongClickable(true);
+                price_editText.getEditText().setFocusable(true);
 
             } else {    //CheckBox non selezionata
                 confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
@@ -82,12 +85,15 @@ public class ShowProductFragment extends Fragment {
 
                 name_editText.getEditText().setClickable(false);
                 name_editText.getEditText().setLongClickable(false);
+                name_editText.getEditText().setFocusable(false);
 
                 code_editText.getEditText().setClickable(false);
                 code_editText.getEditText().setLongClickable(false);
+                code_editText.getEditText().setFocusable(false);
 
                 price_editText.getEditText().setClickable(false);
                 price_editText.getEditText().setLongClickable(false);
+                price_editText.getEditText().setFocusable(false);
             }
         });
 
