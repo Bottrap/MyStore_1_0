@@ -177,6 +177,7 @@
                         android:id="@+id/list_prod_img"
                         android:layout_width="80dp"
                         app:tint="@color/arancione"
+                        android:src="@drawable/gest_prod_img"
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp" />
