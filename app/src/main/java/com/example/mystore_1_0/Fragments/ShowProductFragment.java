@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
@@ -42,6 +45,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowProductFragment extends Fragment {
+    Prodotto prodInSospeso;
+    Boolean isRestarted;
+    List<Prodotto> listaProdotti;
+    public Boolean isClicked = false;
+    public int indicePrecedente;
+    public int indiceSuccessivo = 500;
+    public Boolean is2Clicked = false;
+    public int lunghezza = 1;
+    private final int NumeroColonne = 33;
+    public Posizione posizione;
+    String oldCode;
+
+    public ShowProductFragment(){
+        this.isRestarted = false;
+    }
+
+    public ShowProductFragment(Prodotto prodInSospeso, String oldCode){
+        this.prodInSospeso = prodInSospeso;
+        this.isRestarted = true;
+        this.oldCode = oldCode;
+    }
+
+    private Posizione getPosition(int index) {
+        int x = 0;
+        while (index >= NumeroColonne) {
+            index = index - NumeroColonne;
+            x = x + 1;
+        }
+        Posizione posizione = new Posizione(x, index);
+        return posizione;
+    }
 
     @Nullable
     @Override
@@ -53,10 +87,12 @@ public class ShowProductFragment extends Fragment {
         MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
         GridLayout gridLayout = view.findViewById(R.id.gridShowProduct);
 
+        /*
         //Rendo tutti i bottoni invisibili appena il fragment viene creato
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
             gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
         }
+        */
 
         TextInputLayout name_editText = view.findViewById(R.id.name_editText);
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
@@ -64,6 +100,87 @@ public class ShowProductFragment extends Fragment {
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
 
         MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
+
+        if(isRestarted){
+            autoComplete.setText(prodInSospeso.getNome());
+            if (!prodInSospeso.getNome().equals("null")){
+                name_editText.getEditText().setText(prodInSospeso.getNome());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                code_editText.getEditText().setText(prodInSospeso.getCodice());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                price_editText.getEditText().setText(prodInSospeso.getPrezzo());
+            }
+
+            for (int i = 0; i < gridLayout.getChildCount(); i++) {
+
+                final int finalI = i;
+                gridLayout.getChildAt(i).setOnClickListener(view1 -> {
+                    // your click code here
+                    if (!is2Clicked) {  // SE NON E' STATO CLICCATO UN SECONDO BOTTONE
+                        if (!isClicked) {  // SE NON E' STATO CLICCATO NULLA, QUINDI PRIMO CLICK
+                            isClicked = true;
+                            position_editText.getEditText().setText(getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                            indicePrecedente = finalI;
+                            gridLayout.getChildAt(finalI).setBackgroundResource(R.drawable.button_shape);
+                            posizione = getPosition(indicePrecedente);
+
+                        } else { // E' STATO CLICCATO GIA' UN BOTTONE, QUINDI CODICE PER IL SECONDO BOTTONE
+                            lunghezza = 0;
+                            is2Clicked = true;
+                            indiceSuccessivo = finalI;
+                            if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(finalI).getIndiceRiga()) {
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA RIGA DEL PRIMO
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' A DESTRA DEL 1 BOTTONE
+                                    for (int j = indicePrecedente; j <= finalI; j++) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
+                                    }
+                                    //posizione = getPosition(finalI);
+                                } else if (indicePrecedente > indiceSuccessivo) {
+                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {   // SE IL 2 BOTTONE E' A SINISTRA DEL 1 BOTTONE
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza--;
+                                    }
+                                }
+                                //posizione.setLunghezza(lunghezza);
+                            }
+                            if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA COLONNA DEL PRIMO
+                                posizione.setOrientamento(Orientamento.verticale);
+
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' A DESTRA DEL PRIMO
+
+                                    for (int j = indicePrecedente; j <= indiceSuccessivo; j = j + 33) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
+                                    }
+                                    posizione.setLunghezza(lunghezza);
+                                } else if (indicePrecedente > indiceSuccessivo) { // SE IL SECONDO BOTTONE E' A SINISRA DEL PRIMO
+                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j = j - 33) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza--;
+                                    }
+
+                                } else {
+                                    lunghezza = 1;
+                                    is2Clicked = false;
+                                }
+                            }
+
+                        }
+
+                    }
+                });
+            }
+
+        }
+
 
         CheckBox checkBox = view.findViewById(R.id.editCheck);
 
@@ -101,12 +218,22 @@ public class ShowProductFragment extends Fragment {
                 price_editText.getEditText().setFocusable(false);
             }
         });
-
+        // CONFERMA MODIFICA
         confirmBtn.setOnClickListener(v -> {
             Boolean isEmpty = false;
             Prodotto prodotto = new Prodotto();
 
             //MANCA IL CONTROLLO SULLA POSIZIONE E L'AGGIUNTA DI POSIZIONE A PRODOTTO
+
+            if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
+                posizione.setLunghezza(lunghezza);
+                prodotto.setPosizione(posizione);
+                prodotto.setNome(position_editText.getEditText().getText().toString().trim());
+            } else {
+                position_editText.getEditText().setError("Questo campo non può essere vuoto");
+                position_editText.getEditText().requestFocus();
+                isEmpty = true;
+            }
 
             if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
                 name_editText.getEditText().setError("Questo campo non può essere vuoto");
@@ -140,12 +267,20 @@ public class ShowProductFragment extends Fragment {
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
+                        if (oldCode.equals(prodotto.getCodice())){
+                            reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
+                            Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                            name_editText.getEditText().getText().clear();
+                            code_editText.getEditText().getText().clear();
+                            position_editText.getEditText().getText().clear();
+                            price_editText.getEditText().getText().clear();
+                        } else if (dataSnapshot.exists()){
                             code_editText.getEditText().setError("È stato inserito un id già esistente");
                             code_editText.getEditText().requestFocus();
                         }
                         else{
                             reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
+                            reference.child("Products").child(oldCode).removeValue();
                             Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
                             name_editText.getEditText().getText().clear();
                             code_editText.getEditText().getText().clear();
@@ -182,12 +317,11 @@ public class ShowProductFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        List<Prodotto> listaProdotti = new ArrayList<>();
+                        listaProdotti = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             Prodotto prodotto = ds.getValue(Prodotto.class);
                             listaProdotti.add(prodotto);
                         }
-
                         AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(getContext(), listaProdotti);
                         autoComplete.setAdapter(adapter);
                     }
@@ -218,7 +352,7 @@ public class ShowProductFragment extends Fragment {
                     Object item = parent.getItemAtPosition(position);
                     if (item instanceof Prodotto) {
                         Prodotto prodotto = (Prodotto) item;
-
+                        oldCode = prodotto.getCodice();
                         name_editText.getEditText().setText(prodotto.getNome());
                         code_editText.getEditText().setText(prodotto.getCodice());
                         price_editText.getEditText().setText(prodotto.getPrezzo());
@@ -279,6 +413,35 @@ public class ShowProductFragment extends Fragment {
 
 
             });
+
+        // CLICK SU CANCELLA POSIZIONE
+        position_editText.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
+                //relativ.setVisibility(View.VISIBLE);
+
+                Prodotto prodInSospeso = new Prodotto();
+                if (!name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setNome(name_editText.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setNome("null");
+                }
+                if (!code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setCodice(code_editText.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setCodice("null");
+                }
+                if (!price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setPrezzo(price_editText.getEditText().getText().toString().trim());
+                } else{
+                    prodInSospeso.setPrezzo("null");
+                }
+                AppCompatActivity activity = (AppCompatActivity) getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment(prodInSospeso, oldCode)).commit();
+
+            }
+        });
 
             return view;
         }
