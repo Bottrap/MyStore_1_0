@@ -67,27 +67,27 @@ public class ShowProductFragment extends Fragment {
                 confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
                 confirmBtn.setClickable(true);
 
-                name_editText.setClickable(true);
-                name_editText.setLongClickable(true);
+                name_editText.getEditText().setClickable(true);
+                name_editText.getEditText().setLongClickable(true);
 
-                code_editText.setClickable(true);
-                code_editText.setLongClickable(true);
+                code_editText.getEditText().setClickable(true);
+                code_editText.getEditText().setLongClickable(true);
 
-                price_editText.setClickable(true);
-                price_editText.setLongClickable(true);
+                price_editText.getEditText().setClickable(true);
+                price_editText.getEditText().setLongClickable(true);
 
             } else {    //CheckBox non selezionata
                 confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
                 confirmBtn.setClickable(false);
 
-                name_editText.setClickable(false);
-                name_editText.setLongClickable(false);
+                name_editText.getEditText().setClickable(false);
+                name_editText.getEditText().setLongClickable(false);
 
-                code_editText.setClickable(false);
-                code_editText.setLongClickable(false);
+                code_editText.getEditText().setClickable(false);
+                code_editText.getEditText().setLongClickable(false);
 
-                price_editText.setClickable(false);
-                price_editText.setLongClickable(false);
+                price_editText.getEditText().setClickable(false);
+                price_editText.getEditText().setLongClickable(false);
             }
         });
 
