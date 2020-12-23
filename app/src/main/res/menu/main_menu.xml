@@ -34,7 +34,7 @@
                 android:icon = "@drawable/img_add_prod"/>
             <item
                 android:id="@+id/nav_show_prod"
-                android:title = "Mostra Prodotti"
+                android:title = "Gestisci Prodotti"
                 android:icon = "@drawable/logout_img"/>
         </menu>
     </item>
@@ -45,7 +45,7 @@
                 <item
                     android:id="@+id/nav_qr_gen"
                     android:title = "Genera QR-code"
-                    android:icon = "@drawable/logout_img"/>
+                    android:icon = "@drawable/qr_scan_img"/>
             </group>
         </menu>
     </item>
