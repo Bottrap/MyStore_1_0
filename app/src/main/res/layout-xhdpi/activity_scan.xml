@@ -7,21 +7,6 @@
     android:background="@drawable/background"
     tools:context=".Activity.ScanActivity">
 
-    <!--
-    <ImageButton
-        android:id="@+id/scanBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:onClick="clickScanBtn"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
-        app:srcCompat="@drawable/bottone_scan" />
-    -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/scanBtn"
         android:onClick="clickScanBtn"

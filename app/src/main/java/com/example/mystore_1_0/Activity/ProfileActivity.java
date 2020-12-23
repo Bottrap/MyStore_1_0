@@ -19,12 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddProductFragment;
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.Fragments.LoadingFragment;
 import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
@@ -46,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     NavigationView navigationView;
     Toolbar toolbar;
     TextView passwHeader, idHeader;
+    Boolean isClosed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+
 
         Intent intent = getIntent();
         Utente utente = intent.getParcelableExtra("utente");
@@ -84,13 +88,19 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         toggle.setHomeAsUpIndicator(drawable);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                } else {
+                if (isClosed){
                     drawerLayout.openDrawer(GravityCompat.START);
+                    isClosed = false;
+                }else{
+                    if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawerLayout.openDrawer(GravityCompat.START);
+                    }
                 }
             }
         });
@@ -128,6 +138,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -144,10 +155,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QrGeneratorFragment()).commit();
                 break;
             case R.id.nav_add_prod:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(1)).commit();
                 break;
             case R.id.nav_show_prod:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(2)).commit();
                 break;
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();

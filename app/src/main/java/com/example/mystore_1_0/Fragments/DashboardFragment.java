@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.example.mystore_1_0.R;
 public class DashboardFragment extends Fragment {
 
     CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV, showProdCV;
+    RelativeLayout relativ;
 
     @Nullable
     @Override
@@ -31,6 +33,7 @@ public class DashboardFragment extends Fragment {
         //logoutCV = view.findViewById(R.id.logout_cardView);
         addProdCV = view.findViewById(R.id.add_prod_cardView);
         showProdCV = view.findViewById(R.id.list_prod_cardView);
+        relativ = view.findViewById(R.id.relative_progress);
 
         addUserCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -43,6 +46,7 @@ public class DashboardFragment extends Fragment {
         });
 
         addProdCV.setOnClickListener(v -> {
+            relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
         });
@@ -58,6 +62,7 @@ public class DashboardFragment extends Fragment {
         });
 
         showProdCV.setOnClickListener(v -> {
+            relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
         });

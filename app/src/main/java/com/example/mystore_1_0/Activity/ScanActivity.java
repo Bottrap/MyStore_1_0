@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mystore_1_0.Capture;
@@ -37,6 +38,7 @@ public class ScanActivity extends AppCompatActivity {
 
          */
     }
+
 
     public void clickScanBtn(View v){
         IntentIntegrator intentIntegrator = new IntentIntegrator(this);

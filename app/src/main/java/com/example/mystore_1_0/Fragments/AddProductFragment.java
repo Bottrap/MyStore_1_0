@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,6 +74,7 @@ public class AddProductFragment extends Fragment {
     public Boolean is2Clicked = false;
     public Posizione posizione;
     public int lunghezza = 1;
+
 
 
     @Override
@@ -177,10 +179,13 @@ public class AddProductFragment extends Fragment {
             });
         }
 
+
         // CLICK SU CANCELLA POSIZIONE
         text_posizione.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
+                relativ.setVisibility(View.VISIBLE);
                 Prodotto prodInSospeso = new Prodotto();
                 if (!text_nome.getEditText().getText().toString().trim().isEmpty()) {
                     prodInSospeso.setNome(text_nome.getEditText().getText().toString().trim());
