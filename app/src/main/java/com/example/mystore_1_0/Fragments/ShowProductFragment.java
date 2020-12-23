@@ -51,7 +51,12 @@ public class ShowProductFragment extends Fragment {
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
 
         MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
-        GridLayout gridLayout = view.findViewById(R.id.gridlayout);
+        GridLayout gridLayout = view.findViewById(R.id.gridShowProduct);
+
+        //Rendo tutti i bottoni invisibili appena il fragment viene creato
+        for (int i = 0; i < gridLayout.getChildCount(); i++) {
+            gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+        }
 
         TextInputLayout name_editText = view.findViewById(R.id.name_editText);
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
@@ -194,7 +199,7 @@ public class ShowProductFragment extends Fragment {
 
             });
 
-            GridLayout grid = view.findViewById(R.id.gridlayout);
+
             autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -225,8 +230,8 @@ public class ShowProductFragment extends Fragment {
                             //ORENTAMENTO ORIZZONTALE
                             if (posizione.getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
                                 for (int i = indice; i < indice + prodotto.getPosizione().getLunghezza(); i++) {
-                                    grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                    grid.getChildAt(i).setVisibility(View.VISIBLE);
+                                    gridLayout.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                    gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
                                 }
                                 if (prodotto.getPosizione().getLunghezza() == 1) {
                                     position_editText.getEditText().setText(posizione.getIndiceRiga() + ", " + posizione.getIndiceColonna());
@@ -235,8 +240,8 @@ public class ShowProductFragment extends Fragment {
                                 }
                             } else { // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
                                 for (int i = indice; i > indice + prodotto.getPosizione().getLunghezza(); i--) {
-                                    grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                    grid.getChildAt(i).setVisibility(View.VISIBLE);
+                                    gridLayout.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                    gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
                                 }
                                 if (prodotto.getPosizione().getLunghezza() == 1) {
                                     position_editText.getEditText().setText(posizione.getIndiceRiga() + ", " + posizione.getIndiceColonna());
@@ -247,8 +252,8 @@ public class ShowProductFragment extends Fragment {
                         } else { // ORIENTAMENTO VERTICALE
                             if (posizione.getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
                                 for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza() * 33); i = i + 33) {
-                                    grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                    grid.getChildAt(i).setVisibility(View.VISIBLE);
+                                    gridLayout.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                    gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
                                 }
                                 if (prodotto.getPosizione().getLunghezza() == 1) {
                                     position_editText.getEditText().setText(posizione.getIndiceRiga() + ", " + posizione.getIndiceColonna());
@@ -257,8 +262,8 @@ public class ShowProductFragment extends Fragment {
                                 }
                             } else { // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
                                 for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza() * 33); i = i - 33) {
-                                    grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                    grid.getChildAt(i).setVisibility(View.VISIBLE);
+                                    gridLayout.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                                    gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
                                 }
                                 if (prodotto.getPosizione().getLunghezza() == 1) {
                                     position_editText.getEditText().setText(posizione.getIndiceRiga() + ", " + posizione.getIndiceColonna());
