@@ -208,7 +208,7 @@
                         android:layout_below="@id/list_prod_img"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="2dp"
-                        android:text="GESTISCI PRODOTTI"
+                        android:text="MOSTRA PRODOTTI"
                         android:textColor="@color/scanStatusBarColor"
                         android:textSize="12dp" />
 

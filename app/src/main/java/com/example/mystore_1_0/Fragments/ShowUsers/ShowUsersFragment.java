@@ -48,11 +48,8 @@ public class ShowUsersFragment extends Fragment {
                         Utente utente = ds.getValue(Utente.class);
                         listaUtenti.add(utente);
                     }
-
                     ShowUsersAdapter userAdapter = new ShowUsersAdapter(listaUtenti);
                     recyclerView.setAdapter(userAdapter);
-
-
                 }
                 else{
                     Toast.makeText(getActivity(), "Dati non trovati", Toast.LENGTH_SHORT).show();

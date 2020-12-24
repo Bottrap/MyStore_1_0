@@ -88,7 +88,6 @@ public class AddUsersFragment extends Fragment {
                     text_password.getEditText().setError("Questo campo non può essere vuoto");
                     text_password.getEditText().requestFocus();
                     isEmpty = true;
-
                 } else {
                     password = text_password.getEditText().getText().toString().trim();
                     utente.setPassword(password);

@@ -2344,53 +2344,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:id="@+id/editCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="12dp"
-                android:buttonTint="@color/arancione"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/editCheck"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="top"
-                android:text="Modifica"
-                android:textStyle="bold"
-                android:layout_marginLeft="12dp"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/black"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/confirmBtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/editCheck"
-                android:backgroundTint="@color/gray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button"
-                android:text="Conferma modifiche"
-                app:cornerRadius="60dp"
-                android:clickable="false"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
-                android:layout_gravity="center"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/white"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
