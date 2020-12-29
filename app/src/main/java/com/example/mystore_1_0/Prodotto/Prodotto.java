@@ -18,7 +18,7 @@ import java.io.IOException;
 
 
 public class Prodotto {
-    final int NumeroColonne = 33;
+    final static int NumeroColonne = 33;
     String nome, codice, prezzo, URLImmagine;
     Posizione posizione;
 
@@ -78,15 +78,7 @@ public class Prodotto {
         return indice;
     }
 
-    private Posizione getPosition(int index) {
-        int x = 0;
-        while (index >= NumeroColonne) {
-            index = index - NumeroColonne;
-            x = x + 1;
-        }
-        Posizione posizione = new Posizione(x, index);
-        return posizione;
-    }
+
 
 
 }

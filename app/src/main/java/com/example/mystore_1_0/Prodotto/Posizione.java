@@ -5,6 +5,7 @@ import com.example.mystore_1_0.Orientamento;
 public class Posizione {
     int indiceRiga, indiceColonna, lunghezza;
     Orientamento orientamento;
+    final static int NumeroColonne = 33;
 
     public Posizione(int indiceRiga, int indiceColonna, int lunghezza, String orientamento) {
         this.indiceRiga = indiceRiga;
@@ -67,6 +68,16 @@ public class Posizione {
         if(orientamento == Orientamento.orizzontale) stringa = "orizzontale";
         else if (orientamento == Orientamento.verticale) stringa = "verticale";
         return stringa;
+    }
+
+    public static Posizione getPosition(int index) {
+        int x = 0;
+        while (index >= NumeroColonne) {
+            index = index - NumeroColonne;
+            x = x + 1;
+        }
+        Posizione posizione = new Posizione(x, index);
+        return posizione;
     }
 
     public Posizione(){

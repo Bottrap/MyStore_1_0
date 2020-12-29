@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.Activity.ProfileActivity;
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
@@ -44,35 +46,57 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
+
 public class ShowProductFragment extends Fragment {
-    List<Prodotto> listaProdotti;
+    List<Prodotto> listaProdotti; // LISTA PRODOTTI PER AUTOCOMPLETE
+    Prodotto prodInDb; // DATI NEL DB DEL PRODOTTO CLICCATO DALLA LISTA
+    Prodotto prodInSospeso; // DATI NELLE TEXT DEL PRODOTTO CHE SI STA MODIFICANDO
+    Boolean isRestarted; // SE IL FRAGMENT E' STATO RESTARTATO (CLICCANDO SU CANCELLA POSIZIONE)
+    Boolean isClicked = false; // PRIMO CLICK SU UN BOTTONE
+    Boolean is2Clicked = false; // SECONDO CLICK SU UN BOTTONE
+    int indicePrecedente;
+    int indiceSuccessivo = 500;
+    Posizione posizione;
+    int lunghezza = 1;
+
+
+    public ShowProductFragment(){
+        this.isRestarted = false;
+    }
+
+    public ShowProductFragment(Prodotto prodInSospeso, Prodotto prodInDb){
+        this.prodInSospeso = prodInSospeso;
+        this.prodInDb = prodInDb;
+        this.isRestarted = true;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_showproduct, container, false);
+        //View view = inflater.inflate(R.layout.fragment_showproduct, container, false);
+        View view = View.inflate(getActivity(), R.layout.fragment_showproduct, null );
 
+        // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
+        String negozio = utenteLoggato.getNegozio();
 
+        // DICHIARO ELEMENTI DELL'INTERFACCIA
         MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
         GridLayout gridLayout = view.findViewById(R.id.gridShowProduct);
-
-
-        //Rendo tutti i bottoni invisibili appena il fragment viene creato
-        for (int i = 0; i < gridLayout.getChildCount(); i++) {
-            gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
-        }
-
-
         TextInputLayout name_editText = view.findViewById(R.id.name_editText);
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
         TextInputLayout price_editText = view.findViewById(R.id.price_editText);
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
+        MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
+        CheckBox checkBox = view.findViewById(R.id.editCheck);
 
-        //MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
+        //RENDO TUTTI I BOTTONI INVISIBILI APPENA IL FRAGMENT VIENE CREATO
+        for (int i = 0; i < gridLayout.getChildCount(); i++) {
+            gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+        }
 
-        String negozio = utenteLoggato.getNegozio();
-
+        // CARICO LA MAPPA DEL NEGOZIO RELATIVO ALL'UTENTE LOGGATO
         StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
         try {
             File localFile = File.createTempFile(negozio, "png");
@@ -85,6 +109,7 @@ public class ShowProductFragment extends Fragment {
             e.printStackTrace();
         }
 
+        // CARICO I PRODOTTI PRESENTI NEL DATABASE, DA FAR VISUALIZZARE NELLA LISTA (NELL'AUTOCOMPLETE TEXT VIEW)
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
         Query retrieveAll = reference.orderByKey();
         retrieveAll.addValueEventListener(new ValueEventListener() {
@@ -96,17 +121,16 @@ public class ShowProductFragment extends Fragment {
                         Prodotto prodotto = ds.getValue(Prodotto.class);
                         listaProdotti.add(prodotto);
                     }
-                    AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(getContext(), listaProdotti);
+                    AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(view.getContext(), listaProdotti);
                     autoComplete.setAdapter(adapter);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
-
         });
 
+        // CLICK SUGLI ELEMENTI DELLA LISTA
         autoComplete.setOnItemClickListener((parent, view12, position, id) -> {
             //CLOSE KEYBOARD
             View vista = getActivity().getCurrentFocus();
@@ -126,9 +150,12 @@ public class ShowProductFragment extends Fragment {
                 name_editText.getEditText().setText(prodotto.getNome());
                 code_editText.getEditText().setText(prodotto.getCodice());
                 price_editText.getEditText().setText(prodotto.getPrezzo());
-
+                if (!isRestarted){
+                    prodInDb = prodotto;
+                }
                 Posizione posizione = prodotto.getPosizione();
 
+                // VISUALIZZA SULLA MAPPA LA POSIZIONE DEL PRODOTTO
                 int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
                 if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)) {
                     //ORENTAMENTO ORIZZONTALE
@@ -178,6 +205,260 @@ public class ShowProductFragment extends Fragment {
                 }
 
 
+            }
+        });
+
+        // CLICK SULLA CHECKBOX PER ATTIVARE LE MODIFICHE
+        checkBox.setOnClickListener(v -> {
+            if (autoComplete.getText().toString().isEmpty()){ // SE NON HO SELEZIONATO ALCUN PRODOTTO DALL'AUTOCOMPLETE
+                checkBox.setChecked(false);
+                Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
+            }else{
+                if (checkBox.isChecked()) {     //CheckBox selezionata
+                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
+                    confirmBtn.setClickable(true);
+
+                    Log.d("è checkata", String.valueOf(checkBox.isChecked()));
+
+                    name_editText.getEditText().setClickable(true);
+                    name_editText.getEditText().setLongClickable(true);
+                    name_editText.getEditText().setFocusable(true);
+
+                    name_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
+                    code_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
+                    price_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
+
+                    code_editText.getEditText().setClickable(true);
+                    code_editText.getEditText().setLongClickable(true);
+                    code_editText.getEditText().setFocusable(true);
+
+                    price_editText.getEditText().setClickable(true);
+                    price_editText.getEditText().setLongClickable(true);
+                    price_editText.getEditText().setFocusable(true);
+
+
+                } else {    //CheckBox non selezionata
+                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
+                    confirmBtn.setClickable(false);
+                    Log.d("è checkata", String.valueOf(checkBox.isChecked()));
+                    name_editText.getEditText().setClickable(false);
+                    name_editText.getEditText().setLongClickable(false);
+                    name_editText.getEditText().setFocusable(false);
+
+                    name_editText.getEditText().setInputType(InputType.TYPE_NULL);
+                    code_editText.getEditText().setInputType(InputType.TYPE_NULL);
+                    price_editText.getEditText().setInputType(InputType.TYPE_NULL);
+
+                    code_editText.getEditText().setClickable(false);
+                    code_editText.getEditText().setLongClickable(false);
+                    code_editText.getEditText().setFocusable(false);
+
+                    price_editText.getEditText().setClickable(false);
+                    price_editText.getEditText().setLongClickable(false);
+                    price_editText.getEditText().setFocusable(false);
+
+
+                }
+            }
+
+        });
+
+        // CLICK SU CANCELLA POSIZIONE
+        position_editText.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
+                //relativ.setVisibility(View.VISIBLE);
+
+                if (checkBox.isChecked()) {
+                    Prodotto prodInSospeso = new Prodotto();
+                    if (!name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        prodInSospeso.setNome(name_editText.getEditText().getText().toString().trim());
+                    } else {
+                        prodInSospeso.setNome("null");
+                    }
+                    if (!code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        prodInSospeso.setCodice(code_editText.getEditText().getText().toString().trim());
+                    } else {
+                        prodInSospeso.setCodice("null");
+                    }
+                    if (!price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        prodInSospeso.setPrezzo(price_editText.getEditText().getText().toString().trim());
+                    } else {
+                        prodInSospeso.setPrezzo("null");
+                    }
+                    AppCompatActivity activity = (AppCompatActivity) getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment(prodInSospeso, prodInDb)).commit();
+                }
+            }
+        });
+
+        // IL FRAGMENT E' RESTARTATO
+        if(isRestarted){ // RIEMPIO LE TEXT CON DATI PRECEDENTI
+            autoComplete.setText(prodInDb.getNome());
+            checkBox.setChecked(true);
+            if (!prodInSospeso.getNome().equals("null")){
+                name_editText.getEditText().setText(prodInSospeso.getNome());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                code_editText.getEditText().setText(prodInSospeso.getCodice());
+            }
+            if (!prodInSospeso.getNome().equals("null")){
+                price_editText.getEditText().setText(prodInSospeso.getPrezzo());
+            }
+
+            //RENDO TUTTI I BOTTONI VISIBILI APPENA IL FRAGMENT VIENE RESTARTATO
+            for (int i = 0; i < gridLayout.getChildCount(); i++) {
+                gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
+            }
+
+            // ON CLICK LISTENER SU TUTTI I BOTTONI
+            for (int i = 0; i < gridLayout.getChildCount(); i++) {
+
+                final int finalI = i;
+                gridLayout.getChildAt(i).setOnClickListener(view1 -> {
+                    // your click code here
+                    if (!is2Clicked) {  // SE NON E' STATO CLICCATO UN SECONDO BOTTONE
+                        if (!isClicked) {  // SE NON E' STATO CLICCATO NULLA, QUINDI PRIMO CLICK
+                            isClicked = true;
+                            position_editText.getEditText().setText(getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                            indicePrecedente = finalI;
+                            gridLayout.getChildAt(finalI).setBackgroundResource(R.drawable.button_shape);
+                            posizione = getPosition(indicePrecedente);
+
+                        } else { // E' STATO CLICCATO GIA' UN BOTTONE, QUINDI CODICE PER IL SECONDO BOTTONE
+                            lunghezza = 0;
+                            is2Clicked = true;
+                            indiceSuccessivo = finalI;
+                            if (getPosition(indicePrecedente).getIndiceRiga() == getPosition(indiceSuccessivo).getIndiceRiga()) {
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA RIGA DEL PRIMO
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' A DESTRA DEL 1 BOTTONE
+                                    for (int j = indicePrecedente; j <= indiceSuccessivo; j++) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
+                                    }
+                                    //posizione = getPosition(finalI);
+                                } else if (indicePrecedente > indiceSuccessivo) {
+                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {   // SE IL 2 BOTTONE E' A SINISTRA DEL 1 BOTTONE
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza--;
+                                    }
+                                }
+                                //posizione.setLunghezza(lunghezza);
+                            }
+                            if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
+                                // SE IL SECONDO BOTTONE E' SULLA STESSA COLONNA DEL PRIMO
+                                posizione.setOrientamento(Orientamento.verticale);
+
+                                if (indicePrecedente < indiceSuccessivo) { // SE IL 2 BOTTONE E' IN BASSO RISPETTO AL PRIMO
+
+                                    for (int j = indicePrecedente; j <= indiceSuccessivo; j = j + 33) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza++;
+                                    }
+                                    //posizione.setLunghezza(lunghezza);
+                                } else if (indicePrecedente > indiceSuccessivo) { // SE IL SECONDO BOTTONE E' IN ALTO RISPETTO AL PRIMO
+                                    for (int j = indicePrecedente; j >= indiceSuccessivo; j = j - 33) {
+                                        gridLayout.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
+                                        position_editText.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
+                                        lunghezza--;
+                                    }
+
+                                } else { // CLICK IN DIAGONALE (NON FA NIENTE)
+                                    lunghezza = 1;
+                                    is2Clicked = false;
+                                }
+                            }
+
+                        }
+
+                    }
+                });
+            }
+
+        }
+
+        // CONFERMA MODIFICA
+        confirmBtn.setOnClickListener(v -> {
+            Boolean isEmpty = false;
+            Prodotto prodotto = new Prodotto();
+
+            // CONTROLLO SULLA POSIZIONE
+            if (isRestarted){ // SE HO CLICCATO SU CANCELLA POSIZIONE
+                if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
+                    posizione.setLunghezza(lunghezza);
+                    prodotto.setPosizione(posizione);
+                } else {
+                    position_editText.getEditText().setError("Questo campo non può essere vuoto");
+                    position_editText.getEditText().requestFocus();
+                    isEmpty = true;
+                }
+            }else{ // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
+                prodotto.setPosizione(prodInDb.getPosizione());
+            }
+
+            //IMMAGINE PRODOTTO VECCHIA
+            prodotto.setURLImmagine(prodInDb.getURLImmagine());
+
+            if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                name_editText.getEditText().setError("Questo campo non può essere vuoto");
+                name_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setNome(name_editText.getEditText().getText().toString().trim());
+            }
+            if (code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                code_editText.getEditText().setError("Questo campo non può essere vuoto");
+                code_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
+            }
+            if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                price_editText.getEditText().setError("Questo campo non può essere vuoto");
+                price_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
+            }
+
+            if(!isEmpty){
+                //DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
+                Query checkId = reference.orderByChild("codice").equalTo(prodotto.getCodice());
+
+                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (prodInDb.getCodice().equals(prodotto.getCodice())){ // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
+                            reference.child(prodotto.getCodice()).setValue(prodotto);
+                            Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+
+                            AppCompatActivity activity = (AppCompatActivity) getContext();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                        } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
+                            if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
+                                code_editText.getEditText().setError("È stato inserito un id già esistente");
+                                code_editText.getEditText().requestFocus();
+                            } else { // IL NUOVO CODICE E' UTILIZZABILE
+                                reference.child(prodotto.getCodice()).setValue(prodotto);
+                                reference.child(prodInDb.getCodice()).removeValue();
+                                Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+
+                                AppCompatActivity activity = (AppCompatActivity) getContext();
+                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

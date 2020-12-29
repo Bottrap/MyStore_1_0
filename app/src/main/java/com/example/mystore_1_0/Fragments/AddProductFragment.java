@@ -230,7 +230,6 @@ public class AddProductFragment extends Fragment {
             if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
                 posizione.setLunghezza(lunghezza);
                 prodotto.setPosizione(posizione);
-                prodotto.setNome(text_posizione.getEditText().getText().toString().trim());
             } else {
                 text_posizione.getEditText().setError("Questo campo non può essere vuoto");
                 text_posizione.getEditText().requestFocus();
@@ -277,14 +276,16 @@ public class AddProductFragment extends Fragment {
                             if (imageUri == null) {
                                 Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
                             } else {
-                                reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
+                                //reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
                                 final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
                                 UploadTask uploadTask = imageRef.putFile(imageUri);
                                 uploadTask.addOnSuccessListener(taskSnapshot -> {
                                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                     downloadUrl.addOnSuccessListener(uri -> {
                                         String imageReference = uri.toString();
-                                        reference.child("Products").child(prodotto.getCodice()).child("URLImmagine").setValue(imageReference);
+                                        //reference.child("Products").child(prodotto.getCodice()).child("URLImmagine").setValue(imageReference);
+                                        prodotto.setURLImmagine(imageReference);
+                                        reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
                                         Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
                                         text_nome.getEditText().getText().clear();
                                         text_codice.getEditText().getText().clear();

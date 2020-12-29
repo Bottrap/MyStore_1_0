@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, negoziDisponibili);
         editStore.setAdapter(adapter);
     }
