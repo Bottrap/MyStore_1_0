@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     negoziDisponibili.add(ds.getKey());
                 }
+                negoziDisponibili.remove("StoresEncoding");
             }
 
             @Override

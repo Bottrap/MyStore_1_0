@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -44,48 +52,58 @@ public class QrGeneratorFragment extends Fragment {
         qr_img = view.findViewById(R.id.qr_img);
         qr_img2 = view.findViewById(R.id.qr_img2);
 
-        btn_qr_gen.setOnClickListener(new View.OnClickListener() {
+        String store = utenteLoggato.getNegozio(); //store in cui far accedere i clienti
+        final String[] encodedStore = new String[1];
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("StoresEncoding");
+        Query query = reference.orderByChild("nome").equalTo(store);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                String store = utenteLoggato.getNegozio(); //store in cui far accedere i clienti
-                QRGEncoder qrgEncoderShow = new QRGEncoder(store, QRGContents.Type.TEXT, 700);
-                qrgEncoderShow.setColorWhite(Color.TRANSPARENT);
-                try {
-                    // Getting QR-Code as Bitmap
-                    bitmap = qrgEncoderShow.getBitmap();
-                    // Setting Bitmap to ImageView
-                    qr_img.setImageBitmap(bitmap);
-                    btn_save.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    encodedStore[0] = ds.child("codice").getValue().toString();
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-
-                String store = "store1";
-                QRGEncoder qrgEncoderSave = new QRGEncoder(store, QRGContents.Type.TEXT, 1000);
-                try {
-                    // Getting QR-Code as Bitmap
-                    bitmap = qrgEncoderSave.getBitmap();
-                    qr_img2.setImageBitmap(bitmap);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                bitmapsave = ((BitmapDrawable) qr_img2.getDrawable()).getBitmap();
-                String filename = String.format("%d.png", System.currentTimeMillis());
-                // Salvo l'immagine nella galleria
-                MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmapsave, "QR Code", null);
-                Toast.makeText(getActivity(), "Immagine salvata", Toast.LENGTH_LONG).show();
+        btn_qr_gen.setOnClickListener(v -> {
+            QRGEncoder qrgEncoderShow = new QRGEncoder(encodedStore[0], QRGContents.Type.TEXT, 700);
+            qrgEncoderShow.setColorWhite(Color.TRANSPARENT);
+            try {
+                // Getting QR-Code as Bitmap
+                bitmap = qrgEncoderShow.getBitmap();
+                // Setting Bitmap to ImageView
+                qr_img.setImageBitmap(bitmap);
+                btn_save.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
+        btn_save.setOnClickListener(v -> {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+
+            QRGEncoder qrgEncoderSave = new QRGEncoder(encodedStore[0], QRGContents.Type.TEXT, 1000);
+            try {
+                // Getting QR-Code as Bitmap
+                bitmap = qrgEncoderSave.getBitmap();
+                qr_img2.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            bitmapsave = ((BitmapDrawable) qr_img2.getDrawable()).getBitmap();
+            String filename = String.format("%d.png", System.currentTimeMillis());
+            // Salvo l'immagine nella galleria
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmapsave, "QR Code", null);
+            Toast.makeText(getActivity(), "Immagine salvata", Toast.LENGTH_LONG).show();
+        });
         return view;
     }
 }
+

@@ -59,7 +59,7 @@ public class MapActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String negozio = intent.getStringExtra("negozio");
 
-       StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
+        StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
         try {
             File localFile = File.createTempFile(negozio, "png");
             mapReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
@@ -99,38 +99,38 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object item = parent.getItemAtPosition(position);
-                if (item instanceof Prodotto){
+                if (item instanceof Prodotto) {
                     Prodotto prodotto = (Prodotto) item;
 
                     //prima di visualizzare il nuovo prodotto, rendo invisibili tutti i bottoni del grid layout
-                    for(int i = 0; i < gridLayout.getChildCount(); i++){
+                    for (int i = 0; i < gridLayout.getChildCount(); i++) {
                         gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
                     }
 
                     int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
-                    if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)){
+                    if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)) {
                         //ORENTAMENTO ORIZZONTALE
-                        if (prodotto.getPosizione().getLunghezza() > 0){ // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
+                        if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
                             for (int i = indice; i < indice + prodotto.getPosizione().getLunghezza(); i++) {
                                 grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
                                 grid.getChildAt(i).setVisibility(View.VISIBLE);
                             }
-                        }else{ // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
+                        } else { // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
                             for (int i = indice; i > indice + prodotto.getPosizione().getLunghezza(); i--) {
                                 grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
                                 grid.getChildAt(i).setVisibility(View.VISIBLE);
 
                             }
                         }
-                    }else{ // ORIENTAMENTO VERTICALE
-                        if (prodotto.getPosizione().getLunghezza() > 0){ // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
-                            for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza()*33); i=i+33) {
+                    } else { // ORIENTAMENTO VERTICALE
+                        if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
+                            for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza() * 33); i = i + 33) {
                                 grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
                                 grid.getChildAt(i).setVisibility(View.VISIBLE);
 
                             }
-                        }else{ // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
-                            for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza()*33); i=i-33) {
+                        } else { // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
+                            for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza() * 33); i = i - 33) {
                                 grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
                                 grid.getChildAt(i).setVisibility(View.VISIBLE);
 
@@ -138,16 +138,16 @@ public class MapActivity extends AppCompatActivity {
                         }
                     }
 
-                closeKeyboard();
+                    closeKeyboard();
 
                 }
             }
         });
 
 
-
     }
-     private void closeKeyboard(){
+
+    private void closeKeyboard() {
         View vista = this.getCurrentFocus();
         if (vista != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
