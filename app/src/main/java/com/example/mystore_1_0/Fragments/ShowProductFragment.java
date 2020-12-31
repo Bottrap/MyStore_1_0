@@ -1,9 +1,11 @@
 package com.example.mystore_1_0.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -29,6 +32,8 @@ import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,14 +43,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
 public class ShowProductFragment extends Fragment {
@@ -60,12 +68,25 @@ public class ShowProductFragment extends Fragment {
     Posizione posizione;
     int lunghezza = 1;
 
+    private static final int PICK_IMAGE = 1;
+    Uri imageUri = null;
 
-    public ShowProductFragment(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
+            imageUri = data.getData();
+            Toast.makeText(getContext(), "Immagine modificata correttamente", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public ShowProductFragment() {
         this.isRestarted = false;
     }
 
-    public ShowProductFragment(Prodotto prodInSospeso, Prodotto prodInDb){
+    public ShowProductFragment(Prodotto prodInSospeso, Prodotto prodInDb) {
         this.prodInSospeso = prodInSospeso;
         this.prodInDb = prodInDb;
         this.isRestarted = true;
@@ -75,7 +96,7 @@ public class ShowProductFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_showproduct, container, false);
-        View view = View.inflate(getActivity(), R.layout.fragment_showproduct, null );
+        View view = View.inflate(getActivity(), R.layout.fragment_showproduct, null);
 
         // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
@@ -125,6 +146,7 @@ public class ShowProductFragment extends Fragment {
                     autoComplete.setAdapter(adapter);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -150,10 +172,24 @@ public class ShowProductFragment extends Fragment {
                 name_editText.getEditText().setText(prodotto.getNome());
                 code_editText.getEditText().setText(prodotto.getCodice());
                 price_editText.getEditText().setText(prodotto.getPrezzo());
-                if (!isRestarted){
+                if (!isRestarted) {
                     prodInDb = prodotto;
                 }
                 Posizione posizione = prodotto.getPosizione();
+
+                //VISUALIZZAZIONE IMMAGINE DEL PRODOTTO NELLA IMAGEVIEW
+                String imgPath = "Immagini_Prodotti/" + prodotto.getCodice() + ".jpg";
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(imgPath);
+                try {
+                    final File localFile = File.createTempFile(prodotto.getCodice(), "jpg");
+                    storageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        ImageView productImgView = view.findViewById(R.id.product_imgView);
+                        productImgView.setImageBitmap(bitmap);
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 // VISUALIZZA SULLA MAPPA LA POSIZIONE DEL PRODOTTO
                 int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
@@ -210,100 +246,69 @@ public class ShowProductFragment extends Fragment {
 
         // CLICK SULLA CHECKBOX PER ATTIVARE LE MODIFICHE
         checkBox.setOnClickListener(v -> {
-            if (autoComplete.getText().toString().isEmpty()){ // SE NON HO SELEZIONATO ALCUN PRODOTTO DALL'AUTOCOMPLETE
+            if (autoComplete.getText().toString().isEmpty()) { // SE NON HO SELEZIONATO ALCUN PRODOTTO DALL'AUTOCOMPLETE
                 checkBox.setChecked(false);
                 Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 if (checkBox.isChecked()) {     //CheckBox selezionata
                     confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
                     confirmBtn.setClickable(true);
-
-                    Log.d("è checkata", String.valueOf(checkBox.isChecked()));
-
-                    name_editText.getEditText().setClickable(true);
-                    name_editText.getEditText().setLongClickable(true);
-                    name_editText.getEditText().setFocusable(true);
-
-                    name_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
-                    code_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
-                    price_editText.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
-
-                    code_editText.getEditText().setClickable(true);
-                    code_editText.getEditText().setLongClickable(true);
-                    code_editText.getEditText().setFocusable(true);
-
-                    price_editText.getEditText().setClickable(true);
-                    price_editText.getEditText().setLongClickable(true);
-                    price_editText.getEditText().setFocusable(true);
-
-
                 } else {    //CheckBox non selezionata
                     confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
                     confirmBtn.setClickable(false);
-                    Log.d("è checkata", String.valueOf(checkBox.isChecked()));
-                    name_editText.getEditText().setClickable(false);
-                    name_editText.getEditText().setLongClickable(false);
-                    name_editText.getEditText().setFocusable(false);
-
-                    name_editText.getEditText().setInputType(InputType.TYPE_NULL);
-                    code_editText.getEditText().setInputType(InputType.TYPE_NULL);
-                    price_editText.getEditText().setInputType(InputType.TYPE_NULL);
-
-                    code_editText.getEditText().setClickable(false);
-                    code_editText.getEditText().setLongClickable(false);
-                    code_editText.getEditText().setFocusable(false);
-
-                    price_editText.getEditText().setClickable(false);
-                    price_editText.getEditText().setLongClickable(false);
-                    price_editText.getEditText().setFocusable(false);
-
-
                 }
             }
 
         });
 
-        // CLICK SU CANCELLA POSIZIONE
-        position_editText.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
-                //relativ.setVisibility(View.VISIBLE);
+        // CLICK SU MODIFICA IMMAGINE
+        MaterialButton editImg = view.findViewById(R.id.editImg_btn);
+        editImg.setOnClickListener(v -> {
+            //prendo l'immagine dalla galleria come uri
+            Intent galleria = new Intent();
+            galleria.setType("image/*");
+            galleria.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(galleria, "Seleziona un'immagine"), PICK_IMAGE);
+        });
 
-                if (checkBox.isChecked()) {
-                    Prodotto prodInSospeso = new Prodotto();
-                    if (!name_editText.getEditText().getText().toString().trim().isEmpty()) {
-                        prodInSospeso.setNome(name_editText.getEditText().getText().toString().trim());
-                    } else {
-                        prodInSospeso.setNome("null");
-                    }
-                    if (!code_editText.getEditText().getText().toString().trim().isEmpty()) {
-                        prodInSospeso.setCodice(code_editText.getEditText().getText().toString().trim());
-                    } else {
-                        prodInSospeso.setCodice("null");
-                    }
-                    if (!price_editText.getEditText().getText().toString().trim().isEmpty()) {
-                        prodInSospeso.setPrezzo(price_editText.getEditText().getText().toString().trim());
-                    } else {
-                        prodInSospeso.setPrezzo("null");
-                    }
-                    AppCompatActivity activity = (AppCompatActivity) getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment(prodInSospeso, prodInDb)).commit();
+        // CLICK SU CANCELLA POSIZIONE
+        position_editText.setEndIconOnClickListener(v -> {
+            //RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
+            //relativ.setVisibility(View.VISIBLE);
+
+            if (checkBox.isChecked()) {
+                Prodotto prodInSospeso = new Prodotto();
+                if (!name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setNome(name_editText.getEditText().getText().toString().trim());
+                } else {
+                    prodInSospeso.setNome("null");
                 }
+                if (!code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setCodice(code_editText.getEditText().getText().toString().trim());
+                } else {
+                    prodInSospeso.setCodice("null");
+                }
+                if (!price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                    prodInSospeso.setPrezzo(price_editText.getEditText().getText().toString().trim());
+                } else {
+                    prodInSospeso.setPrezzo("null");
+                }
+                AppCompatActivity activity = (AppCompatActivity) getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment(prodInSospeso, prodInDb)).commit();
             }
         });
 
         // IL FRAGMENT E' RESTARTATO
-        if(isRestarted){ // RIEMPIO LE TEXT CON DATI PRECEDENTI
+        if (isRestarted) { // RIEMPIO LE TEXT CON DATI PRECEDENTI
             autoComplete.setText(prodInDb.getNome());
             checkBox.setChecked(true);
-            if (!prodInSospeso.getNome().equals("null")){
+            if (!prodInSospeso.getNome().equals("null")) {
                 name_editText.getEditText().setText(prodInSospeso.getNome());
             }
-            if (!prodInSospeso.getNome().equals("null")){
+            if (!prodInSospeso.getNome().equals("null")) {
                 code_editText.getEditText().setText(prodInSospeso.getCodice());
             }
-            if (!prodInSospeso.getNome().equals("null")){
+            if (!prodInSospeso.getNome().equals("null")) {
                 price_editText.getEditText().setText(prodInSospeso.getPrezzo());
             }
 
@@ -387,7 +392,7 @@ public class ShowProductFragment extends Fragment {
             Prodotto prodotto = new Prodotto();
 
             // CONTROLLO SULLA POSIZIONE
-            if (isRestarted){ // SE HO CLICCATO SU CANCELLA POSIZIONE
+            if (isRestarted) { // SE HO CLICCATO SU CANCELLA POSIZIONE
                 if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
                     posizione.setLunghezza(lunghezza);
                     prodotto.setPosizione(posizione);
@@ -396,12 +401,24 @@ public class ShowProductFragment extends Fragment {
                     position_editText.getEditText().requestFocus();
                     isEmpty = true;
                 }
-            }else{ // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
+            } else { // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
                 prodotto.setPosizione(prodInDb.getPosizione());
             }
 
-            //IMMAGINE PRODOTTO VECCHIA
-            prodotto.setURLImmagine(prodInDb.getURLImmagine());
+            // CONTROLLO SULL'IMMAGINE
+            if (imageUri == null) {
+                prodotto.setURLImmagine(prodInDb.getURLImmagine());
+            } else {
+                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                UploadTask uploadTask = imageRef.putFile(imageUri);
+                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(uri -> {
+                        String imageReference = uri.toString();
+                        prodotto.setURLImmagine(imageReference);
+                    });
+                });
+            }
 
             if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
                 name_editText.getEditText().setError("Questo campo non può essere vuoto");
@@ -425,16 +442,16 @@ public class ShowProductFragment extends Fragment {
                 prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
             }
 
-            if(!isEmpty){
+            if (!isEmpty) {
                 //DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                 Query checkId = reference.orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (prodInDb.getCodice().equals(prodotto.getCodice())){ // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
+                        if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
                             reference.child(prodotto.getCodice()).setValue(prodotto);
-                            Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
 
                             AppCompatActivity activity = (AppCompatActivity) getContext();
                             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();

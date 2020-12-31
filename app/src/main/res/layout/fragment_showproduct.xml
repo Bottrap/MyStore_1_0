@@ -2284,8 +2284,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:longClickable="false"
             android:inputType="text"
             android:textColor="@color/scanStatusBarColor"
             android:textCursorDrawable="@null" />
@@ -2310,8 +2308,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:longClickable="false"
             android:inputType="text"
             android:textColor="@color/scanStatusBarColor"
             android:textCursorDrawable="@null" />
@@ -2337,11 +2333,45 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:longClickable="false"
             android:inputType="text"
             android:textColor="@color/scanStatusBarColor"
             android:textCursorDrawable="@null" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/product_imgView"
+                    android:src="@drawable/img_agg_immag"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/editImg_btn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/editImg_btn"
+                    android:backgroundTint="@color/statusBarColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/product_imgView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    style="@style/Widget.MaterialComponents.Button"
+                    app:cornerRadius="60dp"
+                    android:clickable="false"
+                    android:layout_gravity="center"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white"
+                    android:text="Modifica Immagine"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -2351,10 +2381,10 @@
                     android:id="@+id/editCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:buttonTint="@color/arancione"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginLeft="12dp"
-                    android:buttonTint="@color/arancione"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -2364,8 +2394,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="Modifica"
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textColor="@color/black"/>
 
                 <com.google.android.material.button.MaterialButton

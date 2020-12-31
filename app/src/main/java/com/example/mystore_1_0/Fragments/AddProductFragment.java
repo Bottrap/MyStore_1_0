@@ -181,43 +181,38 @@ public class AddProductFragment extends Fragment {
 
 
         // CLICK SU CANCELLA POSIZIONE
-        text_posizione.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
-                relativ.setVisibility(View.VISIBLE);
-                Prodotto prodInSospeso = new Prodotto();
-                if (!text_nome.getEditText().getText().toString().trim().isEmpty()) {
-                    prodInSospeso.setNome(text_nome.getEditText().getText().toString().trim());
-                } else {
-                    prodInSospeso.setNome("null");
-                }
-                if (!text_codice.getEditText().getText().toString().trim().isEmpty()) {
-                    prodInSospeso.setCodice(text_codice.getEditText().getText().toString().trim());
-                } else {
-                    prodInSospeso.setCodice("null");
-                }
-                if (!text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
-                    prodInSospeso.setPrezzo(text_prezzo.getEditText().getText().toString().trim());
-                } else {
-                    prodInSospeso.setPrezzo("null");
-                }
-                AppCompatActivity activity = (AppCompatActivity) getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment(prodInSospeso)).commit();
-
+        text_posizione.setEndIconOnClickListener(v -> {
+            RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
+            relativ.setVisibility(View.VISIBLE);
+            Prodotto prodInSospeso = new Prodotto();
+            if (!text_nome.getEditText().getText().toString().trim().isEmpty()) {
+                prodInSospeso.setNome(text_nome.getEditText().getText().toString().trim());
+            } else {
+                prodInSospeso.setNome("null");
             }
+            if (!text_codice.getEditText().getText().toString().trim().isEmpty()) {
+                prodInSospeso.setCodice(text_codice.getEditText().getText().toString().trim());
+            } else {
+                prodInSospeso.setCodice("null");
+            }
+            if (!text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
+                prodInSospeso.setPrezzo(text_prezzo.getEditText().getText().toString().trim());
+            } else {
+                prodInSospeso.setPrezzo("null");
+            }
+            AppCompatActivity activity = (AppCompatActivity) getContext();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment(prodInSospeso)).commit();
+
         });
 
+        // CLICK SU AGGIUNGI IMMAGINE
         Button btn_imagePick = view.findViewById(R.id.pickImageBtn);
-        btn_imagePick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //prendo l'immagine dalla galleria come uri
-                Intent galleria = new Intent();
-                galleria.setType("image/*");
-                galleria.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(galleria, "Seleziona un'immagine"), PICK_IMAGE);
-            }
+        btn_imagePick.setOnClickListener(v -> {
+            //prendo l'immagine dalla galleria come uri
+            Intent galleria = new Intent();
+            galleria.setType("image/*");
+            galleria.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(galleria, "Seleziona un'immagine"), PICK_IMAGE);
         });
 
 

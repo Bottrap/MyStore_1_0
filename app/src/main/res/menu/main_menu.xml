@@ -26,15 +26,28 @@
         </menu>
     </item>
 
-    <item android:title="Prodotti">
+    <item android:title="Esposizione">
         <menu>
             <item
                 android:id="@+id/nav_add_prod"
-                android:title = "Aggiungi prodotti"
+                android:title = "Aggiungi prodotti (Esposizione)"
                 android:icon = "@drawable/img_add_prod"/>
             <item
                 android:id="@+id/nav_show_prod"
-                android:title = "Mostra Prodotti"
+                android:title = "Gestisci Prodotti (Esposizione)"
+                android:icon = "@drawable/gest_prod_img"/>
+        </menu>
+    </item>
+
+    <item android:title="Magazzino">
+        <menu>
+            <item
+                android:id="@+id/nav_add_prod_magazzino"
+                android:title = "Aggiungi lotti al magazzino"
+                android:icon = "@drawable/img_add_prod"/>
+            <item
+                android:id="@+id/nav_show_prod_magazzino"
+                android:title = "Gestisci Prodotti del magazzino"
                 android:icon = "@drawable/gest_prod_img"/>
         </menu>
     </item>
