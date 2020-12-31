@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.R;
@@ -19,6 +20,7 @@ public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPho
 
     MaterialTextView showId, showNome, showCognome, showPermessi, showDataNascita, showTelefono;
     MaterialButton pwEdit, phoneEdit;
+    CardView showUsersCardView;
 
     @Nullable
     @Override
@@ -38,6 +40,7 @@ public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPho
         showTelefono = view.findViewById(R.id.showTelefono);
         pwEdit = view.findViewById(R.id.pwEdit);
         phoneEdit = view.findViewById(R.id.phoneEdit);
+        showUsersCardView = view.findViewById(R.id.showusers_cardview);
 
         showNome.setText(utente.getNome());
         showCognome.setText(utente.getCognome());
