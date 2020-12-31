@@ -405,21 +405,6 @@ public class ShowProductFragment extends Fragment {
                 prodotto.setPosizione(prodInDb.getPosizione());
             }
 
-            // CONTROLLO SULL'IMMAGINE
-            if (imageUri == null) {
-                prodotto.setURLImmagine(prodInDb.getURLImmagine());
-            } else {
-                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
-                UploadTask uploadTask = imageRef.putFile(imageUri);
-                uploadTask.addOnSuccessListener(taskSnapshot -> {
-                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
-                    downloadUrl.addOnSuccessListener(uri -> {
-                        String imageReference = uri.toString();
-                        prodotto.setURLImmagine(imageReference);
-                    });
-                });
-            }
-
             if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
                 name_editText.getEditText().setError("Questo campo non può essere vuoto");
                 name_editText.getEditText().requestFocus();
@@ -446,13 +431,29 @@ public class ShowProductFragment extends Fragment {
                 //DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                 Query checkId = reference.orderByChild("codice").equalTo(prodotto.getCodice());
 
+
+
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
                             reference.child(prodotto.getCodice()).setValue(prodotto);
+                            // CONTROLLO SULL'IMMAGINE
+                            if (imageUri == null) {
+                                prodotto.setURLImmagine(prodInDb.getURLImmagine());
+                            } else {
+                                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                                UploadTask uploadTask = imageRef.putFile(imageUri);
+                                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                                    downloadUrl.addOnSuccessListener(uri -> {
+                                        String imageReference = uri.toString();
+                                        reference.child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                        //prodotto.setURLImmagine(imageReference);
+                                    });
+                                });
+                            }
                             Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
-
                             AppCompatActivity activity = (AppCompatActivity) getContext();
                             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
                         } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
@@ -461,6 +462,21 @@ public class ShowProductFragment extends Fragment {
                                 code_editText.getEditText().requestFocus();
                             } else { // IL NUOVO CODICE E' UTILIZZABILE
                                 reference.child(prodotto.getCodice()).setValue(prodotto);
+                                // CONTROLLO SULL'IMMAGINE
+                                if (imageUri == null) {
+                                    prodotto.setURLImmagine(prodInDb.getURLImmagine());
+                                } else {
+                                    final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                                    UploadTask uploadTask = imageRef.putFile(imageUri);
+                                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                                        Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                                        downloadUrl.addOnSuccessListener(uri -> {
+                                            String imageReference = uri.toString();
+                                            reference.child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                            //prodotto.setURLImmagine(imageReference);
+                                        });
+                                    });
+                                }
                                 reference.child(prodInDb.getCodice()).removeValue();
                                 Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
 

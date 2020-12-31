@@ -215,11 +215,10 @@ public class AddProductFragment extends Fragment {
             startActivityForResult(Intent.createChooser(galleria, "Seleziona un'immagine"), PICK_IMAGE);
         });
 
-
+        // CLICK SU AGGIUNGI PRODOTTO
         Button btn_add_prod = view.findViewById(R.id.btn_add_prod);
         btn_add_prod.setOnClickListener(v -> {
-            Boolean isEmpty = false;
-
+            boolean isEmpty = false;
             Prodotto prodotto = new Prodotto();
 
             if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
@@ -257,7 +256,6 @@ public class AddProductFragment extends Fragment {
             }
 
             if (!isEmpty) {
-                // codice database :)
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                 Query checkId = reference.child("Products").orderByChild("codice").equalTo(prodotto.getCodice());
 
