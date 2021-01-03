@@ -49,12 +49,16 @@ public class ScanActivity extends AppCompatActivity {
 
 
     public void clickScanBtn(View v) {
-        IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+        Intent intent = new Intent(getApplicationContext(), TestActivity.class);  //AVVIA L'ACTIVITY TEST
+        startActivity(intent);
+        /*IntentIntegrator intentIntegrator = new IntentIntegrator(this);
         intentIntegrator.setPrompt("Scansiona il QR code");
         intentIntegrator.setBeepEnabled(true);
         intentIntegrator.setOrientationLocked(true);
         intentIntegrator.setCaptureActivity(Capture.class);
         intentIntegrator.initiateScan();
+
+         */
     }
 
     @Override
@@ -62,7 +66,7 @@ public class ScanActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult.getContents() != null) {
-            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+            Intent intent = new Intent(getApplicationContext(), TestActivity.class);
             String idNegozio = intentResult.getContents();
 
             final String[] negozio = new String[1];

@@ -95,52 +95,49 @@ public class MapActivity extends AppCompatActivity {
         });
 
         GridLayout grid = findViewById(R.id.gridlayout);
-        autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                if (item instanceof Prodotto) {
-                    Prodotto prodotto = (Prodotto) item;
+        autoComplete.setOnItemClickListener((parent, view, position, id) -> {
+            Object item = parent.getItemAtPosition(position);
+            if (item instanceof Prodotto) {
+                Prodotto prodotto = (Prodotto) item;
 
-                    //prima di visualizzare il nuovo prodotto, rendo invisibili tutti i bottoni del grid layout
-                    for (int i = 0; i < gridLayout.getChildCount(); i++) {
-                        gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
-                    }
-
-                    int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
-                    if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)) {
-                        //ORENTAMENTO ORIZZONTALE
-                        if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
-                            for (int i = indice; i < indice + prodotto.getPosizione().getLunghezza(); i++) {
-                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                grid.getChildAt(i).setVisibility(View.VISIBLE);
-                            }
-                        } else { // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
-                            for (int i = indice; i > indice + prodotto.getPosizione().getLunghezza(); i--) {
-                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                grid.getChildAt(i).setVisibility(View.VISIBLE);
-
-                            }
-                        }
-                    } else { // ORIENTAMENTO VERTICALE
-                        if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
-                            for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza() * 33); i = i + 33) {
-                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                grid.getChildAt(i).setVisibility(View.VISIBLE);
-
-                            }
-                        } else { // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
-                            for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza() * 33); i = i - 33) {
-                                grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
-                                grid.getChildAt(i).setVisibility(View.VISIBLE);
-
-                            }
-                        }
-                    }
-
-                    closeKeyboard();
-
+                //prima di visualizzare il nuovo prodotto, rendo invisibili tutti i bottoni del grid layout
+                for (int i = 0; i < gridLayout.getChildCount(); i++) {
+                    gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
                 }
+
+                int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
+                if (prodotto.getPosizione().getOrientamento().equals(Orientamento.orizzontale)) {
+                    //ORENTAMENTO ORIZZONTALE
+                    if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI A DESTRA
+                        for (int i = indice; i < indice + prodotto.getPosizione().getLunghezza(); i++) {
+                            grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                            grid.getChildAt(i).setVisibility(View.VISIBLE);
+                        }
+                    } else { // LUNGHEZZA MINORE DI ZERO QUINDI A SINISTRA
+                        for (int i = indice; i > indice + prodotto.getPosizione().getLunghezza(); i--) {
+                            grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                            grid.getChildAt(i).setVisibility(View.VISIBLE);
+
+                        }
+                    }
+                } else { // ORIENTAMENTO VERTICALE
+                    if (prodotto.getPosizione().getLunghezza() > 0) { // LUNGHEZZA MAGGIORE DI ZERO QUINDI VERSO IL BASSO
+                        for (int i = indice; i < indice + (prodotto.getPosizione().getLunghezza() * 33); i = i + 33) {
+                            grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                            grid.getChildAt(i).setVisibility(View.VISIBLE);
+
+                        }
+                    } else { // LUNGHEZZA MINORE DI ZERO QUINDI VERSO L'ALTO
+                        for (int i = indice; i > indice + (prodotto.getPosizione().getLunghezza() * 33); i = i - 33) {
+                            grid.getChildAt(i).setBackgroundResource(R.drawable.button_shape);
+                            grid.getChildAt(i).setVisibility(View.VISIBLE);
+
+                        }
+                    }
+                }
+
+                closeKeyboard();
+
             }
         });
 
