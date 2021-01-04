@@ -1,40 +1,24 @@
 package com.example.mystore_1_0.Prodotto;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.io.IOException;
-
 
 public class Prodotto {
     final static int NumeroColonne = 33;
-    String nome, codice, prezzo, URLImmagine;
+    String nome, codice, prezzo, urlimmagine;
     Posizione posizione;
 
     public String getURLImmagine() {
-        return URLImmagine;
+        return urlimmagine;
     }
 
-    public void setURLImmagine(String URLImmagine) {
-        this.URLImmagine = URLImmagine;
+    public void setURLImmagine(String urlimmagine) {
+        this.urlimmagine = urlimmagine;
     }
 
-    public Prodotto(String nome, String codice, String prezzo, String URLImmagine, Posizione posizione) {
+    public Prodotto(String nome, String codice, String prezzo, String urlimmagine, Posizione posizione) {
         this.nome = nome;
         this.codice = codice;
         this.prezzo = prezzo;
-        this.URLImmagine = URLImmagine;
+        this.urlimmagine = urlimmagine;
         this.posizione = posizione;
     }
 

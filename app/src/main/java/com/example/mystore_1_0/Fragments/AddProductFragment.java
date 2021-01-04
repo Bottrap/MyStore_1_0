@@ -2,9 +2,9 @@ package com.example.mystore_1_0.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +24,7 @@ import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,9 +40,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddProductFragment extends Fragment {
 
-    private boolean isRestarted = false;
-    private Prodotto prodInSospeso;
-
     private final int NumeroColonne = 33;
     private Uri imageUri;
     private static final int PICK_IMAGE = 1;
@@ -49,15 +47,6 @@ public class AddProductFragment extends Fragment {
     private int getIndex(int x, int y) {
         int indice = ((NumeroColonne) * x) + y;
         return indice;
-    }
-
-    public AddProductFragment() {
-        this.isRestarted = false;
-    }
-
-    public AddProductFragment(Prodotto prodInSospeso) {
-        this.isRestarted = true;
-        this.prodInSospeso = prodInSospeso;
     }
 
     private Posizione getPosition(int index) {
@@ -99,20 +88,11 @@ public class AddProductFragment extends Fragment {
         TextInputLayout text_codice = view.findViewById(R.id.text_codice_prodotto);
         TextInputLayout text_prezzo = view.findViewById(R.id.text_price);
 
+        MaterialButton btn = new MaterialButton(getActivity());
+        Drawable background = btn.getBackground();
+
         GridLayout grid = (GridLayout) view.findViewById(R.id.gridProduct);
         int childCount = grid.getChildCount();
-
-        if (isRestarted) {
-            if (!prodInSospeso.getNome().equals("null")) {
-                text_nome.getEditText().setText(prodInSospeso.getNome());
-            }
-            if (!prodInSospeso.getNome().equals("null")) {
-                text_codice.getEditText().setText(prodInSospeso.getCodice());
-            }
-            if (!prodInSospeso.getNome().equals("null")) {
-                text_prezzo.getEditText().setText(prodInSospeso.getPrezzo());
-            }
-        }
 
         for (int i = 0; i < childCount; i++) {
 
@@ -182,27 +162,12 @@ public class AddProductFragment extends Fragment {
 
         // CLICK SU CANCELLA POSIZIONE
         text_posizione.setEndIconOnClickListener(v -> {
-            RelativeLayout relativ = view.findViewById(R.id.relative_progress_add_prod);
-            relativ.setVisibility(View.VISIBLE);
-            Prodotto prodInSospeso = new Prodotto();
-            if (!text_nome.getEditText().getText().toString().trim().isEmpty()) {
-                prodInSospeso.setNome(text_nome.getEditText().getText().toString().trim());
-            } else {
-                prodInSospeso.setNome("null");
+            for (int i = 0; i < grid.getChildCount(); i++) {
+                grid.getChildAt(i).setBackground(background);
+                is2Clicked = false;
+                isClicked = false;
+                text_posizione.getEditText().getText().clear();
             }
-            if (!text_codice.getEditText().getText().toString().trim().isEmpty()) {
-                prodInSospeso.setCodice(text_codice.getEditText().getText().toString().trim());
-            } else {
-                prodInSospeso.setCodice("null");
-            }
-            if (!text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
-                prodInSospeso.setPrezzo(text_prezzo.getEditText().getText().toString().trim());
-            } else {
-                prodInSospeso.setPrezzo("null");
-            }
-            AppCompatActivity activity = (AppCompatActivity) getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment(prodInSospeso)).commit();
-
         });
 
         // CLICK SU AGGIUNGI IMMAGINE

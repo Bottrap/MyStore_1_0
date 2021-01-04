@@ -7,17 +7,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,14 +22,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.mystore_1_0.Activity.ProfileActivity;
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
@@ -43,7 +38,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -69,7 +63,7 @@ public class ShowProductFragment extends Fragment {
     int lunghezza = 1;
 
     private static final int PICK_IMAGE = 1;
-    Uri imageUri = null;
+    Uri imageUri;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -418,6 +412,7 @@ public class ShowProductFragment extends Fragment {
                 isEmpty = true;
             } else {
                 prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
+                Log.d("ok", String.valueOf(prodotto.getCodice()));
             }
             if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
                 price_editText.getEditText().setError("Questo campo non può essere vuoto");
@@ -426,17 +421,36 @@ public class ShowProductFragment extends Fragment {
             } else {
                 prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
             }
-
+            if (!prodotto.getCodice().isEmpty()) {
+                // CONTROLLO SULL'IMMAGINE
+                Log.d("imageuri", String.valueOf(imageUri));
+                if (imageUri == null) {
+                    prodotto.setURLImmagine(prodInDb.getURLImmagine());
+                } else {
+                    final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                    UploadTask uploadTask = imageRef.putFile(imageUri);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                        downloadUrl.addOnSuccessListener(uri -> {
+                            String imageReference = uri.toString();
+                            prodotto.setURLImmagine(imageReference);
+                            Log.d("image in prod", prodotto.getURLImmagine());
+                        });
+                    });
+                }
+            }
             if (!isEmpty) {
                 //DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
                 Query checkId = reference.orderByChild("codice").equalTo(prodotto.getCodice());
 
 
 
-                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                checkId.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
+                            Log.d("image before save", prodotto.getURLImmagine() + "ciao");
+                            Log.d("code before save", prodotto.getCodice() + "ciao");
                             reference.child(prodotto.getCodice()).setValue(prodotto);
                             // CONTROLLO SULL'IMMAGINE
                             if (imageUri == null) {
@@ -461,6 +475,8 @@ public class ShowProductFragment extends Fragment {
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
                                 code_editText.getEditText().requestFocus();
                             } else { // IL NUOVO CODICE E' UTILIZZABILE
+                                Log.d("image before save2", prodotto.getURLImmagine() + "ciao");
+                                Log.d("code before save2", prodotto.getCodice() + "ciao");
                                 reference.child(prodotto.getCodice()).setValue(prodotto);
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
