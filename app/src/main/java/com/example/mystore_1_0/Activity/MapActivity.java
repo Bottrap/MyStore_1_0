@@ -82,7 +82,6 @@ public class MapActivity extends AppCompatActivity {
                         Prodotto prodotto = ds.getValue(Prodotto.class);
                         listaProdotti.add(prodotto);
                     }
-
                     AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(getApplicationContext(), listaProdotti);
                     autoComplete.setAdapter(adapter);
                 }
@@ -135,9 +134,7 @@ public class MapActivity extends AppCompatActivity {
                         }
                     }
                 }
-
                 closeKeyboard();
-
             }
         });
 
