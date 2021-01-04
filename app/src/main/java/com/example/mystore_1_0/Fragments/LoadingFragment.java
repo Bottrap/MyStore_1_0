@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
 import com.example.mystore_1_0.R;
 
 public class LoadingFragment extends Fragment {

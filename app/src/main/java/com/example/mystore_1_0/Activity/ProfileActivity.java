@@ -24,10 +24,12 @@ import android.widget.Toast;
 
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.Fragments.Esposizione.ShowProductFragment;
 import com.example.mystore_1_0.Fragments.LoadingFragment;
 import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.ShowStorageProductFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
@@ -40,7 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, EditPasswordDialog.ChangePasswordDialogListener{
+public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, EditPasswordDialog.ChangePasswordDialogListener {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -48,7 +50,6 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     Boolean isClosed = true;
     LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayout4;
     String negozio;
-
 
 
     @Override
@@ -96,10 +97,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle.setToolbarNavigationClickListener(v -> {
-            if (isClosed){
+            if (isClosed) {
                 drawerLayout.openDrawer(GravityCompat.START);
                 isClosed = false;
-            }else{
+            } else {
                 if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
@@ -111,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
         // CONTROLLO SUI PERMESSI DELL'UTENTE
-        switch(Integer.parseInt(utenteLoggato.getPermessi())){
+        switch (Integer.parseInt(utenteLoggato.getPermessi())) {
             case 1: // CAPO SUPREMO
                 navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
                 break;
@@ -137,8 +138,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     public void onBackPressed() {
 
         Fragment editFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (!(editFragment instanceof IOnBackPressed) || !((IOnBackPressed) editFragment).onBackPressed())
-        {
+        if (!(editFragment instanceof IOnBackPressed) || !((IOnBackPressed) editFragment).onBackPressed()) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else {
@@ -175,10 +175,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
+            case R.id.nav_show_prod_magazzino:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowStorageProductFragment()).commit();
+                break;
             case R.id.nav_show_prod:
-                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                intent.putExtra("negozio", negozio);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
                 break;
             case R.id.nav_logout:
                 finish();

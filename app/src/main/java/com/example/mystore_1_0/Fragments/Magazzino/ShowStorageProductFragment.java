@@ -1,34 +1,28 @@
-package com.example.mystore_1_0.Activity;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+package com.example.mystore_1_0.Fragments.Magazzino;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-
 import android.widget.GridLayout;
-import android.widget.HorizontalScrollView;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
-import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersAdapter;
+import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,7 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -45,19 +38,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+public class ShowStorageProductFragment extends Fragment implements IOnBackPressed {
 
-public class MapActivity extends AppCompatActivity {
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.mappa);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = View.inflate(getActivity(), R.layout.fragment_show_storage_product, null);
 
-        MaterialAutoCompleteTextView autoComplete = findViewById(R.id.autoCompleteTextView);
-        GridLayout gridLayout = findViewById(R.id.gridlayout);
+        // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
+        Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
+        String negozio = utenteLoggato.getNegozio();
 
-        Intent intent = getIntent();
-        String negozio = intent.getStringExtra("negozio");
+        MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
+        GridLayout gridLayout = view.findViewById(R.id.gridlayout);
+
 
         StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
         try {
@@ -71,7 +65,7 @@ public class MapActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Esposizione");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Magazzino");
         Query retrieveAll = reference.orderByKey();
         retrieveAll.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,7 +76,7 @@ public class MapActivity extends AppCompatActivity {
                         Prodotto prodotto = ds.getValue(Prodotto.class);
                         listaProdotti.add(prodotto);
                     }
-                    AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(getApplicationContext(), listaProdotti);
+                    AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(view.getContext(), listaProdotti);
                     autoComplete.setAdapter(adapter);
                 }
             }
@@ -93,8 +87,9 @@ public class MapActivity extends AppCompatActivity {
 
         });
 
-        GridLayout grid = findViewById(R.id.gridlayout);
-        autoComplete.setOnItemClickListener((parent, view, position, id) -> {
+        GridLayout grid = view.findViewById(R.id.gridlayout);
+
+        autoComplete.setOnItemClickListener((parent, view1, position, id) -> {
             Object item = parent.getItemAtPosition(position);
             if (item instanceof Prodotto) {
                 Prodotto prodotto = (Prodotto) item;
@@ -134,19 +129,22 @@ public class MapActivity extends AppCompatActivity {
                         }
                     }
                 }
-                closeKeyboard();
+                // CHIUSURA TASTIERA
+                View vista = getActivity().getCurrentFocus();
+                if (vista != null) {
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(vista.getWindowToken(), 0);
+                }
             }
         });
 
-
+        return view;
     }
 
-    private void closeKeyboard() {
-        View vista = this.getCurrentFocus();
-        if (vista != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(vista.getWindowToken(), 0);
-        }
-
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
     }
 }

@@ -227,7 +227,7 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
 
             if (!isEmpty) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
-                Query checkId = reference.child("Products").orderByChild("codice").equalTo(prodotto.getCodice());
+                Query checkId = reference.child("Products").child("Esposizione").orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -239,16 +239,14 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
                             if (imageUri == null) {
                                 Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
                             } else {
-                                //reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
                                 final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
                                 UploadTask uploadTask = imageRef.putFile(imageUri);
                                 uploadTask.addOnSuccessListener(taskSnapshot -> {
                                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                     downloadUrl.addOnSuccessListener(uri -> {
                                         String imageReference = uri.toString();
-                                        //reference.child("Products").child(prodotto.getCodice()).child("URLImmagine").setValue(imageReference);
                                         prodotto.setURLImmagine(imageReference);
-                                        reference.child("Products").child(prodotto.getCodice()).setValue(prodotto);
+                                        reference.child("Products").child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
                                         Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
                                         text_nome.getEditText().getText().clear();
                                         text_codice.getEditText().getText().clear();

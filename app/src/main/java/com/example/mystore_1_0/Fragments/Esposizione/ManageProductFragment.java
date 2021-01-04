@@ -1,4 +1,4 @@
-package com.example.mystore_1_0.Fragments;
+package com.example.mystore_1_0.Fragments.Esposizione;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,8 +22,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
-import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
+import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
@@ -79,7 +80,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //View view = inflater.inflate(R.layout.fragment_showproduct, container, false);
+        //View view = inflater.inflate(R.layout.fragment_manageproduct, container, false);
         View view = View.inflate(getActivity(), R.layout.fragment_manageproduct, null);
 
         // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
@@ -119,7 +120,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
         }
 
         // CARICO I PRODOTTI PRESENTI NEL DATABASE, DA FAR VISUALIZZARE NELLA LISTA (NELL'AUTOCOMPLETE TEXT VIEW)
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Esposizione");
         Query retrieveAll = reference.orderByKey();
         retrieveAll.addValueEventListener(new ValueEventListener() {
             @Override
@@ -165,18 +166,8 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
                 Posizione posizione = prodotto.getPosizione();
 
                 //VISUALIZZAZIONE IMMAGINE DEL PRODOTTO NELLA IMAGEVIEW
-                String imgPath = "Immagini_Prodotti/" + prodotto.getCodice() + ".jpg";
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(imgPath);
-                try {
-                    final File localFile = File.createTempFile(prodotto.getCodice(), "jpg");
-                    storageReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        ImageView productImgView = view.findViewById(R.id.product_imgView);
-                        productImgView.setImageBitmap(bitmap);
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ImageView productImgView = view.findViewById(R.id.product_imgView);
+                Glide.with(productImgView).load(prodotto.getURLImmagine()).into(productImgView);
 
                 // VISUALIZZA SULLA MAPPA LA POSIZIONE DEL PRODOTTO
                 int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
