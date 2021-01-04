@@ -1,80 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titolo_qr_gen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Genera il QR-code da mostrare ai tuoi clienti per acceder ai servizi dell'app"
-        android:textSize="28sp"
-        android:textAlignment="center"
+    <RelativeLayout
+        android:id="@+id/title_relative"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/titleshape"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/TextAppearance.AppCompat.Title"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/titolo_qr_gen"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GENERA QR CODE"
+            android:textAlignment="center"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:fontFamily="casual"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/qrGen_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_relative">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_relative">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/sub_title_qr_gen"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genera il QR-code da mostrare ai tuoi clienti per acceder ai servizi dell'app"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:fontFamily="casual"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_qr_gen"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/scanStatusBarColor"
+                android:onClick="clicKGenera"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:text="GENERA QR CODE"
+                app:cornerRadius="60dp"
+                app:layout_constraintBottom_toTopOf="@+id/qr_img"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp" />
+
+            <ImageView
+                android:id="@+id/qr_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:src="@drawable/img_qr_null"/>
+
+            <ImageView
+                android:id="@+id/qr_img2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_qr_gen" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/scanStatusBarColor"
+                android:onClick="clicKSave"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:text="SALVA COME IMMAGINE"
+                android:visibility="gone"
+                app:cornerRadius="60dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_qr_gen"
-        android:text="GENERA QR CODE"
-        android:backgroundTint="@color/scanStatusBarColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btn_inutile"
         style="@style/Widget.MaterialComponents.Button"
-        app:cornerRadius="60dp"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/titolo_qr_gen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/qr_img"
-        android:onClick="clicKGenera"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/white"
-        android:layout_marginTop="20dp"/>
-
-    <ImageView
-        android:id="@+id/qr_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/btn_qr_gen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"/>
-
-    <ImageView
-        android:id="@+id/qr_img2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/btn_qr_gen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/scanStatusBarColor"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
         android:text="SALVA COME IMMAGINE"
-        android:backgroundTint="@color/scanStatusBarColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button"
+        android:visibility="invisible"
         app:cornerRadius="60dp"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/qr_img"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:onClick="clicKSave"
-        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrGen_cardView"
         app:strokeColor="@color/white"
-        android:visibility="gone"
-        android:layout_marginBottom="15dp"/>
-
+        app:strokeWidth="1dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

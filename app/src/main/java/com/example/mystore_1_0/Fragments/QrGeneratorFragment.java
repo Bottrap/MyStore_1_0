@@ -71,6 +71,7 @@ public class QrGeneratorFragment extends Fragment {
             }
         });
 
+        //IMMAGINE VISIBILE
         btn_qr_gen.setOnClickListener(v -> {
             QRGEncoder qrgEncoderShow = new QRGEncoder(encodedStore[0], QRGContents.Type.TEXT, 700);
             qrgEncoderShow.setColorWhite(Color.TRANSPARENT);
@@ -85,6 +86,7 @@ public class QrGeneratorFragment extends Fragment {
             }
         });
 
+        //IMMAGINE INVISIBILE PER SALVATAGGIO
         btn_save.setOnClickListener(v -> {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
