@@ -1,221 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backprova1">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titolo_mod_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Modifica dati Utente"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_marginBottom="10dp"
-        />
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/title_relative"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/titolo_mod_user"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="80dp"
+        android:background="@drawable/titleshape"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        >
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_mod_nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Nome"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textCursorDrawable="@null"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_mod_cognome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Cognome"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/name_img"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textCursorDrawable="@null"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_mod_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Id"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/id_img"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textCursorDrawable="@null"
-                android:textColor="@color/white"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_mod_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Password"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:passwordToggleEnabled="true"
-            app:startIconDrawable="@drawable/password_img"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColor="@color/white"
-                android:textCursorDrawable="@null"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:hint="Permessi"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/permessi_img"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white"
-            app:hintTextColor="@color/white"
-            >
-
-            <AutoCompleteTextView
-                android:id="@+id/text_mod_permessi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:textColor="@color/white"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_mod_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Cellulare"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:startIconDrawable="@drawable/phone_img"
-            app:hintTextColor="@color/white"
-            app:boxStrokeColor="@color/arancione"
-
-            app:placeholderTextColor="@color/white">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textCursorDrawable="@null"
-                android:textColor="@color/white"/>
-        </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data di nascita"
-            android:textAlignment="center"
-            app:fontFamily="@font/allerta"
-            android:layout_marginTop="20dp"
-            style="@style/TextAppearance.AppCompat.Body1"/>
-
-
-        <DatePicker
-            android:id="@+id/text_mod_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarTextColor="@color/arancione"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:spinnersShown="true"
-            android:yearListSelectorColor="@color/white" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_mod"
-            android:text="CONFERMA"
-            android:backgroundTint="@color/scanStatusBarColor"
+            android:id="@+id/titolo_mod_user"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button"
-            app:cornerRadius="60dp"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:layout_gravity="center"
-            android:layout_marginBottom="60dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/white"/>
+            android:layout_marginBottom="10dp"
+            android:text="Modifica dati Utente"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:fontFamily="casual"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/editusers_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_relative">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_relative">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_mod_nome"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+
+                app:placeholderTextColor="@color/white"
+                app:startIconDrawable="@drawable/name_img">
 
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_mod_cognome"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cognome"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+
+                app:placeholderTextColor="@color/white"
+                app:startIconDrawable="@drawable/name_img">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_mod_id"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Id"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+
+                app:placeholderTextColor="@color/white"
+                app:startIconDrawable="@drawable/id_img">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_mod_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+                app:passwordToggleEnabled="true"
+
+                app:placeholderTextColor="@color/white"
+                app:startIconDrawable="@drawable/password_img">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Permessi"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+
+                app:placeholderTextColor="@color/white"
+                app:startIconDrawable="@drawable/permessi_img">
+
+                <AutoCompleteTextView
+                    android:id="@+id/text_mod_permessi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_mod_phone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cellulare"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/arancione"
+                app:hintTextColor="@color/white"
+                app:placeholderTextColor="@color/white"
+
+                app:startIconDrawable="@drawable/phone_img">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@null" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Data di nascita"
+                android:textAlignment="center"
+                app:fontFamily="@font/allerta" />
+
+
+            <DatePicker
+                android:id="@+id/text_mod_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:calendarTextColor="@color/arancione"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:spinnersShown="true"
+                android:yearListSelectorColor="@color/white" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_mod"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/scanStatusBarColor"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:text="CONFERMA"
+        app:cornerRadius="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editusers_cardview"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
