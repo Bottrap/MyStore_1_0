@@ -43,6 +43,7 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edituser, container, false);
 
+        Log.d("utente", utente.getNome());
 
         //aggancio variabili
         TextInputLayout text_mod_nome = view.findViewById(R.id.text_mod_nome);
@@ -65,7 +66,7 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
         text_mod_id.getEditText().setText(utente.getId());
         text_mod_password.getEditText().setText(utente.getPassword());
         text_mod_phone.getEditText().setText(utente.getTelefono());
-        text_mod_date.init(utente.getYear(utente.getDataNascita()), utente.getMonth(utente.getDataNascita()), utente.getDay(utente.getDataNascita()), null);
+        text_mod_date.init(utente.getYear(utente.getDataNascita()), utente.getMonth(utente.getDataNascita())-1, utente.getDay(utente.getDataNascita()), null);
 
         btn_mod.setOnClickListener(new View.OnClickListener() {
             @Override

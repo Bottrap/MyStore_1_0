@@ -324,10 +324,14 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
                                         lunghezza--;
                                     }
 
-                                } else { // CLICK IN DIAGONALE (NON FA NIENTE)
+                                } else { // CLICK SUL BOTTONE DI PRIMA
                                     lunghezza = 1;
                                     is2Clicked = false;
                                 }
+                            } // CLICK IN DIAGONALE
+                            if(getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna() ) {
+                                lunghezza = 1;
+                                is2Clicked = false;
                             }
 
                         }

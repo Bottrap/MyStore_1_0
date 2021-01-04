@@ -153,6 +153,10 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
                                 is2Clicked = false;
                             }
                         }
+                        if(getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna() ) {
+                            lunghezza = 1;
+                            is2Clicked = false;
+                        }
 
                     }
 

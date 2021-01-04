@@ -72,7 +72,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            android:padding="2dp"
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor">
 
@@ -97,7 +97,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/name_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            android:padding="2dp"
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor">
 
@@ -122,7 +122,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/id_img"
                 app:boxStrokeColor="@color/scanStatusBarColor"
-
+                android:padding="2dp"
                 app:placeholderTextColor="@color/scanStatusBarColor"
                 app:hintTextColor="@color/scanStatusBarColor">
 
@@ -148,7 +148,7 @@
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/password_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            android:padding="2dp"
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor">
 
@@ -171,7 +171,7 @@
             app:boxCornerRadiusTopEnd="10dp"
             app:startIconDrawable="@drawable/permessi_img"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            android:padding="2dp"
             app:placeholderTextColor="@color/scanStatusBarColor"
             app:hintTextColor="@color/scanStatusBarColor"
             >
@@ -198,7 +198,7 @@
             app:startIconDrawable="@drawable/phone_img"
             app:hintTextColor="@color/scanStatusBarColor"
             app:boxStrokeColor="@color/scanStatusBarColor"
-
+            android:padding="2dp"
             app:placeholderTextColor="@color/scanStatusBarColor">
 
             <com.google.android.material.textfield.TextInputEditText

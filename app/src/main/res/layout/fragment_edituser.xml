@@ -27,7 +27,7 @@
             app:fontFamily="casual"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
@@ -66,10 +66,10 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
-
-                app:placeholderTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
+                android:padding="2dp"
+                app:placeholderTextColor="@color/scanStatusBarColor"
                 app:startIconDrawable="@drawable/name_img">
 
 
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:textColor="@color/white"
+                    android:textColor="@color/scanStatusBarColor"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,17 +91,17 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
-
-                app:placeholderTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
+                android:padding="2dp"
+                app:placeholderTextColor="@color/scanStatusBarColor"
                 app:startIconDrawable="@drawable/name_img">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:textColor="@color/white"
+                    android:textColor="@color/scanStatusBarColor"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,17 +116,17 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
-
-                app:placeholderTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
+                android:padding="2dp"
+                app:placeholderTextColor="@color/scanStatusBarColor"
                 app:startIconDrawable="@drawable/id_img">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textColor="@color/white"
+                    android:textColor="@color/scanStatusBarColor"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,18 +141,18 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
                 app:passwordToggleEnabled="true"
-
-                app:placeholderTextColor="@color/white"
+                android:padding="2dp"
+                app:placeholderTextColor="@color/scanStatusBarColor"
                 app:startIconDrawable="@drawable/password_img">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textColor="@color/white"
+                    android:textColor="@color/scanStatusBarColor"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -165,10 +165,10 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
-
-                app:placeholderTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
+                android:padding="2dp"
+                app:placeholderTextColor="@color/scanStatusBarColor"
                 app:startIconDrawable="@drawable/permessi_img">
 
                 <AutoCompleteTextView
@@ -176,7 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/scanStatusBarColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -189,17 +189,17 @@
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                app:boxStrokeColor="@color/arancione"
-                app:hintTextColor="@color/white"
+                app:boxStrokeColor="@color/scanStatusBarColor"
+                app:hintTextColor="@color/scanStatusBarColor"
                 app:placeholderTextColor="@color/white"
-
+                android:padding="2dp"
                 app:startIconDrawable="@drawable/phone_img">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textColor="@color/white"
+                    android:textColor="@color/scanStatusBarColor"
                     android:textCursorDrawable="@null" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -210,7 +210,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Data di nascita"
                 android:textAlignment="center"
-                app:fontFamily="@font/allerta" />
+                android:textStyle="bold"
+                app:fontFamily="@font/signika_negative_light" />
 
 
             <DatePicker
@@ -246,5 +247,24 @@
         app:strokeColor="@color/white"
         app:strokeWidth="1dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_inutile"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/scanStatusBarColor"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:text="SALVA COME IMMAGINE"
+        android:visibility="invisible"
+        app:cornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_mod"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

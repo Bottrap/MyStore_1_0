@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     Toolbar toolbar;
     TextView passwHeader, idHeader;
     Boolean isClosed = true;
-
+    LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayout4;
     String negozio;
 
 
@@ -64,6 +65,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+
+        linearLayout1 = findViewById(R.id.linearLayout1);
+        linearLayout2 = findViewById(R.id.linearLayout2);
+        linearLayout3 = findViewById(R.id.linearLayout3);
 
         Intent intent = getIntent();
         Utente utenteLoggato = intent.getParcelableExtra("utente");
@@ -107,16 +112,18 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         // CONTROLLO SUI PERMESSI DELL'UTENTE
         switch(Integer.parseInt(utenteLoggato.getPermessi())){
-            case 1:
+            case 1: // CAPO SUPREMO
                 navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
                 break;
-            case 2:
+            case 2: // MAGAZZINIERE
                 navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_manage_prod).setVisible(false);
+
+
                 break;
-            case 3:
+            case 3: // DIPENDENTE
                 navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
