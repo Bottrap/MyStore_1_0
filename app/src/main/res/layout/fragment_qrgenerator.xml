@@ -63,10 +63,10 @@
                 android:layout_height="wrap_content"
                 android:text="Genera il QR-code da mostrare ai tuoi clienti per acceder ai servizi dell'app"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:fontFamily="casual"
+                app:fontFamily="@font/signika_negative_light"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
