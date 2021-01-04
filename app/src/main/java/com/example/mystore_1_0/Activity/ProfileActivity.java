@@ -11,7 +11,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,18 +18,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mystore_1_0.Fragments.AddProductFragment;
 import com.example.mystore_1_0.Fragments.AddUsersFragment;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.Fragments.LoadingFragment;
 import com.example.mystore_1_0.Fragments.Profile.EditPasswordDialog;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.QrGeneratorFragment;
-import com.example.mystore_1_0.Fragments.ShowProductFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
@@ -50,6 +46,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     TextView passwHeader, idHeader;
     Boolean isClosed = true;
 
+    String negozio;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,15 +65,16 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
-
         Intent intent = getIntent();
-        Utente utente = intent.getParcelableExtra("utente");
+        Utente utenteLoggato = intent.getParcelableExtra("utente");
+
+        negozio = utenteLoggato.getNegozio();
 
         View header = navigationView.getHeaderView(0);
         idHeader = header.findViewById(R.id.idHeader);
         passwHeader = header.findViewById(R.id.passwHeader);
-        passwHeader.setText("Benvenuto " + utente.getNome());
-        idHeader.setText("Il tuo ID è: " + utente.getId());
+        passwHeader.setText("Benvenuto " + utenteLoggato.getNome());
+        idHeader.setText("Il tuo ID è: " + utenteLoggato.getId());
 
 
         //toolbar
@@ -89,31 +90,39 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isClosed){
+        toggle.setToolbarNavigationClickListener(v -> {
+            if (isClosed){
+                drawerLayout.openDrawer(GravityCompat.START);
+                isClosed = false;
+            }else{
+                if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
                     drawerLayout.openDrawer(GravityCompat.START);
-                    isClosed = false;
-                }else{
-                    if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                    } else {
-                        drawerLayout.openDrawer(GravityCompat.START);
-                    }
                 }
             }
         });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
-        //Controllo sui permessi dell'utente
-        if((Integer.parseInt(utente.getPermessi()) == 2) || (Integer.parseInt(utente.getPermessi()) == 3)){
-            navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
+        // CONTROLLO SUI PERMESSI DELL'UTENTE
+        switch(Integer.parseInt(utenteLoggato.getPermessi())){
+            case 1:
+                navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
+                break;
+            case 2:
+                navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_manage_prod).setVisible(false);
+                break;
+            case 3:
+                navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
+                break;
         }
-
 
     }
 
@@ -127,11 +136,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else {
                 new AlertDialog.Builder(this).setTitle("Sei sicuro di voler uscire?").setMessage("Se esci dovrai autenticarti nuovamente.")
-                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                ProfileActivity.super.onBackPressed();
-                            }
-                        }).setNeutralButton("No", null).create().show();
+                        .setPositiveButton("Si", (arg0, arg1) -> ProfileActivity.super.onBackPressed()).setNeutralButton("No", null).create().show();
             }
         }
 
@@ -157,11 +162,16 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_add_prod:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(1)).commit();
                 break;
-            case R.id.nav_show_prod:
+            case R.id.nav_manage_prod:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(2)).commit();
                 break;
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                break;
+            case R.id.nav_show_prod:
+                Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                intent.putExtra("negozio", negozio);
+                startActivity(intent);
                 break;
             case R.id.nav_logout:
                 finish();
@@ -172,13 +182,13 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void changePassword(String password) {
-        Utente utente = getIntent().getParcelableExtra("utente");
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
-        Query checkId = reference.orderByChild("id").equalTo(utente.getId());
+        Utente utenteLoggato = getIntent().getParcelableExtra("utente");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio()).child("Users");
+        Query checkId = reference.orderByChild("id").equalTo(utenteLoggato.getId());
         checkId.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                reference.child(utente.getId()).child("password").setValue(password);
+                reference.child(utenteLoggato.getId()).child("password").setValue(password);
                 Toast.makeText(ProfileActivity.this, "Password modificata correttamente", Toast.LENGTH_SHORT).show();
             }
 

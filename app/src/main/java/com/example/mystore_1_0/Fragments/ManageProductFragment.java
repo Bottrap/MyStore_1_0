@@ -8,7 +8,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
+import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
@@ -51,7 +52,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
-public class ShowProductFragment extends Fragment {
+public class ManageProductFragment extends Fragment implements IOnBackPressed{
     List<Prodotto> listaProdotti; // LISTA PRODOTTI PER AUTOCOMPLETE
     Prodotto prodInDb; // VARIABILE PER SALVARE LE INFO DEL PRODOTTO SELEZIONATO PRIMA DELLA MODIFICA
     boolean isClicked = false; // PRIMO CLICK SU UN BOTTONE
@@ -79,7 +80,7 @@ public class ShowProductFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_showproduct, container, false);
-        View view = View.inflate(getActivity(), R.layout.fragment_showproduct, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_manageproduct, null);
 
         // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
@@ -401,7 +402,7 @@ public class ShowProductFragment extends Fragment {
                             }
                             Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
                             AppCompatActivity activity = (AppCompatActivity) getContext();
-                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
                         } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
                             if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
@@ -426,7 +427,7 @@ public class ShowProductFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
 
                                 AppCompatActivity activity = (AppCompatActivity) getContext();
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
 
                             }
                         }
@@ -441,5 +442,12 @@ public class ShowProductFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
     }
 }

@@ -8,15 +8,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
-public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPhoneDialogListener {
+public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPhoneDialogListener, IOnBackPressed {
 
     MaterialTextView showId, showNome, showCognome, showPermessi, showDataNascita, showTelefono;
     MaterialButton pwEdit, phoneEdit;
@@ -67,6 +70,13 @@ public class ProfileFragment extends Fragment implements EditPhoneDialog.EditPho
     public void changePhoneNumber(String phone) {
         showTelefono.setText(phone);
         Toast.makeText(getContext(), "Numero di telefono modificato correttamente", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
     }
 }
 

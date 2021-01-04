@@ -64,7 +64,7 @@ public class DashboardFragment extends Fragment {
         showProdCV.setOnClickListener(v -> {
             relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
         });
 /*
         logoutCV.setOnClickListener(v -> {

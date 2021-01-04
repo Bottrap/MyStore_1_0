@@ -16,7 +16,7 @@ public class Utente implements Parcelable {
 
     /** Legenda permessi
      *
-     * Permesso = 1 --> Capo supremo
+     * Permesso = 1 --> Amministratore
      * Permesso = 2 --> Responsabile magazzino
      * Permesso = 3 --> Dipendente (zona esposizione)
      *
