@@ -10,8 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersAdapter;
 import com.example.mystore_1_0.Utente;
@@ -26,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowUsersFragment extends Fragment {
+public class ShowUsersFragment extends Fragment implements IOnBackPressed {
 
     RecyclerView recyclerView;
 
@@ -65,4 +69,10 @@ public class ShowUsersFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
+    }
 }

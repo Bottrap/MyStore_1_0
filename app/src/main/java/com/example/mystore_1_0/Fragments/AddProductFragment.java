@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
@@ -38,7 +39,7 @@ import com.google.firebase.storage.UploadTask;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddProductFragment extends Fragment {
+public class AddProductFragment extends Fragment implements IOnBackPressed {
 
     private final int NumeroColonne = 33;
     private Uri imageUri;
@@ -267,5 +268,12 @@ public class AddProductFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
     }
 }

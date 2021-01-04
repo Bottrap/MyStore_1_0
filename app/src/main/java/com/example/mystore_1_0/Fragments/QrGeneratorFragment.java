@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-public class QrGeneratorFragment extends Fragment {
+public class QrGeneratorFragment extends Fragment implements IOnBackPressed {
 
     Bitmap bitmap, bitmapsave;
     Button btn_qr_gen;
@@ -104,6 +106,13 @@ public class QrGeneratorFragment extends Fragment {
             Toast.makeText(getActivity(), "Immagine salvata", Toast.LENGTH_LONG).show();
         });
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        AppCompatActivity activity = (AppCompatActivity) getContext();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
+        return true;
     }
 }
 
