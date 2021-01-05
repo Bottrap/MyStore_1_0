@@ -43,7 +43,7 @@ public class ShowStorageProductFragment extends Fragment implements IOnBackPress
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_show_storage_product, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_showproduct, null);
 
         // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
@@ -53,7 +53,7 @@ public class ShowStorageProductFragment extends Fragment implements IOnBackPress
         GridLayout gridLayout = view.findViewById(R.id.gridlayout);
 
 
-        StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
+        StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/magazzino_" + negozio + ".png");
         try {
             File localFile = File.createTempFile(negozio, "png");
             mapReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {

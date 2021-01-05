@@ -1,4 +1,4 @@
-package com.example.mystore_1_0.Fragments;
+package com.example.mystore_1_0.Fragments.Magazzino;
 
 
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
@@ -38,27 +38,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
-public class AddProductFragment extends Fragment implements IOnBackPressed {
+public class AddStorageProductFragment extends Fragment implements IOnBackPressed {
 
     private final int NumeroColonne = 33;
     private Uri imageUri;
     private static final int PICK_IMAGE = 1;
 
-    private int getIndex(int x, int y) {
-        int indice = ((NumeroColonne) * x) + y;
-        return indice;
-    }
 
-    private Posizione getPosition(int index) {
-        int x = 0;
-        while (index >= NumeroColonne) {
-            index = index - NumeroColonne;
-            x = x + 1;
-        }
-        Posizione posizione = new Posizione(x, index);
-        return posizione;
-    }
+
 
     public Boolean isClicked = false;
     public int indicePrecedente;
@@ -80,7 +69,7 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_addproduct, container, false);
+        View view = inflater.inflate(R.layout.fragment_addstorageproduct, container, false);
 
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
 
@@ -227,7 +216,7 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
 
             if (!isEmpty) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
-                Query checkId = reference.child("Products").child("Esposizione").orderByChild("codice").equalTo(prodotto.getCodice());
+                Query checkId = reference.child("Products").child("Magazzino").orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -246,7 +235,7 @@ public class AddProductFragment extends Fragment implements IOnBackPressed {
                                     downloadUrl.addOnSuccessListener(uri -> {
                                         String imageReference = uri.toString();
                                         prodotto.setURLImmagine(imageReference);
-                                        reference.child("Products").child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                                        reference.child("Products").child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                                         Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
                                         text_nome.getEditText().getText().clear();
                                         text_codice.getEditText().getText().clear();

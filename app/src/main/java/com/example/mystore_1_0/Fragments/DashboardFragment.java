@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.AddStorageProductFragment;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.R;
@@ -49,7 +50,7 @@ public class DashboardFragment extends Fragment {
         addProdCV.setOnClickListener(v -> {
             relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddProductFragment()).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddStorageProductFragment()).commit();
         });
 
         qrScanCV.setOnClickListener(v -> {
