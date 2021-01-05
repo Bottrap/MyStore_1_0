@@ -49,7 +49,7 @@ public class EditPhoneDialog extends AppCompatDialogFragment{
             positiveButton.setOnClickListener(v -> {
                 String phone = newPhone.getText().toString().trim();
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("store1").child("Users");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utente.getNegozio()).child("Users");
                 Query checkId = reference.orderByChild("id").equalTo(utente.getId());
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

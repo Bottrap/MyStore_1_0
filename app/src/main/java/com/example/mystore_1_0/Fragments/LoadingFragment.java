@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.AddStorageProductFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.ManageStorageProductFragment;
 import com.example.mystore_1_0.R;
 
 public class LoadingFragment extends Fragment {
@@ -37,6 +38,9 @@ public class LoadingFragment extends Fragment {
                 } else if(frag == 2){
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                } else if(frag == 3){
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
                 }
 
             }
