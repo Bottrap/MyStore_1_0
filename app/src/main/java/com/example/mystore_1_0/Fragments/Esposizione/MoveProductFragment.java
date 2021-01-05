@@ -1,25 +1,25 @@
-package com.example.mystore_1_0.Fragments.Magazzino;
+package com.example.mystore_1_0.Fragments.Esposizione;
 
-
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
@@ -27,8 +27,8 @@ import com.example.mystore_1_0.Prodotto.Posizione;
 import com.example.mystore_1_0.Prodotto.Prodotto;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,63 +38,52 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
-public class AddStorageProductFragment extends Fragment implements IOnBackPressed {
-
-    private final int NumeroColonne = 33;
-    private Uri imageUri;
-    private static final int PICK_IMAGE = 1;
-
-
-
-
+public class MoveProductFragment extends Fragment implements IOnBackPressed {
+    List<Prodotto> listaProdottiMagazzino = new ArrayList<>();
+    List<Prodotto> listaProdottiEsposizione = new ArrayList<>();
+    List<Prodotto> listaProdotti = new ArrayList<>();
+    Prodotto prodInMagazzino;
     public Boolean isClicked = false;
     public int indicePrecedente;
     public int indiceSuccessivo = 500;
     public Boolean is2Clicked = false;
     public Posizione posizione;
     public int lunghezza = 1;
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
-            imageUri = data.getData();
-        }
-    }
+    long oldQuantita;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_addstorageproduct, container, false);
+        View view = View.inflate(getActivity(), R.layout.fragment_moveproduct, null);
 
+        // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
-
-        TextInputLayout text_posizione = view.findViewById(R.id.text_position);
-        TextInputLayout text_nome = view.findViewById(R.id.text_NomeProdotto);
-        TextInputLayout text_codice = view.findViewById(R.id.text_codice_prodotto);
-        TextInputLayout text_prezzo = view.findViewById(R.id.text_price);
+        String negozio = utenteLoggato.getNegozio();
 
         // DICHIARO BOTTONE DEL QUALE MI SERVE IL BACKGROUND, PER RESETTARE IL BACKGROUND DEI BOTTONI PRESENTI NEL GRID LAYOUT
         MaterialButton btn = new MaterialButton(getActivity());
         Drawable background = btn.getBackground();
 
-        GridLayout grid = (GridLayout) view.findViewById(R.id.gridProduct);
+        // DICHIARO ELEMENTI DELL'INTERFACCIA
+        GridLayout grid = view.findViewById(R.id.gridProduct);
+        MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
+        TextInputLayout text_posizione = view.findViewById(R.id.position_editText);
+        TextInputLayout text_prezzo = view.findViewById(R.id.price_editText);
+        TextInputLayout text_quantita = view.findViewById(R.id.quantity_editText);
+        MaterialButton addBtn = view.findViewById(R.id.addBtn);
 
         // CARICO LA MAPPA DEL NEGOZIO RELATIVO ALL'UTENTE LOGGATO
-        StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/magazzino_" + utenteLoggato.getNegozio() + ".png");
+        StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
         try {
-            File localFile = File.createTempFile(utenteLoggato.getNegozio(), "png");
+            File localFile = File.createTempFile(negozio, "png");
             mapReference.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                 BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
@@ -104,6 +93,65 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
             e.printStackTrace();
         }
 
+        // CARICO I PRODOTTI PRESENTI NEL MAGAZZINO
+            DatabaseReference referenceMagazzino = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Magazzino");
+            Query prodottiMagazzino = referenceMagazzino.orderByKey();
+            prodottiMagazzino.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        ArrayList<Prodotto> lista1 = new ArrayList<>();
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Prodotto prodotto = ds.getValue(Prodotto.class);
+                            lista1.add(prodotto);
+                        }
+                        listaProdottiMagazzino = new ArrayList<>(lista1);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+        // CARICO I PRODOTTI PRESENTI NELLA ZONA ESPOSIZIONE
+            DatabaseReference referenceEsposizione = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Esposizione");
+            Query prodottiEsposizione = referenceEsposizione.orderByKey();
+            prodottiEsposizione.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        ArrayList<Prodotto> lista2 = new ArrayList<>();
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Prodotto prodotto = ds.getValue(Prodotto.class);
+                            lista2.add(prodotto);
+                        }
+                        listaProdottiMagazzino = new ArrayList<>(lista2);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+        // GENERO LA LISTA "DIFFERENZA" DA MOSTRARE NELL'AUTOCOMPLETE
+        for (int i = 0; i < listaProdottiMagazzino.size(); i++) {
+            boolean flag = false;
+            for (int j = 0; j < listaProdottiEsposizione.size(); j++) {
+                if (listaProdottiMagazzino.get(i).getCodice().equals(listaProdottiEsposizione.get(j).getCodice())) {
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                listaProdotti.add(listaProdottiMagazzino.get(i));
+            }
+        }
+        AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(view.getContext(), listaProdotti);
+        autoComplete.setAdapter(adapter);
+
+        // INSERIRE LA POSIZIONE DEL PRODOTTO NELLA ZONA ESPOSIZIONE
         int childCount = grid.getChildCount();
 
         for (int i = 0; i < childCount; i++) {
@@ -130,7 +178,6 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                     text_posizione.getEditText().setText(getPosition(indicePrecedente).getIndiceRiga() + ", " + getPosition(indicePrecedente).getIndiceColonna() + " -> " + getPosition(finalI).getIndiceRiga() + ", " + getPosition(finalI).getIndiceColonna());
                                     lunghezza++;
                                 }
-                                //posizione = getPosition(finalI);
                             } else if (indicePrecedente > indiceSuccessivo) {
                                 for (int j = indicePrecedente; j >= indiceSuccessivo; j--) {   // SE IL 2 BOTTONE E' A SINISTRA DEL 1 BOTTONE
                                     grid.getChildAt(j).setBackgroundResource(R.drawable.button_shape);
@@ -138,7 +185,6 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                     lunghezza--;
                                 }
                             }
-                            //posizione.setLunghezza(lunghezza);
                         }
                         if (getPosition(indicePrecedente).getIndiceColonna() == getPosition(indiceSuccessivo).getIndiceColonna()) {
                             // SE IL SECONDO BOTTONE E' SULLA STESSA COLONNA DEL PRIMO
@@ -164,7 +210,7 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                 is2Clicked = false;
                             }
                         }
-                        if(getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna() ) {
+                        if (getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna()) {
                             lunghezza = 1;
                             is2Clicked = false;
                         }
@@ -175,6 +221,23 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
             });
         }
 
+        // CLICK SUGLI ELEMENTI DELLA LISTA
+        autoComplete.setOnItemClickListener((parent, view12, position, id) -> {
+            //CLOSE KEYBOARD
+            View vista = getActivity().getCurrentFocus();
+            if (vista != null) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(vista.getWindowToken(), 0);
+            }
+
+            Object item = parent.getItemAtPosition(position);
+            if (item instanceof Prodotto) {
+                Prodotto prodotto = (Prodotto) item;
+                prodInMagazzino = prodotto;
+                oldQuantita = prodInMagazzino.getQuantita();
+                text_quantita.getEditText().setHint("Quantità (MAX: " + oldQuantita + " )");
+            }
+        });
 
         // CLICK SU CANCELLA POSIZIONE
         text_posizione.setEndIconOnClickListener(v -> {
@@ -186,46 +249,17 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
             }
         });
 
-        // CLICK SU AGGIUNGI IMMAGINE
-        Button btn_imagePick = view.findViewById(R.id.pickImageBtn);
-        btn_imagePick.setOnClickListener(v -> {
-            //prendo l'immagine dalla galleria come uri
-            Intent galleria = new Intent();
-            galleria.setType("image/*");
-            galleria.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(galleria, "Seleziona un'immagine"), PICK_IMAGE);
-        });
-
         // CLICK SU AGGIUNGI PRODOTTO
-        Button btn_add_prod = view.findViewById(R.id.btn_add_prod);
-        btn_add_prod.setOnClickListener(v -> {
+        addBtn.setOnClickListener(v -> {
             boolean isEmpty = false;
-            Prodotto prodotto = new Prodotto();
 
             if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
                 posizione.setLunghezza(lunghezza);
-                prodotto.setPosizione(posizione);
+                prodInMagazzino.setPosizione(posizione);
             } else {
                 text_posizione.getEditText().setError("Questo campo non può essere vuoto");
                 text_posizione.getEditText().requestFocus();
                 isEmpty = true;
-            }
-
-            if (text_nome.getEditText().getText().toString().trim().isEmpty()) {
-                text_nome.getEditText().setError("Questo campo non può essere vuoto");
-                text_nome.getEditText().requestFocus();
-                isEmpty = true;
-            } else {
-                String nome = text_nome.getEditText().getText().toString().trim();
-                prodotto.setNome(nome);
-            }
-            if (text_codice.getEditText().getText().toString().trim().isEmpty()) {
-                text_codice.getEditText().setError("Questo campo non può essere vuoto");
-                text_codice.getEditText().requestFocus();
-                isEmpty = true;
-            } else {
-                String codice = text_codice.getEditText().getText().toString().trim();
-                prodotto.setCodice(codice);
             }
             if (text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
                 text_prezzo.getEditText().setError("Questo campo non può essere vuoto");
@@ -233,45 +267,34 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                 isEmpty = true;
             } else {
                 String prezzo = text_prezzo.getEditText().getText().toString().trim();
-                prodotto.setPrezzo(prezzo);
+                prodInMagazzino.setPrezzo(prezzo);
+            }
+            if (text_quantita.getEditText().getText().toString().trim().isEmpty()) {
+                text_quantita.getEditText().setError("Questo campo non può essere vuoto");
+                text_quantita.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                if (Long.parseLong(text_quantita.getEditText().getText().toString().trim()) > prodInMagazzino.getQuantita()) {
+                    text_quantita.getEditText().setError("Sono presenti in magazzino solo " + prodInMagazzino.getQuantita() + " pezzi");
+                    text_quantita.getEditText().requestFocus();
+                    isEmpty = true;
+                }
+                long quantita = Long.parseLong(text_prezzo.getEditText().getText().toString().trim());
+                prodInMagazzino.setQuantita(quantita);
             }
 
             if (!isEmpty) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
-                Query checkId = reference.child("Products").child("Magazzino").orderByChild("codice").equalTo(prodotto.getCodice());
-
-                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+                Query query = reference;
+                query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            text_codice.getEditText().setError("È stato inserito un id già esistente");
-                            text_codice.getEditText().requestFocus();
-                        } else {
-                            if (imageUri == null) {
-                                Toast.makeText(getContext(), "Immagine non selezionata", Toast.LENGTH_SHORT).show();
-                            } else {
-                                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
-                                UploadTask uploadTask = imageRef.putFile(imageUri);
-                                uploadTask.addOnSuccessListener(taskSnapshot -> {
-                                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
-                                    downloadUrl.addOnSuccessListener(uri -> {
-                                        String imageReference = uri.toString();
-                                        prodotto.setURLImmagine(imageReference);
-                                        reference.child("Products").child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
-                                        Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
-                                        text_nome.getEditText().getText().clear();
-                                        text_codice.getEditText().getText().clear();
-                                        text_posizione.getEditText().getText().clear();
-                                        text_prezzo.getEditText().getText().clear();
-                                    });
-                                });
-                            }
-                        }
+                        reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
+                        reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
