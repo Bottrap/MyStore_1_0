@@ -96,7 +96,7 @@ public class ShowStorageProductFragment extends Fragment implements IOnBackPress
 
                 //prima di visualizzare il nuovo prodotto, rendo invisibili tutti i bottoni del grid layout
                 for (int i = 0; i < gridLayout.getChildCount(); i++) {
-                    gridLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+                    gridLayout.getChildAt(i).setVisibility(View.VISIBLE);
                 }
 
                 int indice = prodotto.getIndex(prodotto.getPosizione().getIndiceRiga(), prodotto.getPosizione().getIndiceColonna());
