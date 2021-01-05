@@ -2241,6 +2241,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_relative">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scegli il prodotto che vuoi visualizzare o modificare"
+            android:layout_gravity="center"
+            android:fontFamily="@font/signika_negative_light"
+            android:textSize="20dp"
+            android:textColor="@color/scanStatusBarColor"
+            android:textAlignment="center"/>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
