@@ -135,7 +135,7 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
                     checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (!(newUtente.getId().equals(utente.getId()))) {
+                            if (!(newUtente.getId().equals(utente.getId()))) { // SE L'ID VIENE MODFICATO ENTRA NELL'IF
                                 if (dataSnapshot.exists()) {
                                     text_mod_id.setError("È stato inserito un id già esistente");
                                     text_mod_id.requestFocus();
@@ -143,9 +143,14 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
                                     reference.child("Users").child(newUtente.getId()).setValue(newUtente);
                                     reference.child("Users").child(utente.getId()).removeValue();
                                     Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
+                                    AppCompatActivity activity = (AppCompatActivity) getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
                                 }
-                            } else {
+                            } else { // SE L'ID NON VIENE MODIFICATO
                                 reference.child("Users").child(utente.getId()).setValue(newUtente);
+                                Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
+                                AppCompatActivity activity = (AppCompatActivity) getContext();
+                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowUsersFragment()).commit();
                             }
                         }
 

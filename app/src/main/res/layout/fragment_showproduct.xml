@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="backprova1">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -1855,8 +1854,8 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
+            app:boxStrokeColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor"
             app:startIconDrawable="@drawable/ic_baseline_search_24"
             android:paddingTop="10dp"
             android:layout_marginStart="10dp"

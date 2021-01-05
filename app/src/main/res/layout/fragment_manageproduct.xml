@@ -2261,15 +2261,14 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
+            app:boxStrokeColor="@color/scanStatusBarColor"
+            app:hintTextColor="@color/scanStatusBarColor"
             app:startIconDrawable="@drawable/ic_baseline_search_24">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:completionThreshold="1" />
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -2447,8 +2446,8 @@
                     android:text="Conferma modifiche"
                     app:cornerRadius="60dp"
                     android:clickable="false"
-                    android:scaleX="1.2"
-                    android:scaleY="1.2"
+                    android:scaleX="1"
+                    android:scaleY="1"
                     android:layout_gravity="center"
                     app:strokeWidth="1dp"
                     app:strokeColor="@color/white"
