@@ -111,18 +111,21 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         switch (Integer.parseInt(utenteLoggato.getPermessi())) {
             case 1: // CAPO SUPREMO
                 navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_show_prod_magazzino).setVisible(false);
                 break;
             case 2: // MAGAZZINIERE
                 navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_manage_prod).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_show_prod_magazzino).setVisible(false);
                 break;
             case 3: // DIPENDENTE
                 navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_add_dip).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_manage_prod_magazzino).setVisible(false);
                 break;
         }
 
