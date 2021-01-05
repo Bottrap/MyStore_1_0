@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.R;
 import com.example.mystore_1_0.Utente;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,7 +55,7 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
         TextInputLayout text_mod_phone = view.findViewById(R.id.text_mod_phone);
         DatePicker text_mod_date = view.findViewById(R.id.text_mod_date);
         Button btn_mod = view.findViewById(R.id.btn_mod);
-        AutoCompleteTextView text_mod_permessi = view.findViewById(R.id.text_mod_permessi);
+        MaterialAutoCompleteTextView text_mod_permessi = view.findViewById(R.id.text_mod_permessi);
 
         //dropdown menu permessi
         String [] tipopermessi = new String[] {"1","2","3"};

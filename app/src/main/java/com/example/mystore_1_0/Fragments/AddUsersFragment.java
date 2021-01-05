@@ -40,6 +40,9 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tipopermessi);
         AutoCompleteTextView text_permessi = view.findViewById(R.id.text_permessi);
         text_permessi.setAdapter(adapter);
+        text_permessi.setOnItemClickListener((parent, viewboh, position, id) -> {
+            text_permessi.setError(null);
+        });
 
         //aggancio variabili
         TextInputLayout text_nome = view.findViewById(R.id.text_nome);
