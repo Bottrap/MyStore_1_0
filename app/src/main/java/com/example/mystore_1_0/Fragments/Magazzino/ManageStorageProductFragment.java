@@ -118,7 +118,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         // CARICO I PRODOTTI PRESENTI NEL DATABASE, DA FAR VISUALIZZARE NELLA LISTA (NELL'AUTOCOMPLETE TEXT VIEW)
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Magazzino");
         Query retrieveAll = reference.orderByKey();

@@ -93,6 +93,56 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
             e.printStackTrace();
         }
 
+        //METODO POTENTISSIMO CHE CI SALVERA' LA VITA
+        DatabaseReference referenceBug = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+        Query query = referenceBug.orderByKey();
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    ArrayList<DataSnapshot> dataSnapshots = new ArrayList<>();
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        dataSnapshots.add(ds);
+                    }
+                    for (int i = 0; i < dataSnapshots.size(); i++) {
+                        if (i == 0) {
+                            DataSnapshot esposizione = dataSnapshots.get(i);
+                            for (DataSnapshot ds : esposizione.getChildren()) {
+                                Prodotto prodotto = ds.getValue(Prodotto.class);
+                                listaProdottiEsposizione.add(prodotto);
+                            }
+                        } else if (i == 1) {
+                            DataSnapshot magazzino = dataSnapshots.get(i);
+                            for (DataSnapshot ds : magazzino.getChildren()) {
+                                Prodotto prodotto = ds.getValue(Prodotto.class);
+                                listaProdottiMagazzino.add(prodotto);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < listaProdottiMagazzino.size(); i++) {
+                        boolean flag = false;
+                        for (int j = 0; j < listaProdottiEsposizione.size(); j++) {
+                            if (listaProdottiMagazzino.get(i).getCodice().equals(listaProdottiEsposizione.get(j).getCodice())) {
+                                flag = true;
+                            }
+                        }
+                        if (!flag) {
+                            listaProdotti.add(listaProdottiMagazzino.get(i));
+                        }
+                    }
+                    AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(view.getContext(), listaProdotti);
+                    autoComplete.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*
         // CARICO I PRODOTTI PRESENTI NEL MAGAZZINO
             DatabaseReference referenceMagazzino = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Magazzino");
             Query prodottiMagazzino = referenceMagazzino.orderByKey();
@@ -100,12 +150,10 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        ArrayList<Prodotto> lista1 = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             Prodotto prodotto = ds.getValue(Prodotto.class);
-                            lista1.add(prodotto);
+                            listaProdottiMagazzino.add(prodotto);
                         }
-                        listaProdottiMagazzino = new ArrayList<>(lista1);
                     }
                 }
 
@@ -121,12 +169,10 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        ArrayList<Prodotto> lista2 = new ArrayList<>();
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             Prodotto prodotto = ds.getValue(Prodotto.class);
-                            lista2.add(prodotto);
+                            listaProdottiEsposizione.add(prodotto);
                         }
-                        listaProdottiMagazzino = new ArrayList<>(lista2);
                     }
 
                 }
@@ -150,6 +196,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
         }
         AutoCompleteProductAdapter adapter = new AutoCompleteProductAdapter(view.getContext(), listaProdotti);
         autoComplete.setAdapter(adapter);
+
+         */
 
         // INSERIRE LA POSIZIONE DEL PRODOTTO NELLA ZONA ESPOSIZIONE
         int childCount = grid.getChildCount();
@@ -285,8 +333,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
 
             if (!isEmpty) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
-                Query query = reference;
-                query.addValueEventListener(new ValueEventListener() {
+                Query query1 = reference;
+                query1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
