@@ -53,7 +53,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
-public class ManageProductFragment extends Fragment implements IOnBackPressed{
+public class ManageProductFragment extends Fragment implements IOnBackPressed {
     List<Prodotto> listaProdotti; // LISTA PRODOTTI PER AUTOCOMPLETE
     Prodotto prodInDb; // VARIABILE PER SALVARE LE INFO DEL PRODOTTO SELEZIONATO PRIMA DELLA MODIFICA
     boolean isClicked = false; // PRIMO CLICK SU UN BOTTONE
@@ -63,6 +63,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
     int indiceSuccessivo = 500;
     Posizione posizione;
     int lunghezza = 1;
+    int qntEsposizione, qntMagazzino;
 
     private static final int PICK_IMAGE = 1;
     Uri imageUri = null;
@@ -94,6 +95,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
         TextInputLayout price_editText = view.findViewById(R.id.price_editText);
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
+        TextInputLayout quantity_editText = view.findViewById(R.id.quantity_Text);
         MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
         CheckBox checkBox = view.findViewById(R.id.editCheck);
 
@@ -159,10 +161,12 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
             if (item instanceof Prodotto) {
                 Prodotto prodotto = (Prodotto) item;
                 prodInDb = prodotto;
+                qntEsposizione = prodotto.getQuantita();
 
                 name_editText.getEditText().setText(prodotto.getNome());
                 code_editText.getEditText().setText(prodotto.getCodice());
                 price_editText.getEditText().setText(prodotto.getPrezzo());
+                quantity_editText.getEditText().setText(String.valueOf(prodotto.getQuantita()));
                 Posizione posizione = prodotto.getPosizione();
 
                 //VISUALIZZAZIONE IMMAGINE DEL PRODOTTO NELLA IMAGEVIEW
@@ -217,8 +221,23 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
                         }
                     }
                 }
+                // RECUPERO DAL DB LA QUANTITA' DEL PRODOTTO SELEZIONATO IN MAGAZZINO
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Magazzino");
+                Query findProduct = ref.orderByKey().equalTo(prodotto.getCodice());
+                findProduct.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            qntMagazzino = dataSnapshot.child("quantita").getValue(Integer.class);
+                        } else {
+                            qntMagazzino = 0;
+                        }
+                    }
 
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
         });
 
@@ -320,7 +339,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
                                     is2Clicked = false;
                                 }
                             } // CLICK IN DIAGONALE
-                            if(getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna() ) {
+                            if (getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna()) {
                                 lunghezza = 1;
                                 is2Clicked = false;
                             }
@@ -371,6 +390,37 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed{
                 isEmpty = true;
             } else {
                 prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
+            }
+            if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
+                quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
+                quantity_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                // CONTROLLI SULLA QUANTITA' INSERITA
+                int quantitaIns = Integer.parseInt(price_editText.getEditText().getText().toString().trim());
+                if (quantitaIns > qntEsposizione) {
+                    if ((quantitaIns - qntEsposizione) > qntMagazzino) {
+                        quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
+                        quantity_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setQuantita(quantitaIns);
+                        // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                        // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino - (quantitaIns - qntEsposizione)
+                    }
+                } else if (quantitaIns < qntEsposizione) {
+                    if (quantitaIns == 0) {
+                        quantity_editText.getEditText().setError("La quantità non può essere nulla");
+                        quantity_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setQuantita(quantitaIns);
+                        // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                        // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino + (qntEsposizione - quantitaIns)
+                    }
+                } else if (quantitaIns == qntEsposizione) {
+                    prodotto.setQuantita(quantitaIns);
+                }
             }
 
             if (!isEmpty) {

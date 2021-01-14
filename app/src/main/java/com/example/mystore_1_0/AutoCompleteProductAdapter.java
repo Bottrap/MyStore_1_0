@@ -42,6 +42,7 @@ public class AutoCompleteProductAdapter extends ArrayAdapter<Prodotto> {
         MaterialTextView productName = convertView.findViewById(R.id.productName);
         MaterialTextView productCode = convertView.findViewById(R.id.productCode);
         MaterialTextView productPrice = convertView.findViewById(R.id.productPrice);
+        MaterialTextView productQuantity = convertView.findViewById(R.id.productQuantity);
         ImageView productImg = convertView.findViewById(R.id.productImg);
 
         Prodotto prodotto = getItem(position);
@@ -49,7 +50,8 @@ public class AutoCompleteProductAdapter extends ArrayAdapter<Prodotto> {
         if(prodotto != null){
             productName.setText(prodotto.getNome());
             productCode.setText(prodotto.getCodice());
-            productPrice.setText(String.valueOf(prodotto.getPrezzo()));
+            productPrice.setText(prodotto.getPrezzo());
+            productQuantity.setText(String.valueOf(prodotto.getQuantita()) + "pz");
             Glide.with(productImg).load(prodotto.getURLImmagine()).into(productImg);
         }
 

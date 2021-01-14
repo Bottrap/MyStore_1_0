@@ -64,6 +64,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
     int indiceSuccessivo = 500;
     Posizione posizione;
     int lunghezza = 1;
+    int qntEsposizione, qntMagazzino;
 
     private static final int PICK_IMAGE = 1;
     Uri imageUri = null;
@@ -94,6 +95,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
         TextInputLayout code_editText = view.findViewById(R.id.code_editText);
         TextInputLayout price_editText = view.findViewById(R.id.price_editText);
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
+        TextInputLayout quantity_editText = view.findViewById(R.id.quantity_Text);
         MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
         CheckBox checkBox = view.findViewById(R.id.editCheck);
 
@@ -158,10 +160,12 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
             if (item instanceof Prodotto) {
                 Prodotto prodotto = (Prodotto) item;
                 prodInDb = prodotto;
+                qntMagazzino = prodotto.getQuantita();
 
                 name_editText.getEditText().setText(prodotto.getNome());
                 code_editText.getEditText().setText(prodotto.getCodice());
                 price_editText.getEditText().setText(prodotto.getPrezzo());
+                quantity_editText.getEditText().setText(String.valueOf(prodotto.getQuantita()));
                 Posizione posizione = prodotto.getPosizione();
 
                 //VISUALIZZAZIONE IMMAGINE DEL PRODOTTO NELLA IMAGEVIEW
@@ -216,8 +220,25 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                         }
                     }
                 }
+                //TODO: VERIFICARE SE VOGLIO FARE IN MODO CHE, SE IL RESPONSABILE DEL MAGAZZINO INSERISCE UNA QUANTITA' MINORE DI QUELLA CHE ERA PRESENTE, LA QUANTITA' RIMOSSA SI AGGIUNGA A QUELLA PRESENTE IN ESPOSIZIONE
+                // IN CASO POSITIVO ****** RECUPERO DAL DB LA QUANTITA' DEL PRODOTTO SELEZIONATO IN ESPOSIZIONE (CODICE QUI SOTTO) ******, ALTRIMENTI DEVO CONSIDERARE LA QUANTITA' RIMOSSA COME SMALTITA O RISPEDITA AL FORNITORE, ECC
+                // RENDENDO COSI UNILATERALE LA POSSIBILITA' DI PASSARE PRODOTTI DAL MAGAZZINO ALL'ESPOSIZIONE E VICEVERSA, DA PARTE DEI SOLI DIPENDENTI DELLA ZONA ESPOSIZIONE (E/O DALL'AMMINISTRATORE)
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Esposizione");
+                Query findProduct = ref.orderByKey().equalTo(prodotto.getCodice());
+                findProduct.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            qntEsposizione = dataSnapshot.child("quantita").getValue(Integer.class);
+                        } else {
+                            qntEsposizione = 0;
+                        }
+                    }
 
-
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
             }
         });
 
@@ -370,6 +391,35 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                 isEmpty = true;
             } else {
                 prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
+            }
+            if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
+                quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
+                quantity_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                // CONTROLLI SULLA QUANTITA' INSERITA
+                int quantitaIns = Integer.parseInt(price_editText.getEditText().getText().toString().trim());
+                if (quantitaIns > qntEsposizione) {
+                    if ((quantitaIns - qntEsposizione) > qntMagazzino) {
+                        quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
+                        quantity_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setQuantita(quantitaIns);
+                        // EVENTUALE AGGIORNAMENTO QUANTITA' IN ESPOSIZIONE (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                    }
+                } else if (quantitaIns < qntEsposizione) {
+                    if (quantitaIns == 0) {
+                        quantity_editText.getEditText().setError("La quantità non può essere nulla");
+                        quantity_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setQuantita(quantitaIns);
+                        // EVENTUALE AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                    }
+                } else if (quantitaIns == qntEsposizione) {
+                    prodotto.setQuantita(quantitaIns);
+                }
             }
 
             if (!isEmpty) {

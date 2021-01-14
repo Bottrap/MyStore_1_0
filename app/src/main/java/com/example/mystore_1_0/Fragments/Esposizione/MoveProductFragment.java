@@ -93,7 +93,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
             e.printStackTrace();
         }
 
-        //METODO POTENTISSIMO CHE CI SALVERA' LA VITA
+        // CARICO I PRODOTTI NELLA AUTOCOMPLETE (CREO UNA LISTA DIFFERENZA DEI PRODOTTI PRESENTI NEL MAGAZZINO CHE NON SONO ANCORA STATI ESPOSTI
         DatabaseReference referenceBug = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
         Query query = referenceBug.orderByKey();
         query.addValueEventListener(new ValueEventListener() {
@@ -327,7 +327,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     text_quantita.getEditText().requestFocus();
                     isEmpty = true;
                 }
-                long quantita = Long.parseLong(text_prezzo.getEditText().getText().toString().trim());
+                int quantita = Integer.parseInt(text_prezzo.getEditText().getText().toString().trim());
                 prodInMagazzino.setQuantita(quantita);
             }
 

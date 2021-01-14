@@ -4,7 +4,7 @@ package com.example.mystore_1_0.Prodotto;
 public class Prodotto {
     final static int NumeroColonne = 33;
     String nome, codice, prezzo, urlimmagine;
-    long quantita;
+    int quantita;
     Posizione posizione;
 
     public String getURLImmagine() {
@@ -15,7 +15,7 @@ public class Prodotto {
         this.urlimmagine = urlimmagine;
     }
 
-    public Prodotto(String nome, String codice, String prezzo, String urlimmagine, Posizione posizione, long quantita) {
+    public Prodotto(String nome, String codice, String prezzo, String urlimmagine, Posizione posizione, int quantita) {
         this.nome = nome;
         this.codice = codice;
         this.prezzo = prezzo;
@@ -27,11 +27,11 @@ public class Prodotto {
     public Prodotto() {
     }
 
-    public long getQuantita() {
+    public int getQuantita() {
         return quantita;
     }
 
-    public void setQuantita(long quantita) {
+    public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
 

@@ -84,6 +84,7 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
         TextInputLayout text_nome = view.findViewById(R.id.text_NomeProdotto);
         TextInputLayout text_codice = view.findViewById(R.id.text_codice_prodotto);
         TextInputLayout text_prezzo = view.findViewById(R.id.text_price);
+        TextInputLayout text_quantita = view.findViewById(R.id.text_quantity);
 
         // DICHIARO BOTTONE DEL QUALE MI SERVE IL BACKGROUND, PER RESETTARE IL BACKGROUND DEI BOTTONI PRESENTI NEL GRID LAYOUT
         MaterialButton btn = new MaterialButton(getActivity());
@@ -235,6 +236,14 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                 String prezzo = text_prezzo.getEditText().getText().toString().trim();
                 prodotto.setPrezzo(prezzo);
             }
+            if (text_quantita.getEditText().getText().toString().trim().isEmpty()) {
+                text_quantita.getEditText().setError("Questo campo non può essere vuoto");
+                text_quantita.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                int quantita = Integer.parseInt(text_quantita.getEditText().getText().toString().trim());
+                prodotto.setQuantita(quantita);
+            }
 
             if (!isEmpty) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utenteLoggato.getNegozio());
@@ -263,6 +272,7 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                         text_codice.getEditText().getText().clear();
                                         text_posizione.getEditText().getText().clear();
                                         text_prezzo.getEditText().getText().clear();
+                                        text_quantita.getEditText().getText().clear();
                                     });
                                 });
                             }
