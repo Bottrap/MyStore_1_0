@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
+import com.example.mystore_1_0.Fragments.Esposizione.MoveProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.AddStorageProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.ManageStorageProductFragment;
 import com.example.mystore_1_0.R;
@@ -32,17 +33,25 @@ public class LoadingFragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (frag == 1){
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddStorageProductFragment()).commit();
-                } else if(frag == 2){
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
-                } else if(frag == 3){
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
-                }
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                switch (frag) {
+                    case 1:
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddStorageProductFragment()).commit();
+                        break;
+                    case 2:
 
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                        break;
+                    case 3:
+
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
+                        break;
+                    case 4:
+
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
+                        break;
+
+                }
             }
         },DELAY);
 

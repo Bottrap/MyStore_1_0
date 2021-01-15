@@ -167,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(1)).commit();
                 break;
             case R.id.nav_move_prod:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(4)).commit();
                 break;
             case R.id.nav_manage_prod:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(2)).commit();
