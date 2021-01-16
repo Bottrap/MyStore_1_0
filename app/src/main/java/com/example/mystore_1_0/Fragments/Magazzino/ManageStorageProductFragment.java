@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
@@ -423,24 +424,30 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
             }
 
             if (!isEmpty) {
-                Query checkId = reference.orderByChild("codice").equalTo(prodotto.getCodice());
+                DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+                Query checkId = productsReference.child("Esposizione").orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
-                            reference.child(prodotto.getCodice()).setValue(prodotto);
+                            // MODIFICO IL PRODOTTO IN ESPOSIZIONE
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                            // MODIFICO IL PRODOTTO ANCHE NEL MAGAZZINO
+                            productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                             // CONTROLLO SULL'IMMAGINE
                             if (imageUri == null) {
-                                reference.child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
                             } else {
-                                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
                                 UploadTask uploadTask = imageRef.putFile(imageUri);
                                 uploadTask.addOnSuccessListener(taskSnapshot -> {
                                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                     downloadUrl.addOnSuccessListener(uri -> {
                                         String imageReference = uri.toString();
-                                        reference.child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                        productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                        productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
                                     });
                                 });
                             }
@@ -452,22 +459,26 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
                                 code_editText.getEditText().requestFocus();
                             } else { // IL NUOVO CODICE E' UTILIZZABILE
-                                reference.child(prodotto.getCodice()).setValue(prodotto);
+                                productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                                productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
-                                    reference.child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                    productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                    productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
                                 } else {
-                                    final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + prodotto.getCodice() + ".jpg");
+                                    final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
                                     UploadTask uploadTask = imageRef.putFile(imageUri);
                                     uploadTask.addOnSuccessListener(taskSnapshot -> {
                                         Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                         downloadUrl.addOnSuccessListener(uri -> {
                                             String imageReference = uri.toString();
-                                            reference.child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                            productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                            productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
                                         });
                                     });
                                 }
-                                reference.child(prodInDb.getCodice()).removeValue();
+                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
+                                productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
                                 Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
 
                                 AppCompatActivity activity = (AppCompatActivity) getContext();
