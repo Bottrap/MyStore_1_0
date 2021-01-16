@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,7 +230,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            qntMagazzino = Integer.parseInt(dataSnapshot.child("quantita").getValue().toString());
+                            qntMagazzino = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
                         } else {
                             qntMagazzino = 0;
                         }
@@ -398,7 +399,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                 isEmpty = true;
             } else {
                 // CONTROLLI SULLA QUANTITA' INSERITA
-                int quantitaIns = Integer.parseInt(price_editText.getEditText().getText().toString().trim());
+                int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
                 if (quantitaIns > qntEsposizione) {
                     if ((quantitaIns - qntEsposizione) > qntMagazzino) {
                         quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");

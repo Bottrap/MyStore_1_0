@@ -66,6 +66,8 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
     Posizione posizione;
     int lunghezza = 1;
     int qntEsposizione, qntMagazzino;
+    String idToCheck, imageURL;
+    boolean idHasChanged;
 
     private static final int PICK_IMAGE = 1;
     Uri imageUri = null;
@@ -230,7 +232,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            qntEsposizione = dataSnapshot.child("quantita").getValue(Integer.class);
+                            qntEsposizione = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
                         } else {
                             qntEsposizione = 0;
                         }
@@ -341,7 +343,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                     is2Clicked = false;
                                 }
                             } // CLICK IN DIAGONALE
-                            if(getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna() ) {
+                            if (getPosition(indicePrecedente).getIndiceRiga() != getPosition(finalI).getIndiceRiga() & getPosition(indicePrecedente).getIndiceColonna() != getPosition(indiceSuccessivo).getIndiceColonna()) {
                                 lunghezza = 1;
                                 is2Clicked = false;
                             }
@@ -399,7 +401,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                 isEmpty = true;
             } else {
                 // CONTROLLI SULLA QUANTITA' INSERITA
-                int quantitaIns = Integer.parseInt(price_editText.getEditText().getText().toString().trim());
+                int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
                 if (quantitaIns > qntEsposizione) {
                     if ((quantitaIns - qntEsposizione) > qntMagazzino) {
                         quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
@@ -425,19 +427,19 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
 
             if (!isEmpty) {
                 DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
-                Query checkId = productsReference.child("Esposizione").orderByChild("codice").equalTo(prodotto.getCodice());
+                Query checkId = productsReference.child("Magazzino").orderByChild("codice").equalTo(prodotto.getCodice());
 
                 checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
-                            // MODIFICO IL PRODOTTO IN ESPOSIZIONE
-                            productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
-                            // MODIFICO IL PRODOTTO ANCHE NEL MAGAZZINO
+                            idToCheck = prodotto.getCodice();
+                            idHasChanged = false;
+                            // MODIFICO IL PRODOTTO IN MAGAZZINO
                             productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                             // CONTROLLO SULL'IMMAGINE
                             if (imageUri == null) {
-                                productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                imageURL = prodInDb.getURLImmagine();
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
                             } else {
                                 final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
@@ -446,7 +448,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                     Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                     downloadUrl.addOnSuccessListener(uri -> {
                                         String imageReference = uri.toString();
-                                        productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                        imageURL = imageReference;
                                         productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
                                     });
                                 });
@@ -459,11 +461,12 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
                                 code_editText.getEditText().requestFocus();
                             } else { // IL NUOVO CODICE E' UTILIZZABILE
-                                productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                                idToCheck = prodInDb.getCodice();
+                                idHasChanged = true;
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
-                                    productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                                    imageURL = prodInDb.getURLImmagine();
                                     productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
                                 } else {
                                     final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
@@ -472,12 +475,11 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         Task<Uri> downloadUrl = imageRef.getDownloadUrl();
                                         downloadUrl.addOnSuccessListener(uri -> {
                                             String imageReference = uri.toString();
-                                            productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                            imageURL = imageReference;
                                             productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
                                         });
                                     });
                                 }
-                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
                                 productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
                                 Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
 
@@ -491,6 +493,24 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                // CONTROLLO SE IL PRODOTTO APPENA MODIFICATO SIA PRESENTE O MENO IN ESPOSIZIONE, COSI' DA POTERLO MODIFICARE
+                Query checkProduct = productsReference.child("Esposizione").orderByKey().equalTo(idToCheck);
+                checkProduct.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageURL);
+                            if (idHasChanged) {
+                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
             }
