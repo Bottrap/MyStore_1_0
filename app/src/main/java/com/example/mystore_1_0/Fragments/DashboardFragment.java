@@ -16,9 +16,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
+import com.example.mystore_1_0.Fragments.Esposizione.MoveProductFragment;
 import com.example.mystore_1_0.Fragments.Esposizione.ShowProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.AddStorageProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.ManageStorageProductFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.ShowStorageProductFragment;
 import com.example.mystore_1_0.Fragments.Profile.ProfileFragment;
 import com.example.mystore_1_0.Fragments.ShowUsers.ShowUsersFragment;
 import com.example.mystore_1_0.R;
@@ -26,7 +28,7 @@ import com.example.mystore_1_0.Utente;
 
 public class DashboardFragment extends Fragment {
 
-    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV, showProdCV, addStorageCV, listStorageCV_MAG, listStorageCV, listProdCV;
+    CardView addUserCV, showUsersCV, qrScanCV, profileCV, logoutCV, addProdCV, showProdCV, addStorageCV, listStorageCV_MAG, listStorageCV, listProdCV, showStorageCV;
     TextView text_Add_storage, text_add_prod, text_manage_prod;
     RelativeLayout relativ;
     LinearLayout linearLayout1, linearLayout2, linearLayout3, linearLayoutDIPENDENTE;
@@ -55,11 +57,12 @@ public class DashboardFragment extends Fragment {
         showProdCV = view.findViewById(R.id.show_prod_cardView);
         listProdCV = view.findViewById(R.id.list_prod_cardView);
         addStorageCV = view.findViewById(R.id.add_storage_cardview);
+        showStorageCV = view.findViewById(R.id.show_storage_cardView);
 
         linearLayout1 = view.findViewById(R.id.linearLayout1);
         linearLayout2 = view.findViewById(R.id.linearLayout2);
         linearLayout3 = view.findViewById(R.id.linearLayout3);
-        linearLayoutDIPENDENTE = view.findViewById(R.id.linearLayoutDIPENDENTE);
+
 
         // CONTROLLO SUI PERMESSI DELL'UTENTE
         switch (Integer.parseInt(utenteLoggato.getPermessi())) {
@@ -73,10 +76,9 @@ public class DashboardFragment extends Fragment {
                 addUserCV.setVisibility(View.GONE);
                 showUsersCV.setVisibility(View.GONE);
                 text_Add_storage.setTextSize(12);
-                listStorageCV.setVisibility(View.GONE);
-                addProdCV.setVisibility(View.GONE);
-                listProdCV.setVisibility(View.GONE);
+                linearLayout2.setVisibility(View.GONE);
                 qrScanCV.setVisibility(View.GONE);
+                logoutCV.setVisibility(View.GONE);
                 break;
             case 3: // DIPENDENTE
                 linearLayout1.setVisibility(View.GONE);
@@ -84,8 +86,9 @@ public class DashboardFragment extends Fragment {
                 showProdCV.setVisibility(View.GONE);
                 text_add_prod.setTextSize(12);
                 text_manage_prod.setTextSize(12);
-                linearLayoutDIPENDENTE.setVisibility(View.VISIBLE);
+                showStorageCV.setVisibility(View.VISIBLE);
                 qrScanCV.setVisibility(View.GONE);
+                logoutCV.setVisibility(View.GONE);
                 break;
         }
 
@@ -102,7 +105,7 @@ public class DashboardFragment extends Fragment {
         addProdCV.setOnClickListener(v -> {
             relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddStorageProductFragment()).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
         });
 
         qrScanCV.setOnClickListener(v -> {
@@ -140,7 +143,12 @@ public class DashboardFragment extends Fragment {
         addStorageCV.setOnClickListener(v -> {
             relativ.setVisibility(View.VISIBLE);
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddStorageProductFragment()).commit();
+        });
+        showStorageCV.setOnClickListener(v -> {
+            relativ.setVisibility(View.VISIBLE);
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowStorageProductFragment()).commit();
         });
         logoutCV.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();

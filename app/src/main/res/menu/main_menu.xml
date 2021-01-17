@@ -30,15 +30,15 @@
         <menu>
             <item
                 android:id="@+id/nav_show_prod"
-                android:title="Mostra prodotti (Esposizione)"
+                android:title="Mostra prodotti Esposizione"
                 android:icon="@drawable/gest_prod_img"/>
             <item
                 android:id="@+id/nav_move_prod"
-                android:title = "Aggiungi prodotti (Esposizione)"
+                android:title = "Aggiungi prodotti Esposizione"
                 android:icon = "@drawable/img_add_prod"/>
             <item
                 android:id="@+id/nav_manage_prod"
-                android:title = "Gestisci Prodotti (Esposizione)"
+                android:title = "Gestisci Prodotti Esposizione"
                 android:icon = "@drawable/gest_prod_img"/>
         </menu>
     </item>
@@ -47,15 +47,15 @@
         <menu>
             <item
                 android:id="@+id/nav_add_prod_magazzino"
-                android:title = "Aggiungi prodotti (Magazzino)"
+                android:title = "Aggiungi prodotti Magazzino"
                 android:icon = "@drawable/img_add_prod"/>
             <item
                 android:id="@+id/nav_show_prod_magazzino"
-                android:title = "Mostra Prodotti (Magazzino)"
+                android:title = "Mostra Prodotti Magazzino"
                 android:icon = "@drawable/gest_prod_img"/>
             <item
                 android:id="@+id/nav_manage_prod_magazzino"
-                android:title = "Gestisci Prodotti (Magazzino)"
+                android:title = "Gestisci Prodotti Magazzino"
                 android:icon = "@drawable/gest_prod_img"/>
         </menu>
     </item>

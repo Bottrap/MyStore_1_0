@@ -119,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_manage_prod).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_show_prod_magazzino).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_move_prod).setVisible(false);
                 break;
             case 3: // DIPENDENTE
                 navigationView.getMenu().findItem(R.id.nav_list_dip).setVisible(false);
@@ -126,6 +127,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 navigationView.getMenu().findItem(R.id.nav_qr_gen).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_show_prod).setVisible(false);
                 navigationView.getMenu().findItem(R.id.nav_manage_prod_magazzino).setVisible(false);
+                navigationView.getMenu().findItem(R.id.nav_add_prod_magazzino).setVisible(false);
                 break;
         }
 
@@ -179,10 +181,10 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 break;
             case R.id.nav_show_prod_magazzino:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowStorageProductFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(6)).commit();
                 break;
             case R.id.nav_show_prod:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoadingFragment(5)).commit();
                 break;
             case R.id.nav_logout:
                 finish();

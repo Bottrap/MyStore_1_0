@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mystore_1_0.Fragments.Esposizione.ManageProductFragment;
 import com.example.mystore_1_0.Fragments.Esposizione.MoveProductFragment;
+import com.example.mystore_1_0.Fragments.Esposizione.ShowProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.AddStorageProductFragment;
 import com.example.mystore_1_0.Fragments.Magazzino.ManageStorageProductFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.ShowStorageProductFragment;
 import com.example.mystore_1_0.R;
 
 public class LoadingFragment extends Fragment {
@@ -50,7 +52,12 @@ public class LoadingFragment extends Fragment {
 
                         activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
                         break;
-
+                    case 5:
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowProductFragment()).commit();
+                        break;
+                    case 6:
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShowStorageProductFragment()).commit();
+                        break;
                 }
             }
         },DELAY);
