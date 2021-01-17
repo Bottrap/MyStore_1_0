@@ -2246,6 +2246,15 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="MAGAZZINO -> ESPOSIZIONE"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/signika_negative_light"
+                    android:textSize="22dp"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Seleziona la posizione del prodotto cliccando sulla mappa"
                     android:layout_gravity="center"
                     android:fontFamily="@font/signika_negative_light"
@@ -2340,7 +2349,7 @@
                     app:boxStrokeColor="@color/scanStatusBarColor"
                     app:hintTextColor="@color/scanStatusBarColor"
                     app:placeholderTextColor="@color/scanStatusBarColor"
-                    app:startIconDrawable="@drawable/ic_baseline_assignment_24">
+                    app:startIconDrawable="@drawable/product_quantity">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
