@@ -501,6 +501,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
+                            prodotto.setQuantita(qntMagazzino);
                             productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
                             productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageURL);
                             if (idHasChanged) {
