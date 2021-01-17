@@ -337,8 +337,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 query1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
-                        reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
+                        reference.child("Magazzino").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
+                        reference.child("Esposizione").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
                     }
 
                     @Override
