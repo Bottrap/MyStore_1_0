@@ -27,6 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class AddUsersFragment extends Fragment implements IOnBackPressed {
     @Nullable
     @Override
@@ -52,6 +55,33 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
         TextInputLayout text_phone = view.findViewById(R.id.text_phone);
         DatePicker text_date = view.findViewById(R.id.text_date);
         Button btn_add = view.findViewById(R.id.btn_add);
+
+        /* NON SO PERCHÈ NON FA NIENTE
+        // LUNGHEZZA MINIMA CELLULARE
+        text_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (text_phone.getEditText().getText().toString().trim().length() < 10) {
+                        text_phone.getEditText().setError("Inserire n° telefono valido");
+                        text_phone.getEditText().requestFocus();
+                    } else {
+                        // your code here
+                        text_phone.getEditText().setError(null);
+                    }
+                } else {
+                    if (text_phone.getEditText().getText().toString().trim().length() < 10) {
+                        text_phone.getEditText().setError("Inserire n° telefono valido");
+                        text_phone.getEditText().requestFocus();
+                    } else {
+                        // your code here
+                        text_phone.getEditText().setError(null);
+                    }
+                }
+
+            }
+        });
+         */
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,9 +140,18 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
                     text_phone.getEditText().setError("Questo campo non può essere vuoto");
                     text_phone.getEditText().requestFocus();
                     isEmpty = true;
+                } else if (text_phone.getEditText().getText().toString().trim().length() != 10){
+                    text_phone.getEditText().setError("Inserisci un n° di telefono valido");
+                    text_phone.getEditText().requestFocus();
+                    isEmpty = true;
                 } else {
                     telefono = text_phone.getEditText().getText().toString().trim();
                     utente.setTelefono(telefono);
+                }
+
+                if(text_date.getYear() >= getCurrentYear() ){
+                    Toast.makeText(getActivity(), "Inserisci una data valida", Toast.LENGTH_SHORT).show();
+                    isEmpty = true;
                 }
 
 
@@ -152,6 +191,12 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
         });
 
         return view;
+    }
+
+    public static int getCurrentYear() {
+        String[] parse = String.valueOf(Calendar.getInstance().getTime()).split("\\s+");
+        int year = Integer.parseInt(parse[5]);
+        return year;
     }
 
     @Override

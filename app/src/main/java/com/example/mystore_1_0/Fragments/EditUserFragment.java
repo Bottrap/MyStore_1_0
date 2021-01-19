@@ -120,9 +120,18 @@ public class EditUserFragment extends Fragment implements IOnBackPressed {
                     text_mod_phone.getEditText().setError("Questo campo non può essere vuoto");
                     text_mod_phone.getEditText().requestFocus();
                     isEmpty = true;
+                } else if (text_mod_phone.getEditText().getText().toString().trim().length() !=  10) {
+                    text_mod_phone.getEditText().setError("Inserisci un n° di telefono valido");
+                    text_mod_phone.getEditText().requestFocus();
+                    isEmpty = true;
                 } else {
                     telefono = text_mod_phone.getEditText().getText().toString().trim();
                     newUtente.setTelefono(telefono);
+                }
+
+                if(text_mod_date.getYear() >= AddUsersFragment.getCurrentYear() ){
+                    Toast.makeText(getActivity(), "Inserisci una data valida", Toast.LENGTH_SHORT).show();
+                    isEmpty = true;
                 }
 
                 if (!isEmpty) {

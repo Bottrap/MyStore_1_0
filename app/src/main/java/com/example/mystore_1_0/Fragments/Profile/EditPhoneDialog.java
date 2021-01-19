@@ -47,22 +47,28 @@ public class EditPhoneDialog extends AppCompatDialogFragment{
             positiveButton.setTextColor(getResources().getColor(R.color.arancione));
             dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.arancione));
             positiveButton.setOnClickListener(v -> {
-                String phone = newPhone.getText().toString().trim();
+                if (newPhone.getText().toString().trim().length() != 10) {
+                    newPhone.setError("Inserire un n° di telefono valido");
+                    newPhone.requestFocus();
+                } else {
 
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utente.getNegozio()).child("Users");
-                Query checkId = reference.orderByChild("id").equalTo(utente.getId());
-                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        reference.child(utente.getId()).child("telefono").setValue(phone);
-                        listener.changePhoneNumber(phone);
-                        dialog.dismiss();
-                    }
+                    String phone = newPhone.getText().toString().trim();
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(utente.getNegozio()).child("Users");
+                    Query checkId = reference.orderByChild("id").equalTo(utente.getId());
+                    checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            reference.child(utente.getId()).child("telefono").setValue(phone);
+                            listener.changePhoneNumber(phone);
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
             });
 
         });

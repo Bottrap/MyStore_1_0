@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -51,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         editId = findViewById(R.id.editId);
         editPassw = findViewById(R.id.editPassw);
         editStore = findViewById(R.id.autoCompleteStores);
+
+        Log.d("data", String.valueOf(Calendar.getInstance().getTime() ));
 
         negoziDisponibili = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();

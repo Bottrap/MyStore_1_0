@@ -199,7 +199,9 @@
             app:hintTextColor="@color/scanStatusBarColor"
             app:boxStrokeColor="@color/scanStatusBarColor"
             android:padding="2dp"
-            app:placeholderTextColor="@color/scanStatusBarColor">
+            app:placeholderTextColor="@color/scanStatusBarColor"
+            app:counterMaxLength="10"
+            app:counterEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
