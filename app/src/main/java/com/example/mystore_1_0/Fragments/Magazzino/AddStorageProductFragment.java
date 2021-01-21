@@ -267,7 +267,7 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                         String imageReference = uri.toString();
                                         prodotto.setURLImmagine(imageReference);
                                         reference.child("Products").child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
-                                        Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), "Prodotto aggiunto correttamente", Toast.LENGTH_SHORT).show();
                                         text_nome.getEditText().getText().clear();
                                         text_codice.getEditText().getText().clear();
                                         text_posizione.getEditText().getText().clear();

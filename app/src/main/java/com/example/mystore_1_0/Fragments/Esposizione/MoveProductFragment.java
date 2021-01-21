@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -330,6 +331,15 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         reference.child("Magazzino").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
                         reference.child("Esposizione").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
+                        Toast.makeText(getActivity(), "Prodotto spostato correttamente", Toast.LENGTH_SHORT).show();
+                        text_posizione.getEditText().getText().clear();
+                        text_quantita.getEditText().getText().clear();
+                        for (int i = 0; i < grid.getChildCount(); i++) {
+                            grid.getChildAt(i).setBackground(background);
+                            is2Clicked = false;
+                            isClicked = false;
+                            text_posizione.getEditText().getText().clear();
+                        }
                     }
 
                     @Override
