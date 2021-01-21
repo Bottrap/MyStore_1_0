@@ -76,7 +76,6 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
         GridLayout grid = view.findViewById(R.id.gridProduct);
         MaterialAutoCompleteTextView autoComplete = view.findViewById(R.id.autoCompleteTextView);
         TextInputLayout text_posizione = view.findViewById(R.id.position_editText);
-        TextInputLayout text_prezzo = view.findViewById(R.id.price_editText);
         TextInputLayout text_quantita = view.findViewById(R.id.quantity_editText);
         MaterialButton addBtn = view.findViewById(R.id.addBtn);
 
@@ -309,14 +308,6 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 text_posizione.getEditText().requestFocus();
                 isEmpty = true;
             }
-            if (text_prezzo.getEditText().getText().toString().trim().isEmpty()) {
-                text_prezzo.getEditText().setError("Questo campo non può essere vuoto");
-                text_prezzo.getEditText().requestFocus();
-                isEmpty = true;
-            } else {
-                String prezzo = text_prezzo.getEditText().getText().toString().trim();
-                prodInMagazzino.setPrezzo(prezzo);
-            }
             if (text_quantita.getEditText().getText().toString().trim().isEmpty()) {
                 text_quantita.getEditText().setError("Questo campo non può essere vuoto");
                 text_quantita.getEditText().requestFocus();
@@ -327,7 +318,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     text_quantita.getEditText().requestFocus();
                     isEmpty = true;
                 }
-                int quantita = Integer.parseInt(text_prezzo.getEditText().getText().toString().trim());
+                int quantita = Integer.parseInt(text_quantita.getEditText().getText().toString().trim());
                 prodInMagazzino.setQuantita(quantita);
             }
 
