@@ -329,8 +329,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 query1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        reference.child("Magazzino").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
-                        reference.child("Esposizione").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
+                        reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
+                        reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
                         Toast.makeText(getActivity(), "Prodotto spostato correttamente", Toast.LENGTH_SHORT).show();
                         text_posizione.getEditText().getText().clear();
                         text_quantita.getEditText().getText().clear();
