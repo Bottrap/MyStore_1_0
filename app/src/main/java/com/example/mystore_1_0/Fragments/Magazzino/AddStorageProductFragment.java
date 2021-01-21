@@ -273,6 +273,12 @@ public class AddStorageProductFragment extends Fragment implements IOnBackPresse
                                         text_posizione.getEditText().getText().clear();
                                         text_prezzo.getEditText().getText().clear();
                                         text_quantita.getEditText().getText().clear();
+                                        for (int i = 0; i < grid.getChildCount(); i++) {
+                                            grid.getChildAt(i).setBackground(background);
+                                            is2Clicked = false;
+                                            isClicked = false;
+                                            text_posizione.getEditText().getText().clear();
+                                        }
                                     });
                                 });
                             }

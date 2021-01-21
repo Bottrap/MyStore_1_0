@@ -228,9 +228,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                         }
                     }
                 }
-                //TODO: VERIFICARE SE VOGLIO FARE IN MODO CHE, SE IL RESPONSABILE DEL MAGAZZINO INSERISCE UNA QUANTITA' MINORE DI QUELLA CHE ERA PRESENTE, LA QUANTITA' RIMOSSA SI AGGIUNGA A QUELLA PRESENTE IN ESPOSIZIONE
-                // IN CASO POSITIVO ****** RECUPERO DAL DB LA QUANTITA' DEL PRODOTTO SELEZIONATO IN ESPOSIZIONE (CODICE QUI SOTTO) ******, ALTRIMENTI DEVO CONSIDERARE LA QUANTITA' RIMOSSA COME SMALTITA O RISPEDITA AL FORNITORE, ECC
-                // RENDENDO COSI UNILATERALE LA POSSIBILITA' DI PASSARE PRODOTTI DAL MAGAZZINO ALL'ESPOSIZIONE E VICEVERSA, DA PARTE DEI SOLI DIPENDENTI DELLA ZONA ESPOSIZIONE (E/O DALL'AMMINISTRATORE)
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference(negozio).child("Products").child("Esposizione");
                 Query findProduct = ref.orderByKey().equalTo(prodotto.getCodice());
                 findProduct.addValueEventListener(new ValueEventListener() {
@@ -415,7 +412,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                             isEmpty = true;
                         } else {
                             prodotto.setQuantita(quantitaIns);
-                            // EVENTUALE AGGIORNAMENTO QUANTITA' IN ESPOSIZIONE (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
                         }
                     } else if (quantitaIns < qntEsposizione) {
                         if (quantitaIns == 0) {
@@ -424,7 +420,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                             isEmpty = true;
                         } else {
                             prodotto.setQuantita(quantitaIns);
-                            // EVENTUALE AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
                         }
                     } else if (quantitaIns == qntEsposizione) {
                         prodotto.setQuantita(quantitaIns);
