@@ -24,7 +24,7 @@
         android:layout_width="216dp"
         android:layout_height="30dp"
         android:fontFamily="@font/signika_negative_light"
-        android:text="Version 0.1"
+        android:text="Version 1.0"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textColorHighlight="#FFFFFF"

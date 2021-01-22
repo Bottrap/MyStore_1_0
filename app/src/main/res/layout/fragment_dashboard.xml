@@ -148,7 +148,7 @@
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/img_add_prod"
+                        android:src="@drawable/ic_baseline_add_business_24"
                         app:tint="@color/arancione" />
 
                     <TextView
@@ -187,7 +187,7 @@
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/gest_prod_img"
+                        android:src="@drawable/ic_baseline_storage_24"
                         app:tint="@color/arancione" />
 
                     <TextView
@@ -244,7 +244,7 @@
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/gest_prod_img"
+                        android:src="@drawable/ic_baseline_storage_24"
                         app:tint="@color/arancione" />
 
                     <TextView
