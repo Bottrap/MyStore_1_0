@@ -359,7 +359,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
         });
 
         // CONFERMA MODIFICA
-        if (confirmBtn.isClickable()) {
             confirmBtn.setOnClickListener(v -> {
                 boolean isEmpty = false;
                 Prodotto prodotto = new Prodotto();
@@ -503,11 +502,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     });
                 }
             });
-        }
-
-        // ELIMINA PRODOTTO SELEZIONATO NELLA LISTA
-        Log.d("click", String.valueOf(deleteBtn.isClickable()));
-        if (deleteBtn.isClickable()) {
 
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -544,8 +538,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                             .create().show();
                 }
             });
-
-        }
         return view;
     }
 

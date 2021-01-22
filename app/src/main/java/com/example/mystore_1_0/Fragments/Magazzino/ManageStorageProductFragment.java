@@ -488,7 +488,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                     Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
 
                                     AppCompatActivity activity = (AppCompatActivity) getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
 
                                 }
                             }
@@ -536,10 +536,10 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
-                                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
+                                                productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
                                                 Toast.makeText(getActivity(), "Prodotto eliminato correttamente", Toast.LENGTH_SHORT).show();
                                                 AppCompatActivity activity = (AppCompatActivity) getContext();
-                                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
 
                                             } else {
                                                 Toast.makeText(getActivity(), "Errore, prodotto inesistente", Toast.LENGTH_SHORT).show();
