@@ -56,33 +56,6 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
         DatePicker text_date = view.findViewById(R.id.text_date);
         Button btn_add = view.findViewById(R.id.btn_add);
 
-        /* NON SO PERCHÈ NON FA NIENTE
-        // LUNGHEZZA MINIMA CELLULARE
-        text_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    if (text_phone.getEditText().getText().toString().trim().length() < 10) {
-                        text_phone.getEditText().setError("Inserire n° telefono valido");
-                        text_phone.getEditText().requestFocus();
-                    } else {
-                        // your code here
-                        text_phone.getEditText().setError(null);
-                    }
-                } else {
-                    if (text_phone.getEditText().getText().toString().trim().length() < 10) {
-                        text_phone.getEditText().setError("Inserire n° telefono valido");
-                        text_phone.getEditText().requestFocus();
-                    } else {
-                        // your code here
-                        text_phone.getEditText().setError(null);
-                    }
-                }
-
-            }
-        });
-         */
-
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
