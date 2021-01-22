@@ -334,6 +334,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                         Toast.makeText(getActivity(), "Prodotto spostato correttamente", Toast.LENGTH_SHORT).show();
                         text_posizione.getEditText().getText().clear();
                         text_quantita.getEditText().getText().clear();
+                        autoComplete.getText().clear();
                         for (int i = 0; i < grid.getChildCount(); i++) {
                             grid.getChildAt(i).setBackground(background);
                             is2Clicked = false;
