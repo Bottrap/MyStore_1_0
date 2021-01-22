@@ -2436,26 +2436,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/deleteBtn"
-                                style="@style/Widget.MaterialComponents.Button"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:backgroundTint="@color/red"
-                                android:clickable="false"
-                                app:icon="@drawable/ic_baseline_delete_24"
-                                app:iconTint="@color/white"
-                                app:cornerRadius="20dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/confirmBtn"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:strokeColor="@color/white"
-                                app:strokeWidth="1dp" />
-
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="20dp">
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/confirmBtn"
@@ -2463,7 +2445,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:backgroundTint="@color/gray"
+                                android:backgroundTint="@color/scanStatusBarColor"
                                 android:clickable="false"
                                 android:scaleX="1.10"
                                 android:scaleY="1.10"
@@ -2472,6 +2454,24 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/deleteBtn"
                                 app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeColor="@color/white"
+                                app:strokeWidth="1dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/deleteBtn"
+                                style="@style/Widget.MaterialComponents.Button"
+                                android:layout_width="55dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/red"
+                                android:clickable="false"
+                                app:icon="@drawable/ic_baseline_delete_24"
+                                app:iconTint="@color/white"
+                                app:cornerRadius="100dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/confirmBtn"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:strokeColor="@color/white"
                                 app:strokeWidth="1dp" />

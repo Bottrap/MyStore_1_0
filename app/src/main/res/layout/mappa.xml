@@ -1863,7 +1863,6 @@
             android:paddingBottom="20dp">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:completionThreshold="0"
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

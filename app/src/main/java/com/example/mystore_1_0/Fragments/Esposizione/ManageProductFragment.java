@@ -348,74 +348,78 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                 if(autoComplete.getText().toString().isEmpty()){
                     isEmpty = true;
                     Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
-                }
+                }else {
 
-                // CONTROLLO SULLA POSIZIONE
-                if (positionHasChanged) { // SE HO CLICCATO SU CANCELLA POSIZIONE
-                    if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
-                        posizione.setLunghezza(lunghezza);
-                        prodotto.setPosizione(posizione);
-                    } else {
-                        position_editText.getEditText().setError("Questo campo non può essere vuoto");
-                        position_editText.getEditText().requestFocus();
+                    // CONTROLLO SULLA POSIZIONE
+                    if (positionHasChanged) { // SE HO CLICCATO SU CANCELLA POSIZIONE
+                        if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
+                            posizione.setLunghezza(lunghezza);
+                            prodotto.setPosizione(posizione);
+                        } else {
+                            position_editText.getEditText().setError("Questo campo non può essere vuoto");
+                            position_editText.getEditText().requestFocus();
+                            isEmpty = true;
+                        }
+                    } else { // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
+                        prodotto.setPosizione(prodInDb.getPosizione());
+                    }
+
+                    if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        name_editText.getEditText().setError("Questo campo non può essere vuoto");
+                        name_editText.getEditText().requestFocus();
                         isEmpty = true;
+                    } else {
+                        prodotto.setNome(name_editText.getEditText().getText().toString().trim());
                     }
-                } else { // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
-                    prodotto.setPosizione(prodInDb.getPosizione());
+                    if (code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        code_editText.getEditText().setError("Questo campo non può essere vuoto");
+                        code_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
+                    }
+                    if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        price_editText.getEditText().setError("Questo campo non può essere vuoto");
+                        price_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
+                    }
+                    if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
+                        quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
+                        quantity_editText.getEditText().requestFocus();
+                        isEmpty = true;
+                    } else {
+                        // CONTROLLI SULLA QUANTITA' INSERITA
+                        quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
+                        if (quantitaIns > qntEsposizione) {
+                            if ((quantitaIns - qntEsposizione) > qntMagazzino) {
+                                quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
+                                quantity_editText.getEditText().requestFocus();
+                                isEmpty = true;
+                            } else {
+                                prodotto.setQuantita(quantitaIns);
+                                // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                                // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino - (quantitaIns - qntEsposizione)
+                            }
+                        } else if (quantitaIns < qntEsposizione) {
+                            if (quantitaIns == 0) {
+                                quantity_editText.getEditText().setError("La quantità non può essere nulla");
+                                quantity_editText.getEditText().requestFocus();
+                                isEmpty = true;
+                            } else {
+                                prodotto.setQuantita(quantitaIns);
+                                // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
+                                // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino + (qntEsposizione - quantitaIns)
+                            }
+                        } else if (quantitaIns == qntEsposizione) {
+                            prodotto.setQuantita(quantitaIns);
+                        }
+                    }
+
                 }
 
-                if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    name_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    name_editText.getEditText().requestFocus();
-                    isEmpty = true;
-                } else {
-                    prodotto.setNome(name_editText.getEditText().getText().toString().trim());
-                }
-                if (code_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    code_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    code_editText.getEditText().requestFocus();
-                    isEmpty = true;
-                } else {
-                    prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
-                }
-                if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    price_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    price_editText.getEditText().requestFocus();
-                    isEmpty = true;
-                } else {
-                    prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
-                }
-                if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    quantity_editText.getEditText().requestFocus();
-                    isEmpty = true;
-                } else {
-                    // CONTROLLI SULLA QUANTITA' INSERITA
-                    quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
-                    if (quantitaIns > qntEsposizione) {
-                        if ((quantitaIns - qntEsposizione) > qntMagazzino) {
-                            quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
-                            quantity_editText.getEditText().requestFocus();
-                            isEmpty = true;
-                        } else {
-                            prodotto.setQuantita(quantitaIns);
-                            // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
-                            // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino - (quantitaIns - qntEsposizione)
-                        }
-                    } else if (quantitaIns < qntEsposizione) {
-                        if (quantitaIns == 0) {
-                            quantity_editText.getEditText().setError("La quantità non può essere nulla");
-                            quantity_editText.getEditText().requestFocus();
-                            isEmpty = true;
-                        } else {
-                            prodotto.setQuantita(quantitaIns);
-                            // AGGIORNAMENTO QUANTITA' IN MAGAZZINO (TODO: DA FARE QUANDO SI REFACTORIZZA IL CODICE PER L'AGGIORNAMENTO SINCRONO DEI PRODOTTI DOPO LA MODIFICA DELL'ID (AD ESEMPIO))
-                            // SETTARE QUANTITA' PRODOTTO IN MAGAZZINO PARI A: qntMagazzino + (qntEsposizione - quantitaIns)
-                        }
-                    } else if (quantitaIns == qntEsposizione) {
-                        prodotto.setQuantita(quantitaIns);
-                    }
-                }
+
 
                 if (!isEmpty) {
                     DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
