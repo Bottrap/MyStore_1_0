@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backprova1">
@@ -8,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
@@ -2246,21 +2249,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MAGAZZINO -> ESPOSIZIONE"
                     android:layout_gravity="center"
                     android:fontFamily="@font/signika_negative_light"
-                    android:textSize="22dp"
-                    android:textAlignment="center"/>
+                    android:text="MAGAZZINO -> ESPOSIZIONE"
+                    android:textAlignment="center"
+                    android:textSize="22dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seleziona la posizione del prodotto cliccando sulla mappa"
                     android:layout_gravity="center"
                     android:fontFamily="@font/signika_negative_light"
-                    android:textSize="20dp"
+                    android:text="Seleziona la posizione del prodotto cliccando sulla mappa"
+                    android:textAlignment="center"
                     android:textColor="@color/scanStatusBarColor"
-                    android:textAlignment="center"/>
+                    android:textSize="20dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -2290,23 +2293,23 @@
                     android:layout_height="wrap_content"
                     android:hint="Posizione"
                     android:padding="2dp"
-                    app:endIconCheckable="false"
                     app:boxCornerRadiusBottomEnd="10dp"
                     app:boxCornerRadiusBottomStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
                     app:boxCornerRadiusTopStart="10dp"
                     app:boxStrokeColor="@color/scanStatusBarColor"
+                    app:endIconCheckable="false"
+                    app:endIconMode="clear_text"
                     app:hintTextColor="@color/scanStatusBarColor"
                     app:placeholderTextColor="@color/scanStatusBarColor"
-                    app:startIconDrawable="@drawable/position_img"
-                    app:endIconMode="clear_text">
+                    app:startIconDrawable="@drawable/position_img">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="false"
-                        android:longClickable="false"
                         android:inputType="text"
+                        android:longClickable="false"
                         android:textColor="@color/scanStatusBarColor"
                         android:textCursorDrawable="@null" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -2337,24 +2340,23 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/addBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/editCheck"
-                    android:backgroundTint="@color/statusBarColor"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button"
-                    android:text="Aggiungi Prodotto"
-                    app:cornerRadius="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/statusBarColor"
                     android:clickable="false"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
-                    android:layout_gravity="center"
-                    app:strokeWidth="1dp"
+                    android:text="Aggiungi Prodotto"
+                    app:cornerRadius="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:strokeColor="@color/white"
-                    android:layout_marginTop="20dp"
-                    />
+                    app:strokeWidth="1dp" />
 
             </LinearLayout>
 

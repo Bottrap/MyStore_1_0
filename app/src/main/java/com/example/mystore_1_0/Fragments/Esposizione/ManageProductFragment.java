@@ -67,7 +67,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
     int indiceSuccessivo = 500;
     Posizione posizione;
     int lunghezza = 1;
-    int qntEsposizione, qntMagazzino;
+    int qntEsposizione, qntMagazzino, quantitaIns;
 
     private static final int PICK_IMAGE = 1;
     Uri imageUri = null;
@@ -101,7 +101,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
         TextInputLayout quantity_editText = view.findViewById(R.id.quantity_Text);
         MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
-        CheckBox checkBox = view.findViewById(R.id.editCheck);
         MaterialButton deleteBtn = view.findViewById(R.id.deleteBtn);
         deleteBtn.setClickable(false);
 
@@ -248,23 +247,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
             }
         });
 
-        // CLICK SULLA CHECKBOX PER ATTIVARE LE MODIFICHE
-        checkBox.setOnClickListener(v -> {
-            if (autoComplete.getText().toString().isEmpty()) { // SE NON HO SELEZIONATO ALCUN PRODOTTO DALL'AUTOCOMPLETE
-                checkBox.setChecked(false);
-                Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
-            } else {
-                if (checkBox.isChecked()) {     //CheckBox selezionata
-                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
-                    confirmBtn.setClickable(true);
-                } else {    //CheckBox non selezionata
-                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
-                    confirmBtn.setClickable(false);
-                }
-            }
-
-        });
-
         // CLICK SU MODIFICA IMMAGINE
         MaterialButton editImg = view.findViewById(R.id.editImg_btn);
         editImg.setOnClickListener(v -> {
@@ -363,6 +345,11 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                 boolean isEmpty = false;
                 Prodotto prodotto = new Prodotto();
 
+                if(autoComplete.getText().toString().isEmpty()){
+                    isEmpty = true;
+                    Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
+                }
+
                 // CONTROLLO SULLA POSIZIONE
                 if (positionHasChanged) { // SE HO CLICCATO SU CANCELLA POSIZIONE
                     if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
@@ -404,7 +391,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     isEmpty = true;
                 } else {
                     // CONTROLLI SULLA QUANTITA' INSERITA
-                    int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
+                    quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
                     if (quantitaIns > qntEsposizione) {
                         if ((quantitaIns - qntEsposizione) > qntMagazzino) {
                             quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
@@ -437,12 +424,12 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Log.d("IO PARTO CONFIRM","sono stronzo");
                             if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
                                 // MODIFICO IL PRODOTTO IN ESPOSIZIONE
                                 productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
-                                // MODIFICO IL PRODOTTO ANCHE NEL MAGAZZINO
+                                // MODIFICO IL PRODOTTO ANCHE NEL MAGAZZINO AGGIORNANDO LA QUANTITA
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
+                                productsReference.child("Magazzino").child(prodotto.getCodice()).child("quantita").setValue(qntMagazzino - (quantitaIns - qntEsposizione));
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
                                     productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
@@ -469,6 +456,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                                 } else { // IL NUOVO CODICE E' UTILIZZABILE
                                     productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
                                     productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
+                                    productsReference.child("Magazzino").child(prodotto.getCodice()).child("quantita").setValue(qntMagazzino - (quantitaIns - qntEsposizione));
                                     // CONTROLLO SULL'IMMAGINE
                                     if (imageUri == null) {
                                         productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
@@ -508,36 +496,40 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new AlertDialog.Builder(getActivity()).setTitle("Elimina").setMessage("Sei sicuro di voler eliminare " + prodInDb.getNome())
-                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
+                    if (!(autoComplete.getText().toString().isEmpty())) {
+                        new AlertDialog.Builder(getActivity()).setTitle("Elimina").setMessage("Sei sicuro di voler eliminare " + prodInDb.getNome())
+                                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
-                                    Query checkId = productsReference.child("Esposizione").orderByChild("codice").equalTo(prodInDb.getCodice());
-                                    checkId.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            if (dataSnapshot.exists()) {
-                                                Log.d("IO PARTO DELETE","sono stronzo");
-                                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
-                                            } else {
-                                                Toast.makeText(getActivity(), "Errore, prodotto inesistente", Toast.LENGTH_SHORT).show();
+                                        DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+                                        Query checkId = productsReference.child("Esposizione").orderByChild("codice").equalTo(prodInDb.getCodice());
+                                        checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()) {
+                                                    productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
+                                                } else {
+                                                    Toast.makeText(getActivity(), "Errore, prodotto inesistente", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                                            Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
 
-                                    Toast.makeText(getActivity(), "Prodotto eliminato", Toast.LENGTH_SHORT).show();
-                                    AppCompatActivity activity = (AppCompatActivity) getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
-                                }
-                            })
-                            .setNegativeButton("ANNULLA", null)
-                            .setIcon(android.R.drawable.ic_menu_delete)
-                            .create().show();
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                        Toast.makeText(getActivity(), "Prodotto eliminato", Toast.LENGTH_SHORT).show();
+                                        AppCompatActivity activity = (AppCompatActivity) getContext();
+                                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                                    }
+                                })
+                                .setNegativeButton("ANNULLA", null)
+                                .setIcon(android.R.drawable.ic_menu_delete)
+                                .create().show();
+                    } else {
+                        Toast.makeText(getActivity(), "Seleziona un prodotto da eliminare", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         return view;

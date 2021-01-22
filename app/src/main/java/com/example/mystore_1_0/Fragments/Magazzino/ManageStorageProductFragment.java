@@ -103,7 +103,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
         TextInputLayout position_editText = view.findViewById(R.id.position_editText);
         TextInputLayout quantity_editText = view.findViewById(R.id.quantity_Text);
         MaterialButton confirmBtn = view.findViewById(R.id.confirmBtn);
-        CheckBox checkBox = view.findViewById(R.id.editCheck);
         MaterialButton deleteBtn = view.findViewById(R.id.deleteBtn);
         deleteBtn.setClickable(false);
 
@@ -248,26 +247,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
             }
         });
 
-        // CLICK SULLA CHECKBOX PER ATTIVARE LE MODIFICHE
-        checkBox.setOnClickListener(v -> {
-            if (autoComplete.getText().toString().isEmpty()) { // SE NON HO SELEZIONATO ALCUN PRODOTTO DALL'AUTOCOMPLETE
-                checkBox.setChecked(false);
-                Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
-            } else {
-                if (checkBox.isChecked()) {     //CheckBox selezionata
-                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
-                    confirmBtn.setClickable(true);
-                    confirmBtn.setLongClickable(true);
-                    Log.d("click",String.valueOf(confirmBtn.isClickable()));
-                } else {    //CheckBox non selezionata
-                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
-                    confirmBtn.setClickable(false);
-                    confirmBtn.setLongClickable(false);
-                }
-            }
-
-        });
-
         // CLICK SU MODIFICA IMMAGINE
         MaterialButton editImg = view.findViewById(R.id.editImg_btn);
         editImg.setOnClickListener(v -> {
@@ -362,72 +341,102 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
         });
 
         // CONFERMA MODIFICA
-            confirmBtn.setOnClickListener(v -> {
-                boolean isEmpty = false;
-                Prodotto prodotto = new Prodotto();
+        confirmBtn.setOnClickListener(v -> {
+            boolean isEmpty = false;
+            Prodotto prodotto = new Prodotto();
 
-                // CONTROLLO SULLA POSIZIONE
-                if (positionHasChanged) { // SE HO CLICCATO SU CANCELLA POSIZIONE
-                    if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
-                        posizione.setLunghezza(lunghezza);
-                        prodotto.setPosizione(posizione);
-                    } else {
-                        position_editText.getEditText().setError("Questo campo non può essere vuoto");
-                        position_editText.getEditText().requestFocus();
-                        isEmpty = true;
-                    }
-                } else { // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
-                    prodotto.setPosizione(prodInDb.getPosizione());
-                }
-
-                if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    name_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    name_editText.getEditText().requestFocus();
-                    isEmpty = true;
+            if(autoComplete.getText().toString().isEmpty()){
+                isEmpty = true;
+                Toast.makeText(getActivity(), "Selezionare prima un prodotto da modificare", Toast.LENGTH_SHORT).show();
+            }
+            // CONTROLLO SULLA POSIZIONE
+            if (positionHasChanged) { // SE HO CLICCATO SU CANCELLA POSIZIONE
+                if (isClicked) { // SE E' STATO CLICCATO ALMENO UN BOTTONE SULLA MAPPA
+                    posizione.setLunghezza(lunghezza);
+                    prodotto.setPosizione(posizione);
                 } else {
-                    prodotto.setNome(name_editText.getEditText().getText().toString().trim());
-                }
-                if (code_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    code_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    code_editText.getEditText().requestFocus();
+                    position_editText.getEditText().setError("Questo campo non può essere vuoto");
+                    position_editText.getEditText().requestFocus();
                     isEmpty = true;
-                } else {
-                    prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
                 }
-                if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    price_editText.getEditText().setError("Questo campo non può essere vuoto");
-                    price_editText.getEditText().requestFocus();
-                    isEmpty = true;
-                } else {
-                    prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
-                }
-                if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
-                    quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
+            } else { // MODIFICA DATI PRODOTTO SENZA MODIFICARE LA POSIZIONE
+                prodotto.setPosizione(prodInDb.getPosizione());
+            }
+            if (name_editText.getEditText().getText().toString().trim().isEmpty()) {
+                name_editText.getEditText().setError("Questo campo non può essere vuoto");
+                name_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setNome(name_editText.getEditText().getText().toString().trim());
+            }
+            if (code_editText.getEditText().getText().toString().trim().isEmpty()) {
+                code_editText.getEditText().setError("Questo campo non può essere vuoto");
+                code_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setCodice(code_editText.getEditText().getText().toString().trim());
+            }
+            if (price_editText.getEditText().getText().toString().trim().isEmpty()) {
+                price_editText.getEditText().setError("Questo campo non può essere vuoto");
+                price_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                prodotto.setPrezzo(price_editText.getEditText().getText().toString().trim());
+            }
+            if (quantity_editText.getEditText().getText().toString().trim().isEmpty()) {
+                quantity_editText.getEditText().setError("Questo campo non può essere vuoto");
+                quantity_editText.getEditText().requestFocus();
+                isEmpty = true;
+            } else {
+                // CONTROLLI SULLA QUANTITA' INSERITA
+                int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
+                if (quantitaIns < 0) {
+                    quantity_editText.getEditText().setError("La quantità non può essere minore di zero");
                     quantity_editText.getEditText().requestFocus();
                     isEmpty = true;
                 } else {
-                    // CONTROLLI SULLA QUANTITA' INSERITA
-                    int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
-                    if (quantitaIns < 0) {
-                            quantity_editText.getEditText().setError("La quantità non può essere minore di zero");
-                            quantity_editText.getEditText().requestFocus();
-                            isEmpty = true;
-                        } else {
-                            prodotto.setQuantita(quantitaIns);
-                        }
-                    }
+                    prodotto.setQuantita(quantitaIns);
+                }
+            }
 
-                if (!isEmpty) {
-                    DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
-                    Query checkId = productsReference.child("Magazzino").orderByChild("codice").equalTo(prodotto.getCodice());
+            if (!isEmpty) {
+                DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
+                Query checkId = productsReference.child("Magazzino").orderByChild("codice").equalTo(prodotto.getCodice());
 
-                    checkId.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
-                                idToCheck = prodotto.getCodice();
-                                idHasChanged = false;
-                                // MODIFICO IL PRODOTTO IN MAGAZZINO
+                checkId.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
+                            idToCheck = prodotto.getCodice();
+                            idHasChanged = false;
+                            // MODIFICO IL PRODOTTO IN MAGAZZINO
+                            productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
+                            // CONTROLLO SULL'IMMAGINE
+                            if (imageUri == null) {
+                                imageURL = prodInDb.getURLImmagine();
+                                productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
+                            } else {
+                                final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
+                                UploadTask uploadTask = imageRef.putFile(imageUri);
+                                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                                    Task<Uri> downloadUrl = imageRef.getDownloadUrl();
+                                    downloadUrl.addOnSuccessListener(uri -> {
+                                        String imageReference = uri.toString();
+                                        imageURL = imageReference;
+                                        productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
+                                    });
+                                });
+                            }
+                            Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
+                            AppCompatActivity activity = (AppCompatActivity) getContext();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                        } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
+                            if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
+                                code_editText.getEditText().setError("È stato inserito un id già esistente");
+                                code_editText.getEditText().requestFocus();
+                            } else { // IL NUOVO CODICE E' UTILIZZABILE
+                                idToCheck = prodInDb.getCodice();
+                                idHasChanged = true;
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
@@ -445,75 +454,49 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         });
                                     });
                                 }
+                                productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
                                 Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
+
                                 AppCompatActivity activity = (AppCompatActivity) getContext();
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
-                            } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
-                                if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
-                                    code_editText.getEditText().setError("È stato inserito un id già esistente");
-                                    code_editText.getEditText().requestFocus();
-                                } else { // IL NUOVO CODICE E' UTILIZZABILE
-                                    idToCheck = prodInDb.getCodice();
-                                    idHasChanged = true;
-                                    productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
-                                    // CONTROLLO SULL'IMMAGINE
-                                    if (imageUri == null) {
-                                        imageURL = prodInDb.getURLImmagine();
-                                        productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(prodInDb.getURLImmagine());
-                                    } else {
-                                        final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("Immagini_Prodotti/" + UUID.randomUUID() + ".jpg");
-                                        UploadTask uploadTask = imageRef.putFile(imageUri);
-                                        uploadTask.addOnSuccessListener(taskSnapshot -> {
-                                            Task<Uri> downloadUrl = imageRef.getDownloadUrl();
-                                            downloadUrl.addOnSuccessListener(uri -> {
-                                                String imageReference = uri.toString();
-                                                imageURL = imageReference;
-                                                productsReference.child("Magazzino").child(prodotto.getCodice()).child("urlimmagine").setValue(imageReference);
-                                            });
-                                        });
-                                    }
-                                    productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
-                                    Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
+                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
 
-                                    AppCompatActivity activity = (AppCompatActivity) getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
-
-                                }
                             }
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    // CONTROLLO SE IL PRODOTTO APPENA MODIFICATO SIA PRESENTE O MENO IN ESPOSIZIONE, COSI' DA POTERLO MODIFICARE
-                    Query checkProduct = productsReference.child("Esposizione").orderByChild("codice").equalTo(idToCheck);
-                    checkProduct.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                prodotto.setQuantita(qntMagazzino);
-                                productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
-                                productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageURL);
-                                if (idHasChanged) {
-                                    productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
-                                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                // CONTROLLO SE IL PRODOTTO APPENA MODIFICATO SIA PRESENTE O MENO IN ESPOSIZIONE, COSI' DA POTERLO MODIFICARE
+                Query checkProduct = productsReference.child("Esposizione").orderByChild("codice").equalTo(idToCheck);
+                checkProduct.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            prodotto.setQuantita(qntMagazzino);
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageURL);
+                            if (idHasChanged) {
+                                productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
                             }
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+            }
+        });
 
         // ELIMINA PRODOTTO SELEZIONATO NELLA LISTA
 
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(autoComplete.getText().toString().isEmpty())) {
                     new AlertDialog.Builder(getActivity()).setTitle("Elimina").setMessage("Sei sicuro di voler eliminare " + prodInDb.getNome())
                             .setPositiveButton("SI", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -547,8 +530,11 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                             .setNegativeButton("ANNULLA", null)
                             .setIcon(android.R.drawable.ic_menu_delete)
                             .create().show();
+                } else {
+                    Toast.makeText(getActivity(), "Seleziona un prodotto da eliminare", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
         return view;
     }
 

@@ -2438,33 +2438,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <RelativeLayout
-                                android:id="@+id/relative"
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/deleteBtn"
+                                style="@style/Widget.MaterialComponents.Button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/red"
+                                android:clickable="false"
+                                app:icon="@drawable/ic_baseline_delete_24"
+                                app:iconTint="@color/white"
+                                app:cornerRadius="20dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/confirmBtn">
-                                    <CheckBox
-                                        android:id="@+id/editCheck"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerHorizontal="true"
-                                        android:buttonTint="@color/arancione"
-                                        android:paddingStart="10dp"/>
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Modifica"
-                                        android:textAlignment="center"
-                                        android:layout_centerHorizontal="true"
-                                        android:textColor="@color/black"
-                                        android:textStyle="bold"
-                                        android:layout_below="@id/editCheck"
-                                         />
-                            </RelativeLayout>
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/confirmBtn"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeColor="@color/white"
+                                app:strokeWidth="1dp" />
 
 
                             <com.google.android.material.button.MaterialButton
@@ -2480,43 +2470,13 @@
                                 android:text="Salva modifiche"
                                 app:cornerRadius="60dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/relative"
+                                app:layout_constraintEnd_toStartOf="@id/deleteBtn"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:strokeColor="@color/white"
                                 app:strokeWidth="1dp" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="15dp">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/deleteBtn"
-                            style="@style/Widget.MaterialComponents.Button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:backgroundTint="@color/red"
-                            android:clickable="false"
-                            android:scaleX="1.05"
-                            android:scaleY="1.05"
-                            app:icon="@drawable/ic_baseline_delete_24"
-                            app:iconTint="@color/white"
-                            app:cornerRadius="20dp"
-                            android:text="Elimina"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:strokeColor="@color/white"
-                            app:strokeWidth="1dp" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
