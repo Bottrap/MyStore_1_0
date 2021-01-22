@@ -429,7 +429,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                             }
                             Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
                             AppCompatActivity activity = (AppCompatActivity) getContext();
-                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
                         } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
                             if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
