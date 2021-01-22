@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,6 @@ import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
 public class MoveProductFragment extends Fragment implements IOnBackPressed {
 
-    // STAVANO FUORI
     Prodotto prodInMagazzino;
     public Boolean isClicked = false;
     public int indicePrecedente;
@@ -64,7 +62,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
     List<Prodotto> listaProdottiMagazzino = new ArrayList<>();
     List<Prodotto> listaProdottiEsposizione = new ArrayList<>();
     List<Prodotto> listaProdotti = new ArrayList<>();
-    int n = 0;
+
 
     @Nullable
     @Override
@@ -138,8 +136,6 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     for (int i = 0; i < listaProdottiMagazzino.size(); i++) {
                         boolean flag = false;
                         for (int j = 0; j < listaProdottiEsposizione.size(); j++) {
-                            Log.d("codiceEsp",String.valueOf(listaProdottiEsposizione.get(j).getCodice()) + String.valueOf(j));
-                            Log.d("codiceMag",String.valueOf(listaProdottiMagazzino.get(j).getCodice()) + String.valueOf(i));
                             if (listaProdottiMagazzino.get(i).getCodice().equals(listaProdottiEsposizione.get(j).getCodice())) {
                                 flag = true;
                             }
@@ -348,8 +344,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
                         reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
-                        n++;
-                        Log.d("ADD IN MOVE", String.valueOf(n));
+
                         //AppCompatActivity activity = (AppCompatActivity) getActivity();
                         //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
 
