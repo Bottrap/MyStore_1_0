@@ -134,7 +134,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Log.d("IO PARTO ADD","sono stronzo");
                     listaProdotti = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Prodotto prodotto = ds.getValue(Prodotto.class);
@@ -237,7 +236,6 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             qntMagazzino = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
-                            Log.d("IO PARTO","sono stronzo");
                         } else {
                             qntMagazzino = 0;
                         }

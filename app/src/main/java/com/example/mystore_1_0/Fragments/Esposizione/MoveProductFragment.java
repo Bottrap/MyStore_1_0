@@ -64,6 +64,7 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
     List<Prodotto> listaProdottiMagazzino = new ArrayList<>();
     List<Prodotto> listaProdottiEsposizione = new ArrayList<>();
     List<Prodotto> listaProdotti = new ArrayList<>();
+    int n = 0;
 
     @Nullable
     @Override
@@ -339,14 +340,16 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 prodInMagazzino.setQuantita(quantita);
             }
             if (!isEmpty) {
+
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
                 Query query1 = reference;
-                query1.addValueEventListener(new ValueEventListener() {
+                query1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
                         reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
-
+                        n++;
+                        Log.d("ADD IN MOVE", String.valueOf(n));
                         //AppCompatActivity activity = (AppCompatActivity) getActivity();
                         //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
 
