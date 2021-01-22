@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -256,9 +257,12 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                 if (checkBox.isChecked()) {     //CheckBox selezionata
                     confirmBtn.setBackgroundColor(getResources().getColor(R.color.scanStatusBarColor));
                     confirmBtn.setClickable(true);
+                    confirmBtn.setLongClickable(true);
+                    Log.d("click",String.valueOf(confirmBtn.isClickable()));
                 } else {    //CheckBox non selezionata
                     confirmBtn.setBackgroundColor(getResources().getColor(R.color.gray));
                     confirmBtn.setClickable(false);
+                    confirmBtn.setLongClickable(false);
                 }
             }
 
@@ -358,7 +362,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
         });
 
         // CONFERMA MODIFICA
-        if (confirmBtn.isClickable()) {
             confirmBtn.setOnClickListener(v -> {
                 boolean isEmpty = false;
                 Prodotto prodotto = new Prodotto();
@@ -497,7 +500,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                         }
                     });
                     // CONTROLLO SE IL PRODOTTO APPENA MODIFICATO SIA PRESENTE O MENO IN ESPOSIZIONE, COSI' DA POTERLO MODIFICARE
-                    Query checkProduct = productsReference.child("Esposizione").orderByKey().equalTo(idToCheck);
+                    Query checkProduct = productsReference.child("Esposizione").orderByChild("codice").equalTo(idToCheck);
                     checkProduct.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -517,9 +520,9 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     });
                 }
             });
-        }
+
         // ELIMINA PRODOTTO SELEZIONATO NELLA LISTA
-        if (deleteBtn.isClickable()) {
+
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -534,6 +537,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
                                                 productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
+                                                Toast.makeText(getActivity(), "Prodotto eliminato correttamente", Toast.LENGTH_SHORT).show();
                                                 AppCompatActivity activity = (AppCompatActivity) getContext();
                                                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
 
@@ -555,7 +559,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                             .create().show();
                 }
             });
-        }
         return view;
     }
 
