@@ -1,4 +1,4 @@
-package com.example.mystore_1_0.Fragments.Esposizione;
+    package com.example.mystore_1_0.Fragments.Esposizione;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.Toast;
@@ -19,9 +20,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mystore_1_0.AutoCompleteProductAdapter;
 import com.example.mystore_1_0.Fragments.DashboardFragment;
+import com.example.mystore_1_0.Fragments.Magazzino.ManageStorageProductFragment;
 import com.example.mystore_1_0.IOnBackPressed;
 import com.example.mystore_1_0.Orientamento;
 import com.example.mystore_1_0.Prodotto.Posizione;
@@ -48,9 +51,8 @@ import java.util.List;
 import static com.example.mystore_1_0.Prodotto.Posizione.getPosition;
 
 public class MoveProductFragment extends Fragment implements IOnBackPressed {
-    List<Prodotto> listaProdottiMagazzino = new ArrayList<>();
-    List<Prodotto> listaProdottiEsposizione = new ArrayList<>();
-    List<Prodotto> listaProdotti = new ArrayList<>();
+
+    // STAVANO FUORI
     Prodotto prodInMagazzino;
     public Boolean isClicked = false;
     public int indicePrecedente;
@@ -59,11 +61,21 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
     public Posizione posizione;
     public int lunghezza = 1;
     long oldQuantita;
+    List<Prodotto> listaProdottiMagazzino = new ArrayList<>();
+    List<Prodotto> listaProdottiEsposizione = new ArrayList<>();
+    List<Prodotto> listaProdotti = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_moveproduct, null);
+
+        isClicked = false;
+        indiceSuccessivo=500;
+        is2Clicked=false;
+        lunghezza=1;
+
+
 
         // UTENTE LOGGATO PER VEDERE IN CHE NEGOZIO E'
         Utente utenteLoggato = getActivity().getIntent().getParcelableExtra("utente");
@@ -79,6 +91,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
         TextInputLayout text_posizione = view.findViewById(R.id.position_editText);
         TextInputLayout text_quantita = view.findViewById(R.id.quantity_editText);
         MaterialButton addBtn = view.findViewById(R.id.addBtn);
+
+
 
         // CARICO LA MAPPA DEL NEGOZIO RELATIVO ALL'UTENTE LOGGATO
         StorageReference mapReference = FirebaseStorage.getInstance().getReference("Mappe_Negozi/" + negozio + ".png");
@@ -123,6 +137,8 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     for (int i = 0; i < listaProdottiMagazzino.size(); i++) {
                         boolean flag = false;
                         for (int j = 0; j < listaProdottiEsposizione.size(); j++) {
+                            Log.d("codiceEsp",String.valueOf(listaProdottiEsposizione.get(j).getCodice()) + String.valueOf(j));
+                            Log.d("codiceMag",String.valueOf(listaProdottiMagazzino.get(j).getCodice()) + String.valueOf(i));
                             if (listaProdottiMagazzino.get(i).getCodice().equals(listaProdottiEsposizione.get(j).getCodice())) {
                                 flag = true;
                             }
@@ -322,7 +338,6 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                 int quantita = Integer.parseInt(text_quantita.getEditText().getText().toString().trim());
                 prodInMagazzino.setQuantita(quantita);
             }
-
             if (!isEmpty) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
                 Query query1 = reference;
@@ -331,23 +346,20 @@ public class MoveProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         reference.child("Esposizione").child(prodInMagazzino.getCodice()).setValue(prodInMagazzino);
                         reference.child("Magazzino").child(prodInMagazzino.getCodice()).child("quantita").setValue(oldQuantita - prodInMagazzino.getQuantita());
-                        Toast.makeText(getActivity(), "Prodotto spostato correttamente", Toast.LENGTH_SHORT).show();
-                        text_posizione.getEditText().getText().clear();
-                        text_quantita.getEditText().getText().clear();
-                        autoComplete.getText().clear();
-                        for (int i = 0; i < grid.getChildCount(); i++) {
-                            grid.getChildAt(i).setBackground(background);
-                            is2Clicked = false;
-                            isClicked = false;
-                            text_posizione.getEditText().getText().clear();
-                        }
+
+                        //AppCompatActivity activity = (AppCompatActivity) getActivity();
+                        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
+
+                        //getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                Toast.makeText(getActivity(), "Prodotto spostato correttamente", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoveProductFragment()).commit();
             }
 
         });

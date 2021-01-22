@@ -134,6 +134,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    Log.d("IO PARTO ADD","sono stronzo");
                     listaProdotti = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Prodotto prodotto = ds.getValue(Prodotto.class);
@@ -236,6 +237,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             qntMagazzino = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
+                            Log.d("IO PARTO","sono stronzo");
                         } else {
                             qntMagazzino = 0;
                         }
@@ -437,6 +439,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     checkId.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.d("IO PARTO CONFIRM","sono stronzo");
                             if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
                                 // MODIFICO IL PRODOTTO IN ESPOSIZIONE
                                 productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
@@ -503,6 +506,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                 }
             });
 
+            //BOTTONE ELIMINA
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -516,21 +520,21 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
+                                                Log.d("IO PARTO DELETE","sono stronzo");
                                                 productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
-                                                AppCompatActivity activity = (AppCompatActivity) getContext();
-                                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
-
                                             } else {
                                                 Toast.makeText(getActivity(), "Errore, prodotto inesistente", Toast.LENGTH_SHORT).show();
                                             }
-
                                         }
-
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                                    Toast.makeText(getActivity(), "Prodotto eliminato", Toast.LENGTH_SHORT).show();
+                                    AppCompatActivity activity = (AppCompatActivity) getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageProductFragment()).commit();
                                 }
                             })
                             .setNegativeButton("ANNULLA", null)

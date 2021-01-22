@@ -408,26 +408,14 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                 } else {
                     // CONTROLLI SULLA QUANTITA' INSERITA
                     int quantitaIns = Integer.parseInt(quantity_editText.getEditText().getText().toString().trim());
-                    if (quantitaIns > qntEsposizione) {
-                        if ((quantitaIns - qntEsposizione) > qntMagazzino) {
-                            quantity_editText.getEditText().setError("Quantità inserita superiore al numero di prodotti presenti (MAX: " + (qntEsposizione + qntMagazzino) + " pz)");
+                    if (quantitaIns < 0) {
+                            quantity_editText.getEditText().setError("La quantità non può essere minore di zero");
                             quantity_editText.getEditText().requestFocus();
                             isEmpty = true;
                         } else {
                             prodotto.setQuantita(quantitaIns);
                         }
-                    } else if (quantitaIns < qntEsposizione) {
-                        if (quantitaIns == 0) {
-                            quantity_editText.getEditText().setError("La quantità non può essere nulla");
-                            quantity_editText.getEditText().requestFocus();
-                            isEmpty = true;
-                        } else {
-                            prodotto.setQuantita(quantitaIns);
-                        }
-                    } else if (quantitaIns == qntEsposizione) {
-                        prodotto.setQuantita(quantitaIns);
                     }
-                }
 
                 if (!isEmpty) {
                     DatabaseReference productsReference = FirebaseDatabase.getInstance().getReference(negozio).child("Products");
@@ -485,7 +473,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         });
                                     }
                                     productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
-                                    Toast.makeText(getActivity(), "Registrazione effettuata", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
 
                                     AppCompatActivity activity = (AppCompatActivity) getContext();
                                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
@@ -537,9 +525,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
                                                 productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
-                                                Toast.makeText(getActivity(), "Prodotto eliminato correttamente", Toast.LENGTH_SHORT).show();
-                                                AppCompatActivity activity = (AppCompatActivity) getContext();
-                                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
+
 
                                             } else {
                                                 Toast.makeText(getActivity(), "Errore, prodotto inesistente", Toast.LENGTH_SHORT).show();
@@ -552,6 +538,10 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                             Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                                    Toast.makeText(getActivity(), "Prodotto eliminato correttamente", Toast.LENGTH_SHORT).show();
+                                    AppCompatActivity activity = (AppCompatActivity) getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
                                 }
                             })
                             .setNegativeButton("ANNULLA", null)
