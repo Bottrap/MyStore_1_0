@@ -176,7 +176,7 @@ public class AddUsersFragment extends Fragment implements IOnBackPressed {
                                 text_cognome.getEditText().getText().clear();
                                 text_id.getEditText().getText().clear();
                                 text_password.getEditText().getText().clear();
-                                text_permessi.clearListSelection();
+                                text_permessi.getText().clear();
                                 text_phone.getEditText().getText().clear();
                             }
                         }
