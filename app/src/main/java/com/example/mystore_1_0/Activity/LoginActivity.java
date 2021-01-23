@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         negoziDisponibili = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query retrieveStores = reference;
-        retrieveStores.addValueEventListener(new ValueEventListener() {
+        retrieveStores.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

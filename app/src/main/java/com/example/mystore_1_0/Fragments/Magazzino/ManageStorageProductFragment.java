@@ -69,7 +69,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
     Posizione posizione;
     int lunghezza = 1;
     int qntEsposizione, qntMagazzino;
-    String idToCheck, imageURL;
+    String imageURL;
     boolean idHasChanged;
 
     private static final int PICK_IMAGE = 1;
@@ -407,7 +407,6 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (prodInDb.getCodice().equals(prodotto.getCodice())) { // CODICE UGUALE AL PRECEDENTE (NON MODIFICATO)
-                            idToCheck = prodotto.getCodice();
                             idHasChanged = false;
                             // MODIFICO IL PRODOTTO IN MAGAZZINO
                             productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
@@ -428,14 +427,12 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                 });
                             }
                             Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
-                            AppCompatActivity activity = (AppCompatActivity) getContext();
-                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
+
                         } else { // CODICE NON UGUALE AL PRECEDENTE (QUINDI MODIFICATO)
                             if (dataSnapshot.exists()) { // IL NUOVO CODICE INSERITO E' GIA' IN USO
                                 code_editText.getEditText().setError("È stato inserito un id già esistente");
                                 code_editText.getEditText().requestFocus();
                             } else { // IL NUOVO CODICE E' UTILIZZABILE
-                                idToCheck = prodInDb.getCodice();
                                 idHasChanged = true;
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
                                 // CONTROLLO SULL'IMMAGINE
@@ -457,8 +454,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                 productsReference.child("Magazzino").child(prodInDb.getCodice()).removeValue();
                                 Toast.makeText(getActivity(), "Modifica effettuata", Toast.LENGTH_SHORT).show();
 
-                                AppCompatActivity activity = (AppCompatActivity) getContext();
-                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
+
 
                             }
                         }
@@ -470,8 +466,8 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     }
                 });
                 // CONTROLLO SE IL PRODOTTO APPENA MODIFICATO SIA PRESENTE O MENO IN ESPOSIZIONE, COSI' DA POTERLO MODIFICARE
-                Query checkProduct = productsReference.child("Esposizione").orderByChild("codice").equalTo(idToCheck);
-                checkProduct.addValueEventListener(new ValueEventListener() {
+                Query checkProduct = productsReference.child("Esposizione").orderByChild("codice").equalTo(prodInDb.getCodice());
+                checkProduct.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
@@ -482,6 +478,8 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                                 productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
                             }
                         }
+                        AppCompatActivity activity = (AppCompatActivity) getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ManageStorageProductFragment()).commit();
                     }
 
                     @Override
