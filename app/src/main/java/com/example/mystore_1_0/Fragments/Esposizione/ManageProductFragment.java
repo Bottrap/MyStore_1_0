@@ -68,6 +68,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
     Posizione posizione;
     int lunghezza = 1;
     int qntEsposizione, qntMagazzino, quantitaIns;
+    Posizione posMagazzino;
 
     private static final int PICK_IMAGE = 1;
     Uri imageUri = null;
@@ -235,6 +236,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             qntMagazzino = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
+                            posMagazzino = dataSnapshot.child(prodotto.getCodice()).child("posizione").getValue(Posizione.class);
                         } else {
                             qntMagazzino = 0;
                         }
@@ -433,6 +435,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                                 productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
                                 // MODIFICO IL PRODOTTO ANCHE NEL MAGAZZINO AGGIORNANDO LA QUANTITA
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
+                                productsReference.child("Magazzino").child(prodotto.getCodice()).child("posizione").setValue(posMagazzino);
                                 productsReference.child("Magazzino").child(prodotto.getCodice()).child("quantita").setValue(qntMagazzino - (quantitaIns - qntEsposizione));
                                 // CONTROLLO SULL'IMMAGINE
                                 if (imageUri == null) {
@@ -460,6 +463,7 @@ public class ManageProductFragment extends Fragment implements IOnBackPressed {
                                 } else { // IL NUOVO CODICE E' UTILIZZABILE
                                     productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
                                     productsReference.child("Magazzino").child(prodotto.getCodice()).setValue(prodotto);
+                                    productsReference.child("Magazzino").child(prodotto.getCodice()).child("posizione").setValue(posMagazzino);
                                     productsReference.child("Magazzino").child(prodotto.getCodice()).child("quantita").setValue(qntMagazzino - (quantitaIns - qntEsposizione));
                                     // CONTROLLO SULL'IMMAGINE
                                     if (imageUri == null) {
