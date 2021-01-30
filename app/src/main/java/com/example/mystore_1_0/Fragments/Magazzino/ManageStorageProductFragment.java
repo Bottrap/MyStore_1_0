@@ -69,6 +69,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
     Posizione posizione;
     int lunghezza = 1;
     int qntEsposizione, qntMagazzino;
+    Posizione posEsposizione;
     String imageURL;
     boolean idHasChanged;
 
@@ -235,6 +236,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             qntEsposizione = Integer.parseInt(dataSnapshot.child(prodotto.getCodice()).child("quantita").getValue().toString());
+                            posEsposizione = dataSnapshot.child(prodotto.getCodice()).child("posizione").getValue(Posizione.class);
                         } else {
                             qntEsposizione = 0;
                         }
@@ -473,6 +475,7 @@ public class ManageStorageProductFragment extends Fragment implements IOnBackPre
                         if (dataSnapshot.exists()) {
                             prodotto.setQuantita(qntMagazzino);
                             productsReference.child("Esposizione").child(prodotto.getCodice()).setValue(prodotto);
+                            productsReference.child("Esposizione").child(prodotto.getCodice()).child("posizione").setValue(posEsposizione);
                             productsReference.child("Esposizione").child(prodotto.getCodice()).child("urlimmagine").setValue(imageURL);
                             if (idHasChanged) {
                                 productsReference.child("Esposizione").child(prodInDb.getCodice()).removeValue();
